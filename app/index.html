@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title ng-bind="($title || 'Home') + ' - FACTS'">FACTS</title>
+	<base href="/">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/angular-material.css"/>
+
+    <link rel="stylesheet" href="css/app.css" type="text/css"/>
+</head>
+<body id="app" layout="row">
+		<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+			<ui-view name="sidenav"></ui-view>
+		</md-sidenav>
+		<div layout="column" class="relative" layout-fill role="main">
+			<ui-view name="toolbar"></ui-view>
+			<md-content flex md-scroll-y>
+				<ui-view name="root"></ui-view>
+			</md-content>
+		</div>
+</body>
+<script type="text/javascript" data-main="bootstrap" src="bower_components/requirejs/require.js"></script>
+</html>

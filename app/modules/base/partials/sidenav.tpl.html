@@ -1,0 +1,33 @@
+<md-toolbar class="md-tall md-hue-2">
+	<span flex></span>
+	<div layout="column" class="md-toolbar-tools-bottom inset">
+	  <div>{{user.name}}</div>
+	  <div>{{user.email}}</div>
+	</div>
+  </md-toolbar>
+  <md-list>
+  <md-item ng-repeat="item in menu">
+	<a ui-sref="{{item.link}}">
+	  <md-item-content md-ink-ripple layout="row" layout-align="start center">
+		<div class="inset">
+		  <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+		</div>
+		<div class="inset">{{item.title}}
+		</div>
+	  </md-item-content>
+	</a>
+  </md-item>
+  <md-divider></md-divider>
+  <md-subheader>My Courses ({{currentPeriod}})</md-subheader>
+  <md-item ng-repeat="item in courses">
+	<a ui-sref="app.facts.courses.details({courseId: item.courseId})">
+	  <md-item-content md-ink-ripple layout="row" layout-align="start center">
+		<div class="inset">
+		  {{item.shortName}}
+		</div>
+		<div class="inset">{{item.name}}
+		</div>
+	  </md-item-content>
+	</a>
+  </md-item>
+</md-list>

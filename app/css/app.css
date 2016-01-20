@@ -1,0 +1,45 @@
+a {
+	text-decoration: none;
+}
+
+.breadcrumb {
+	margin: 0px;
+	padding: 8px 15px;
+	list-style: none;
+}
+
+.breadcrumb > li {
+	display: inline-block;
+}
+
+.breadcrumb > li + li :before {
+	padding: 0 5px;
+	color: #000;
+	content: "/\00a0";
+}
+
+.md-toolbar-tools-bottom {
+  font-size: small;
+  & :last-child {
+    opacity: 0.8;
+  }
+}
+
+md-toolbar {
+  .md-button.md-default-theme {
+    border-radius: 99%; // round toolbar buttons
+  }
+}
+
+md-sidenav {
+  fill: #737373;
+  ng-md-icon {
+    position: relative;
+    top: 5px; // adjust for svg viewbox
+  }
+}
+
+md-content {
+	padding: 15px;
+}
+

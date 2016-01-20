@@ -1,0 +1,1 @@
+define([], function() {	'use strict';	return ['Restangular', function(Restangular) {		return {			getCourse: function(courseId) {					return Restangular.one('courses', courseId).get().$object;			},			getCoursePromise: function(courseId) {				return Restangular.one('courses', courseId).get();			}		};	}];});
