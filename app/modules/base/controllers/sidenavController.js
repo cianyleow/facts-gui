@@ -9,27 +9,27 @@ define([], function() {
 		
 		$scope.menu = [
 			{
-				link: 'app.facts',
+				link: 'app.dashboard',
 				icon: 'dashboard',
 				title: 'Dashboard'
 			},
 			{
-				link: 'app.facts.assignments',
+				link: 'app.assignments',
 				icon: 'assignment',
 				title: 'Assignments'
 			},
 			{
-				link: 'app.facts.courses',
+				link: 'app.courses',
 				icon: 'account_balance',
 				title: 'Courses'
 			},
 			{
-				link: 'app.facts.grades',
+				link: 'app.grades',
 				icon: 'grade',
 				title: 'Grades'
 			},
 			{
-				link: 'app.facts.messages',
+				link: 'app.messages',
 				icon: 'message',
 				title: 'Messages'
 			}

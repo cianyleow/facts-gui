@@ -20,7 +20,7 @@
   <md-divider></md-divider>
   <md-subheader>My Courses ({{currentPeriod}})</md-subheader>
   <md-item ng-repeat="item in courses">
-	<a ui-sref="app.facts.courses.details({courseId: item.courseId})">
+	<a ui-sref="app.courses.details({courseId: item.courseId})">
 	  <md-item-content md-ink-ripple layout="row" layout-align="start center">
 		<div class="inset">
 		  {{item.shortName}}

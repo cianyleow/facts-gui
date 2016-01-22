@@ -1,0 +1,45 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Course Details</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+			
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card flex>
+	<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Assignments</span>
+				</h2>
+				<span flex></span>
+				<md-button aria-label="View All" ui-sref="app.courses.details.assignments">
+					View All
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
+					<span><h3>No assignments!</h3></span>
+				</span>
+				<md-list ng-show="assignments.length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
+						<div class="md-list-item-text">
+							<h3>{{assignment.title}}</h3>
+							<p>Due: {{assignment.description}}</p>
+						</div>
+						<md-button class="md-secondary" ui-sref="app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

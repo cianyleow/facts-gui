@@ -8,7 +8,11 @@ define(['angular',
 	directives.init(base);
 	
 	base.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise('/');
+		// Always redirect to dashboard if unknown or base entry.
+		$urlRouterProvider.when("", "/dashboard");
+		$urlRouterProvider.when("/", "/dashboard");
+		$urlRouterProvider.otherwise('/dashboard');
+		
 		$stateProvider
 			.state('authorize', {
 				url: '/authorize',
@@ -21,7 +25,7 @@ define(['angular',
 			})
 			.state('app', {
 				url: '/',
-				breadcrumbValue: 'Home',
+				abstract: true,
 				views: {
 					root: {
 						templateUrl: 'modules/base/partials/app.tpl.html'
@@ -33,16 +37,12 @@ define(['angular',
 					toolbar: {
 						templateUrl: 'modules/base/partials/toolbar.tpl.html',
 						controller: 'base.controllers.toolbar-controller'
-					},
-					'mainContent@app': {
-						templateUrl: 'modules/base/partials/enter.tpl.html'
 					}
 				},
 				data: {
-					displayName: 'Home'
+					displayName: 'FACTS'
 				}
 			});
 	}]);
-	
 	return base;
 });
