@@ -1,0 +1,28 @@
+<table>
+	<thead>
+		<tr>
+			<th>Week</th>
+			<th>Monday</th>
+			<th>Tuesday</th>
+			<th>Wednesday</th>
+			<th>Thursday</th>
+			<th>Friday</th>
+			<th>Saturday</th>
+			<th>Sunday</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="days in dateArray">
+			<td>Week {{$index + 1}}</td>
+			<td ng-repeat="day in days" ng-class="{oddMonth: day.date.getMonth() % 2, today: day.today}">
+				<md-button class="md-fab md-primary" aria-label="Assignment" ng-show="day.assignment">
+					<md-tooltip md-direction="right">
+						Assignment {{day.assignment.assignmentNumber}}: {{day.assignment.title}}
+					</md-tooltip>
+					{{day.assignment.assignmentNumber}}
+				</md-button>
+				<div class="day">{{day.date.getDate()}}/{{day.date.getMonth() + 1}}</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

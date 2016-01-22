@@ -1,0 +1,38 @@
+assignment-calendar > table {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+assignment-calendar > table, th, td {
+	border: 1px solid #e0e0e0;
+}
+
+assignment-calendar > table > thead > tr > th {
+	color: #a0a0a0;
+}
+
+assignment-calendar > table > tbody > tr > td {
+	height: 70px;
+	position: relative;
+}
+
+assignment-calendar > table > tbody > tr > td > div.day {
+	position: absolute;
+	top: 0;
+	right: 5px;
+	color: #a0a0a0;
+}
+
+assignment-calendar > table > tbody > tr > td.oddMonth {
+	background: #e5ffff;
+}
+
+assignment-calendar > table > tbody > tr > td.today {
+	background: #ffe5ff !important;
+}
+
+assignment-calendar > table > tbody > tr > td:first-child {
+	text-align: center;
+	color: #a0a0a0;
+}
