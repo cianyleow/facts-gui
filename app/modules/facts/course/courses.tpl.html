@@ -14,8 +14,10 @@
 				</span>
 				<md-list ng-show="enrolledCourses.length">
 					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in enrolledCourses">
-						<h3>{{course.shortName}}: {{course.name}}</h3>
-						<p>{{course.description}}</p>
+						<div class="md-list-item-text">
+							<h3>{{course.shortName}}: {{course.name}}</h3>
+							<p>{{course.description}}</p>
+						</div>
 						<md-button class="md-secondary" ui-sref="app.courses.details({courseId: course.courseId})">View Course</md-button>
 					</md-list-item>
 				</md-list>
