@@ -1,6 +1,7 @@
-define(['angular', './controllers'], function(angular, controllers) {
+define(['angular', './controllers', './assignment/assignmentModule'], function(angular, controllers) {
 	'use strict';
-	var course = angular.module('facts.course', []);
+	var configFn = ['facts.course.assignment'];
+	var course = angular.module('facts.course', configFn);
 	course.config(['$stateProvider', function($stateProvider) {
 		$stateProvider
 			.state('app.courses', {
@@ -40,41 +41,6 @@ define(['angular', './controllers'], function(angular, controllers) {
 						return course.shortName + ": " + course.name;
 					}]
 				}
-			})
-			.state('app.courses.details.assignments', {
-				url: '/assignments',
-				data: {
-					displayName: 'Assignments'
-				},
-				views: {
-					'mainContent@app': {
-						templateUrl: 'modules/facts/course/assignment/assignments.tpl.html',
-						controller: 'facts.course.controllers.assignments-controller'
-					}
-				},
-			})
-			.state('app.courses.details.assignments.details', {
-				url: '/:assignmentId',
-				data: {
-					displayName: '{{assignment.title}}'
-				},
-				views: {
-					'mainContent@app': {
-						templateUrl: 'modules/facts/course/assignment/assignment-details.tpl.html',
-						controller: 'facts.course.controllers.assignment-details-controller'
-					}
-				},
-				resolve: {
-					assignment: ['$stateParams', 'facts.services.assignment', function($stateParams, AssignmentService) {
-						return AssignmentService.getAssignmentPromise($stateParams.assignmentId).then(function(_assignment) {
-							return _assignment;
-						});
-					}],
-					$title: ['assignment', function(assignment) {
-						return 'Assignment: ' + assignment.title;
-					}]
-				}
-		
 			});
 	}]);
 	

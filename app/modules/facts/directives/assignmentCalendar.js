@@ -14,7 +14,7 @@ define([], function() {
 					var dat = new Date(this.valueOf());
 					dat.setDate(dat.getDate() + days);
 					return dat;
-				}
+				};
 				var today = new Date();
 				$scope.startDate = new Date(2016, 0, 11, 0, 0, 0);
 				var currentDate = new Date($scope.startDate);
@@ -49,7 +49,7 @@ define([], function() {
 							var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
 							return Math.ceil(timeDiff / (1000 * 3600 * 24));
 							
-						}
+						};
 						for(i = 0; i < assignmentsList.length; i++) {
 							assignmentsList[i].dueDate = new Date(2016, 0, 11 + i * 8, 0, 0, 0);
 							if(assignmentsList[i].dueDate < scope.startDate || assignmentsList[i].dueDate > scope.endDate) {
