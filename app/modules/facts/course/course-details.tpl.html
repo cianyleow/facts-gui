@@ -37,7 +37,7 @@
 					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
 						<div class="md-list-item-text">
 							<h3>{{assignment.title}}</h3>
-							<p>Due: {{assignment.description}}</p>
+							<p><due-date date-string="assignment.dueTime"></due-date><!--{{assignment.dueTime | dueDate}}--></p>
 						</div>
 						<md-button class="md-secondary" ui-sref="app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
 					</md-list-item>

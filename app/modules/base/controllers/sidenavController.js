@@ -38,11 +38,5 @@ define([], function() {
 		$scope.currentPeriod = 'Spring 15/16';
 		
 		$scope.courses = Restangular.one('students', $scope.user.username).getList('enrolledCourses').$object;
-		
-		$scope.logout = function() {
-			$log.debug('Logging out user');
-			// Do something here to log the person out.
-			$state.go('authorize');
-		};
 	}];
 });

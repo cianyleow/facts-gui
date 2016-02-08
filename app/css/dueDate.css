@@ -1,0 +1,11 @@
+due-date > early {
+	color: green;
+}
+
+due-date > close {
+	color: orange;
+}
+
+due-date > late {
+	color: red;
+}

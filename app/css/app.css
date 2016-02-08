@@ -1,3 +1,20 @@
+md-list-item.active {
+	background: #bfbfbf !important;
+	color: #FFFFFF;
+}
+
+md-list-item:hover {
+	background: #f0f0f0;
+}
+
+md-list-item.active > a {
+	color: #FFFFFF;
+}
+
+md-list-item > a {
+	color: #000000;
+}
+
 a {
 	text-decoration: none;
 }
