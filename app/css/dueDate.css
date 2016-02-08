@@ -1,11 +1,11 @@
-due-date > early {
-	color: green;
+due-date > .early {
+	color: #1B5E20 !important;
 }
 
-due-date > close {
-	color: orange;
+due-date > .close {
+	color: #827717 !important;
 }
 
-due-date > late {
-	color: red;
+due-date > .late {
+	color: #B71C1C;
 }

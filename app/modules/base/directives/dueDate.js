@@ -7,8 +7,19 @@ define([], function() {
 			scope: {
 				dateString: '=',
 			},
-			controller: ['$scope', '$filter', function($scope, $filter) {
+			controller: ['$log', '$scope', '$filter', function($log, $scope, $filter) {
 				$scope.date = $filter('date')($scope.dateString, 'hh:mm:ss a dd/MMM/yyyy');
+				var today = Date.now();
+				$log.debug(today);
+				var due = Date.parse($scope.dateString);
+				$log.debug(due);
+				if(today > due) {
+					$scope.late = true;
+				} else if(today - 3600*24*5 > due) {
+					$scope.close = true;
+				} else {
+					$scope.early = true;
+				}
 			}],
 			link: function(scope, el, attrs) {
 				
