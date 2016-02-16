@@ -31,6 +31,7 @@
     "angular-utils-ui-breadcrumbs": "~0.2.2",
     "lodash": "3.10.1",
     "angular-ui-router-title": "~0.0.4",
-    "angular-upload": "~1.0.12"
+    "angular-upload": "~1.0.12",
+    "angular-material-data-table": "~0.9.11"
   }
 }

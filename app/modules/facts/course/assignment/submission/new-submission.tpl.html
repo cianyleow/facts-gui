@@ -9,17 +9,45 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content layout-padding>
-				<form name="newSubmissionForm">
+				<form novalidate name="newSubmissionForm" ng-show="!submitted">
+					<h3>Required Files</h3>
+					<table md-table class="submission-files">
+						<thead md-head>
+							<tr md-row>
+								<th md-column>File Name</th>
+								<th md-column>Allowed Extension(s)</th>
+								<th md-column>Max File Size</th>
+								<th md-column>File</th>
+								<th md-column>File Info</th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<tr md-row ng-repeat="file in files" ng-class="{invalid: file.selectedFile && !isValid(file)}">
+								<td md-cell>{{file.name}}</td>
+								<td md-cell>{{file.type.join(', ')}}</td>
+								<td md-cell>{{file.maxSize | bytes}}</td>
+								<td md-cell><input data-file type="file" ng-model="file.selectedFile"/></td>
+								<td md-cell><span ng-show="file.selectedFile">{{file.selectedFile.type}} ({{file.selectedFile.size | bytes}})</span></td>
+							</tr>
+						</tbody>
+					</table>
 					<md-input-container class="md-block">
 						<label>Comments (Optional)</label>
 						<textarea rows="5" ng-model="submission.comments" md-maxlength="150" md-select-on-focus></textarea>
 					</md-input-container>
-					Files
-					<div class="btn btn-primary btn-upload" upload-button>Upload</div>
 					<div layout="row">
-						<flex><md-button class="md-raised">Submit</md-button>
+						<flex><md-button class="md-raised md-primary" ng-disabled="!canSubmit()" ng-click="sendSubmission()">Submit</md-button>
 					</div>
 				</form>
+				<div layout="column" ng-show="submitted">
+					<h3 ng-if="!finished">Submitting...</h3>
+					<h3 ng-if="finished">Finished!</h3>
+					<md-progress-linear md-mode="indeterminate" ng-if="!finished"></md-progress-linear>
+					<md-progress-linear md-mode="determinate" value="100" ng-if="finished"></md-progress-linear>
+					
+					
+				</div>
+				
 			</md-content>
 		</md-card-content>
 	</md-card>

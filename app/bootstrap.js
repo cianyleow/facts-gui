@@ -12,7 +12,8 @@ require.config({
 		'angular-material-icons': 'bower_components/angular-material-icons/angular-material-icons',
 		'angular-ui-breadcrumbs': 'bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs',
 		'angular-ui-title': 'bower_components/angular-ui-router-title/angular-ui-router-title',
-		'angular-upload': 'bower_components/angular-upload/angular-upload.min'
+		'angular-upload': 'bower_components/angular-upload/angular-upload.min',
+		'angular-material-data-table': 'bower_components/angular-material-data-table/dist/md-data-table.min'
 	},
 	shim: {
 		'angular': { exports: 'angular'},
@@ -27,7 +28,8 @@ require.config({
 		'angular-material-icons': {deps: ['angular']},
 		'angular-ui-breadcrumbs': {deps: ['angular']},
 		'angular-ui-title': {deps: ['angular']},
-		'angular-upload': {deps: ['angular']}
+		'angular-upload': {deps: ['angular']},
+		'angular-material-data-table': {deps: ['angular']}
 	},	
 	deps: ['app']
 });
