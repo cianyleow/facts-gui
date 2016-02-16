@@ -1,0 +1,26 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>New Submission: {{assignment.title}}</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content layout-padding>
+				<form name="newSubmissionForm">
+					<md-input-container class="md-block">
+						<label>Comments (Optional)</label>
+						<textarea rows="5" ng-model="submission.comments" md-maxlength="150" md-select-on-focus></textarea>
+					</md-input-container>
+					Files
+					<div class="btn btn-primary btn-upload" upload-button>Upload</div>
+					<div layout="row">
+						<flex><md-button class="md-raised">Submit</md-button>
+					</div>
+				</form>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

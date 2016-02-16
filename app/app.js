@@ -1,7 +1,7 @@
-define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-title', 'angular-material-icons', 'restangular', 'angular-ui-router', 'modules/facts/facts', 'modules/base/base'
+define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-title', 'angular-material-icons', 'restangular', 'angular-ui-router', 'angular-upload', 'modules/facts/facts', 'modules/base/base'
 ], function(angular) {
 	'use strict';
-	var configFn = ['ui.router', 'base', 'facts', 'restangular', 'ngMaterial', 'ngMdIcons', 'angularUtils.directives.uiBreadcrumbs', 'ui.router.title'];
+	var configFn = ['ui.router', 'lr.upload', 'base', 'facts', 'restangular', 'ngMaterial', 'ngMdIcons', 'angularUtils.directives.uiBreadcrumbs', 'ui.router.title'];
 	var app = angular.module('app', configFn);
 	
 	app.config(['RestangularProvider', '$locationProvider', '$httpProvider',

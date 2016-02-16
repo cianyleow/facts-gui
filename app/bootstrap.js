@@ -11,7 +11,8 @@ require.config({
 		'angular-aria': 'bower_components/angular-aria/angular-aria',
 		'angular-material-icons': 'bower_components/angular-material-icons/angular-material-icons',
 		'angular-ui-breadcrumbs': 'bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs',
-		'angular-ui-title': 'bower_components/angular-ui-router-title/angular-ui-router-title'
+		'angular-ui-title': 'bower_components/angular-ui-router-title/angular-ui-router-title',
+		'angular-upload': 'bower_components/angular-upload/angular-upload.min'
 	},
 	shim: {
 		'angular': { exports: 'angular'},
@@ -25,7 +26,8 @@ require.config({
 		},
 		'angular-material-icons': {deps: ['angular']},
 		'angular-ui-breadcrumbs': {deps: ['angular']},
-		'angular-ui-title': {deps: ['angular']}
+		'angular-ui-title': {deps: ['angular']},
+		'angular-upload': {deps: ['angular']}
 	},	
 	deps: ['app']
 });

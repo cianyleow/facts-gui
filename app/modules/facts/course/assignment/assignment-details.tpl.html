@@ -9,7 +9,9 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-			
+				<strong>Title: </strong>{{assignment.title}}<br />
+				<strong>Description: </strong>{{assignment.description}}<br/>
+				<due-date date-string="assignment.dueTime"></due-date>
 			</md-content>
 		</md-card-content>
 	</md-card>
@@ -19,6 +21,10 @@
 				<h2>
 					<span>Submissions</span>
 				</h2>
+				<span flex></span>
+				<md-button class="md-raised" aria-label="New Submission" ui-sref="app.courses.details.assignments.details.submissions.new">
+					New Submission
+				</md-button>
 			</div>
 		</md-toolbar>
 		<md-card-content>
