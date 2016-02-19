@@ -37,12 +37,12 @@ define([], function() {
 				uploadPromises.push(FileService.uploadFile(
 					file.selectedFile,
 					function(resp) {
-						$scope.submission.fileIds[index] = resp;
+						console.log(resp);
+						$scope.submission.fileIds[index] = resp.data.fileId;
 						currentFile.uploaded = true;
 					},
 					function(resp) {
-						console.log(resp);
-						$scope.errorMessages.push(resp.message);
+						$scope.errorMessages.push(resp.data.message);
 						resetForm();
 					}, function(evt) {
 						currentFile.progress = Math.floor(evt.loaded / evt.total * 100);
@@ -79,6 +79,7 @@ define([], function() {
 				return elem.fileType;
 			}, getFileExtension(file.selectedFile.name));
 			file.valid = valid;
+			file.valid = true;
 			return file.valid;
 		};
 		
