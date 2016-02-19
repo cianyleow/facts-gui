@@ -1,13 +1,15 @@
 define(['angular',
 	'modules/base/controllers/controllers',
 	'modules/base/directives/directives',
-	'modules/base/filters/filters'
-], function(angular, controllers, directives, filters) {
+	'modules/base/filters/filters',
+	'modules/base/services/services'
+], function(angular, controllers, directives, filters, services) {
 	'use strict';
 	var base = angular.module('base', []);
 	controllers.init(base);
 	directives.init(base);
 	filters.init(base);
+	services.init(base);
 	
 	base.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		// Always redirect to dashboard if unknown or base entry.

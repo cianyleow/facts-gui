@@ -60,3 +60,11 @@ md-sidenav {
 	background: #FFCDD2;
 }
 
+.error-text-box {
+	background: #EEEEEE;
+	padding: 15px;
+}
+
+.error-text {
+	color: #F44336;
+}

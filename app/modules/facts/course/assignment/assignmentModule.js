@@ -45,46 +45,7 @@ define(['angular', './controllers'], function(angular, controllers) {
 			.state('app.courses.details.assignments.details.submissions', {
 				url: '/submission',
 				abstract: true,
-				data: {
-					displayName: 'Submissions'
-				},
-				views: {
-					'mainContent@app': {
-						
-					}
-				},
-				resolve: {
-					$title: function() {
-						return 'Submissions';
-					}
-				}
-			})
-			.state('app.courses.details.assignments.details.submissions.details', {
-				url: '/:submissionId',
-				data: {
-					displayName: 'Submission {{submission.version}}'
-				},
-				views: {
-					'mainContent@app': {
-						templateUrl: 'modules/facts/course/assignment/submission/submission-details.tpl.html',
-						controller: 'facts.course.assignment.submission.controllers.submission-details-controller'
-					}
-				},
-				resolve: {
-					submission: ['$stateParams', 'facts.services.submission', function($stateParams, SubmissionService) {
-						return SubmissionService.getSubmissionPromise($stateParams.submissionId).then(function(_submission) {
-							return _submission;
-						});
-					}],
-					assignment: ['$stateParams', 'facts.services.assignment', function($stateParams, AssignmentService) {
-						return AssignmentService.getAssignmentPromise($stateParams.assignmentId).then(function(_assignment) {
-							return _assignment;
-						});
-					}],
-					$title: ['assignment', 'submission', function(assignment, submission) {
-						return 'Submission ' + submission.version + ': ' + assignment.title;
-					}]
-				}
+				template: '<ui-view/>'
 			})
 			.state('app.courses.details.assignments.details.submissions.new', {
 				url: '/new',
@@ -98,13 +59,25 @@ define(['angular', './controllers'], function(angular, controllers) {
 					}
 				},
 				resolve: {
-					assignment: ['$stateParams', 'facts.services.assignment', function($stateParams, AssignmentService) {
-						return AssignmentService.getAssignmentPromise($stateParams.assignmentId).then(function(_assignment) {
-							return _assignment;
-						});
-					}], 
 					$title: ['assignment', function(assignment) {
 						return 'New Submission: ' + assignment.title;
+					}]
+				}
+			})
+			.state('app.courses.details.assignments.details.submissions.details', {
+				url: '/:submissionId',
+				data: {
+					displayName: 'Submission'
+				},
+				views: {
+					'mainContent@app': {
+						templateUrl: 'modules/facts/course/assignment/submission/submission-details.tpl.html',
+						controller: 'facts.course.assignment.submission.controllers.submission-details-controller'
+					}
+				},
+				resolve: {
+					$title: ['assignment', function(assignment) {
+						return 'Submission: ' + assignment.title;
 					}]
 				}
 			});

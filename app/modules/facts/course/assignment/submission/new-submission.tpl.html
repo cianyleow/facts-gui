@@ -1,15 +1,23 @@
 <md-content layout="column">
 	<md-card flex>
-		<md-toolbar>
+		<md-toolbar class="md-whiteframe-4dp">
 			<div class="md-toolbar-tools">
 				<h2>
 					<span>New Submission: {{assignment.title}}</span>
 				</h2>
 			</div>
 		</md-toolbar>
-		<md-card-content>
+		<div ng-if="errorMessages.length > 0" class="error-text-box error-text md-caption">
+			Submission Errors:
+			<ul>
+				<li ng-repeat="errorMessage in errorMessages">
+					{{errorMessage}}
+				</li>
+			</ul>
+		</div>
+		<md-card-content ng-class="{'md-whiteframe-10dp': error}">
 			<md-content layout-padding>
-				<form novalidate name="newSubmissionForm" ng-show="!submitted">
+				<form novalidate name="newSubmissionForm" ng-show="!submitting">
 					<h3>Required Files</h3>
 					<table md-table class="submission-files">
 						<thead md-head>
@@ -39,13 +47,25 @@
 						<flex><md-button class="md-raised md-primary" ng-disabled="!canSubmit()" ng-click="sendSubmission()">Submit</md-button>
 					</div>
 				</form>
-				<div layout="column" ng-show="submitted">
-					<h3 ng-if="!finished">Submitting...</h3>
-					<h3 ng-if="finished">Finished!</h3>
-					<md-progress-linear md-mode="indeterminate" ng-if="!finished"></md-progress-linear>
-					<md-progress-linear md-mode="determinate" value="100" ng-if="finished"></md-progress-linear>
+				<div layout="column" ng-show="submitting">
 					
-					
+					<h3 ng-if="uploading">Uploading Files...</h3>
+					<h3 ng-if="!uploading && !submitted">Sending submission...</h3>
+					<h3 ng-if="submitted">Successful submission!</h3>
+					<md-progress-linear md-mode="indeterminate" ng-if="!submitted"></md-progress-linear>
+					<md-progress-linear md-mode="determinate" ng-if="submitted"></md-progress-linear>
+					<md-list>
+						<md-list-item ng-repeat="upload in uploads">
+							 {{upload.fileName}}
+							 <span ng-if="!upload.uploaded">
+							 ... ({{upload.progress}}% done)
+							 </span>
+							 <span ng-if="upload.uploaded">
+							 ... Done!
+							 </span>
+						</md-list-item>
+					</md-list>
+					<span ng-if="submitted">Submission submitted successfully...redirecting in <ng-pluralize count="timeLeft" when="secondForms"/></span>
 				</div>
 				
 			</md-content>
