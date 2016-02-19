@@ -30,10 +30,10 @@
 							</tr>
 						</thead>
 						<tbody md-body>
-							<tr md-row ng-repeat="file in files" ng-class="{invalid: file.selectedFile && !isValid(file)}">
-								<td md-cell>{{file.name}}</td>
-								<td md-cell>{{file.type.join(', ')}}</td>
-								<td md-cell>{{file.maxSize | bytes}}</td>
+							<tr md-row ng-repeat="file in assignment.requiredFiles" ng-class="{invalid: file.selectedFile && !isValid(file)}">
+								<td md-cell>{{file.fileName}}</td>
+								<td md-cell><span ng-repeat="type in file.allowedExtensions">{{type.fileType}}{{$last ? ''  : ', '}}</span></td>
+								<td md-cell>{{file.maximumSize | bytes}}</td>
 								<td md-cell><input data-file type="file" ng-model="file.selectedFile"/></td>
 								<td md-cell><span ng-show="file.selectedFile">{{file.selectedFile.type}} ({{file.selectedFile.size | bytes}})</span></td>
 							</tr>

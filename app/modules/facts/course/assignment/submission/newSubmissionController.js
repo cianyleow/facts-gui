@@ -17,13 +17,6 @@ define([], function() {
 			fileIds: [],
 			assignmentId: $stateParams.assignmentId
 		};
-		$scope.files = [
-			{
-				name: '7z920-x64',
-				type: ['msi', 'ppt', 'pptx', 'zip'],
-				maxSize: 10485760
-			}
-		];
 		
 		$scope.sendSubmission = function() {
 			$scope.errorMessages = [];
@@ -80,7 +73,7 @@ define([], function() {
 		};
 		
 		$scope.isValid = function(file) {
-			file.valid = file.selectedFile.size <= file.maxSize && getFileName(file.selectedFile.name) == file.name && file.type.indexOf(getFileExtension(file.selectedFile.name)) > -1;
+			file.valid = file.selectedFile.size <= file.maxSize && getFileName(file.selectedFile.name) == file.name && file.typeArray.indexOf(getFileExtension(file.selectedFile.name)) > -1;
 			return file.valid;
 		};
 		
