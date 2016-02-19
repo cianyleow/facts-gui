@@ -28,7 +28,7 @@ define([], function() {
 			var uploadPromises = [];
 			
 			// Upload files and get back fileIds
-			angular.forEach($scope.files, function(file, index) {
+			angular.forEach($scope.assignment.requiredFiles, function(file, index) {
 				var currentFile = {
 					fileName: file.selectedFile.name,
 					progress: 0
@@ -73,17 +73,32 @@ define([], function() {
 		};
 		
 		$scope.isValid = function(file) {
-			file.valid = file.selectedFile.size <= file.maxSize && getFileName(file.selectedFile.name) == file.name && file.typeArray.indexOf(getFileExtension(file.selectedFile.name)) > -1;
+			var valid = file.selectedFile.size <= file.maximumSize;
+			valid = valid && getFileName(file.selectedFile.name) == file.fileName;
+			valid = valid && objectArrayContains(file.allowedExtensions, function(elem) {
+				return elem.fileType;
+			}, getFileExtension(file.selectedFile.name));
+			file.valid = valid;
 			return file.valid;
 		};
 		
 		$scope.canSubmit = function() {
-			var canSubmit = true;
-			angular.forEach($scope.files, function(file) {
-				canSubmit = canSubmit && file.valid;
+			var canSubmit = $scope.assignment.requiredFiles;
+			angular.forEach($scope.assignment.requiredFiles, function(file) {
+				canSubmit = canSubmit && file.selectedFile && file.valid;
 			});
 			return canSubmit;
 		};
+		
+		function objectArrayContains(array, accessor, value) {
+			var i = 0;
+			for(i = 0; i < array.length; i++) {
+				if(accessor(array[i]) == value) {
+					return true;
+				}
+			}
+			return false;
+		}
 		
 		function getFileName(fileName) {
 			return fileName.split('.')[0];
