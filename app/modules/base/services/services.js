@@ -2,9 +2,8 @@ define(['./dialogService',
 		'./fileService',
 		'./sideNavService',
 		'./tokenService',
-		'./authenticationService',
-		'./userService'
-], function(DialogService, FileService, SideNavService, TokenService, AuthenticationService, UserService) {
+		'./authenticationService'
+], function(DialogService, FileService, SideNavService, TokenService, AuthenticationService) {
 	'use strict';
 	return {
 		init: function(module) {
@@ -13,7 +12,6 @@ define(['./dialogService',
 			module.service('base.services.sidenav', SideNavService);
 			module.service('base.services.token', TokenService);
 			module.service('base.services.authentication', AuthenticationService);
-			module.service('base.services.user', UserService);
 		}
 	};
 });

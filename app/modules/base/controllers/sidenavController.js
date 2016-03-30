@@ -1,18 +1,14 @@
 define([], function() {
 	'use strict';
-	return ['$scope', 'Restangular', '$state', 'facts.services.enrollment', 'base.services.sidenav', 'base.services.user', function($scope, Restangular, $state, EnrollmentService, SideNavService, UserService) {
-		$scope.user = UserService.getUser();
+	return ['$scope', 'Restangular', '$state', 'facts.services.enrollment', 'base.services.sidenav', function($scope, Restangular, $state, EnrollmentService, SideNavService) {
+		var userSelf = Restangular.one('self');
+		
+		$scope.user = userSelf.get().$object;
 		
 		$scope.menu = SideNavService.getMenuOptions();
 		
 		$scope.currentPeriod = 'Spring 15/16';
 		
-		$scope.courses = [];
-		
-		EnrollmentService.getEnrollmentsPromise().then(function(responses) {
-			angular.forEach(responses, function(response) {
-				$scope.courses.push(Restangular.one('courses', response.courseId).one('details').get().$object);
-			});
-		});
+		$scope.courses = userSelf.getList('courses').$object;
 	}];
 });
