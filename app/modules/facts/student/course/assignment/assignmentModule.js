@@ -10,7 +10,7 @@ define(['angular', './controllers/controllers', './submission/submissionModule']
 					displayName: 'Assignments'
 				},
 				views: {
-					'mainContent@app': {
+					'mainContent@base.app': {
 						templateUrl: 'modules/facts/student/course/assignment/partials/assignments.tpl.html',
 						controller: 'facts.student.course.assignment.controllers.assignments'
 					}
@@ -27,14 +27,14 @@ define(['angular', './controllers/controllers', './submission/submissionModule']
 					displayName: '{{assignment.title}}'
 				},
 				views: {
-					'mainContent@app': {
+					'mainContent@base.app': {
 						templateUrl: 'modules/facts/student/course/assignment/partials/details.tpl.html',
 						controller: 'facts.student.course.assignment.controllers.details'
 					}
 				},
 				resolve: {
-					assignment: ['$stateParams', 'facts.services.assignment', function($stateParams, AssignmentService) {
-						return AssignmentService.getAssignmentPromise($stateParams.assignmentId).then(function(_assignment) {
+					assignment: ['$stateParams', 'Restangular', function($stateParams, Restangular) {
+						return Restangular.one('assignments', $stateParams.assignmentId).get().then(function(_assignment) {
 							return _assignment;
 						});
 					}],
