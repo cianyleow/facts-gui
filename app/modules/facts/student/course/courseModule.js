@@ -31,9 +31,9 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 						}
 				},
 				resolve: {
-					course: ['$stateParams', 'facts.services.course', function($stateParams, CourseService) {
+					course: ['$stateParams', 'Restangular', function($stateParams, Restangular) {
 						// Using a promise here so that it gets resolved before being used.
-						return CourseService.getCourseDetailsPromise($stateParams.courseId).then(function(_course) {
+						return Restangular.one('courses', $stateParams.courseId).one('details').get().then(function(_course) {
 							return _course;
 						});
 					}],
