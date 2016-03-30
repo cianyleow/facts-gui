@@ -1,7 +1,7 @@
 <md-toolbar class="md-tall md-hue-2">
-	<span flex></span>
+	<span flex>FACTS</span>
 	<div layout="column" class="md-toolbar-tools-bottom inset">
-	  <div>{{user.name}}</div>
+	  <div>{{user.firstName}} {{user.lastName}} ({{user.userName}})</div>
 	  <div>{{user.email}}</div>
 	</div>
   </md-toolbar>
@@ -20,7 +20,7 @@
   <md-divider></md-divider>
   <md-subheader>My Courses ({{currentPeriod}})</md-subheader>
   <md-list-item ng-repeat="item in courses" ui-sref-active="active">
-	<a ui-sref="app.courses.details({courseId: item.courseId})">
+	<a ui-sref="base.app.courses.details({courseId: item.courseId})">
 	  <md-item-content md-ink-ripple layout="row" layout-align="start center">
 		<div class="inset">
 			{{item.shortName}} - {{item.name | limitTo : 12}}<span ng-show="item.name.length > 12">...</span>

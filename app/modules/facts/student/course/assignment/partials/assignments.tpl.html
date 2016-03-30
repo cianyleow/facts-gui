@@ -1,0 +1,40 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Assignment Calendar</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<assignment-calendar assignments-list="assignments" course-id="1"></assignment-calendar>
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card flex>
+	<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Assignments List</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
+					<span><h3>No assignments!</h3></span>
+				</span>
+				<md-list ng-show="assignments.length">
+					<md-list-item class="md-2-line" ng-repeat="assignment in assignments">
+						<div class="md-list-item-text">
+							<h3>{{assignment.title}}</h3>
+							<p>Due: {{assignment.description}}</p>
+						</div>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

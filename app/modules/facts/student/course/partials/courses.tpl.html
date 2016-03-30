@@ -1,0 +1,59 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>My Courses</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!enrolledCourses.length">
+					<span><h3>No enrolled courses!</h3></span>
+				</span>
+				<md-list ng-show="enrolledCourses.length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in enrolledCourses">
+						<div class="md-list-item-text">
+							<h3>{{course.shortName}}: {{course.name}}</h3>
+							<p>{{course.description}}</p>
+						</div>
+						<md-button class="md-secondary" ui-sref="base.app.courses.details({courseId: course.courseId})">View Course</md-button>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card flex>
+	<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>All Courses</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Filter">
+					<ng-md-icon icon="filter_list"></ng-md-icon>
+				</md-button>
+				<md-button class="md-icon-button" aria-label="Search">
+					<ng-md-icon icon="search"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!allCourses.length">
+					<span><h3>No courses!</h3></span>
+				</span>
+				<md-list ng-show="allCourses.length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in allCourses">
+						<a class="md-list-item-text" href="http://google.com">
+							<h3>{{course.shortName}}: {{course.name}}</h3>
+							<p>{{course.description}}</p>
+						</a>
+						<md-button class="md-secondary" ui-sref="base.app.courses.details({courseId: course.courseId})" ng-show="!course.enrolled">Enroll</md-button>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

@@ -1,0 +1,29 @@
+<div layout="row" layout-align="center center">
+	<md-card flex-xs="100" flex-gt-xs="20">
+		<img src="http://www.uq.edu.au/uqabroad/images/_partners/imperialcollegelondon.jpg" class="md-card-image">
+		<md-card-title>
+			<md-card-title-text>
+				<span class="md-headline">FACTS Login</span>
+			</md-card-title-text>
+		</md-card-title>
+		<md-card-content>
+			<form name="authorizationForm">
+				<div class="row">
+					<md-input-container class="md-block" flex>
+						<label>Username</label>
+						<input ng-model="user.username" type="text">
+					</md-input-container>
+				</div>
+				<div class="row">
+					<md-input-container class="md-block" flex>
+						<label>Password</label>
+						<input ng-model="user.password" type="password">
+					</md-input-container>
+				</div>
+				<div class="row">
+					<md-button ng-click="authenticate(user)" class="md-raised md-primary">Login</md-button>
+				</div>
+			</form>
+		</md-card-content>
+	</md-card>
+</div>

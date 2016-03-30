@@ -1,0 +1,1 @@
+define([], function() {	'use strict';	return ['Restangular', function(Restangular) {		var service = this;		service.getUserPromise = function() {			return Restangular.one('users/me').get();		};				service.getUser = function() {			return service.getUserPromise().$object;		};				return service;	}];});

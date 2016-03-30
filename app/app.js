@@ -38,8 +38,16 @@ define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-tit
 			// We can not inject $state directly as this gives a circular dependency
             $httpProvider.interceptors.push(['$q', '$injector', function($q, $injector) {
                 return {
+					request: function(config) {
+						var authToken = $injector.get('base.services.token').retrieve();
+						if(authToken) {
+							config.headers['X-AUTH-TOKEN'] = authToken;
+						}
+						return config;
+					},
                     responseError: function(response) {
-                        if(response.status === 401) {
+                        if(response.status === 401 || response.status === 403) {
+							$injector.get('base.services.token').clear();
                             $injector.get('$state').transitionTo('authorize');
                         }
                         return $q.reject(response);

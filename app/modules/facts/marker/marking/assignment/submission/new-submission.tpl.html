@@ -48,23 +48,10 @@
 					</div>
 				</form>
 				<div layout="column" ng-show="submitting">
-					
-					<h3 ng-if="uploading">Uploading Files...</h3>
-					<h3 ng-if="!uploading && !submitted">Sending submission...</h3>
+					<h3 ng-if="!submitted">Sending submission...</h3>
 					<h3 ng-if="submitted">Successful submission!</h3>
 					<md-progress-linear md-mode="indeterminate" ng-if="!submitted"></md-progress-linear>
 					<md-progress-linear md-mode="determinate" ng-if="submitted"></md-progress-linear>
-					<md-list>
-						<md-list-item ng-repeat="upload in uploads">
-							 {{upload.fileName}}
-							 <span ng-if="!upload.uploaded">
-							 ... ({{upload.progress}}% done)
-							 </span>
-							 <span ng-if="upload.uploaded">
-							 ... Done!
-							 </span>
-						</md-list-item>
-					</md-list>
 					<span ng-if="submitted">Submission submitted successfully...redirecting in <ng-pluralize count="timeLeft" when="secondForms"/></span>
 				</div>
 				

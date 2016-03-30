@@ -1,0 +1,46 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Assignment Details</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<strong>Title: </strong>{{assignment.title}}<br />
+				<strong>Description: </strong>{{assignment.description}}<br/>
+				<due-date date-string="assignment.dueTime"></due-date>
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card flex>
+	<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Submissions</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-raised" aria-label="New Submission" ui-sref="app.courses.details.assignments.details.submissions.new">
+					New Submission
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!submissions.length">
+					<span><h3>No submissions!</h3></span>
+				</span>
+				<md-list ng-show="assignments.length">
+					<md-list-item class="md-2-line" ng-repeat="submission in submissions">
+						<div class="md-list-item-text">
+							<h3>{{submission.title}}</h3>
+							<p>Due: {{submission.description}}</p>
+						</div>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

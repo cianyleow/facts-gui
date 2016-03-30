@@ -1,3 +1,7 @@
+body {
+	background: #ededed;
+}
+
 md-list-item.active {
 	background: #bfbfbf !important;
 	color: #FFFFFF;

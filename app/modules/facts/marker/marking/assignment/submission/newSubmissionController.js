@@ -15,61 +15,34 @@ define([], function() {
 		$scope.submission = {
 			comments: '',
 			fileIds: [],
-			assignmentId: $stateParams.assignmentId
+			assignment_id: $stateParams.assignmentId
 		};
 		
 		$scope.sendSubmission = function() {
 			$scope.errorMessages = [];
 			$scope.submitting = true;
 			$scope.submitted = false;
-			$scope.uploading = true;
-			$scope.uploads = [];
 			
-			var uploadPromises = [];
+			$scope.submission.files = [];
 			
 			// Upload files and get back fileIds
-			angular.forEach($scope.assignment.requiredFiles, function(file, index) {
-				var currentFile = {
-					fileName: file.selectedFile.name,
-					progress: 0
-				};
-				$scope.uploads.push(currentFile);
-				uploadPromises.push(FileService.uploadFile(
-					file.selectedFile,
-					function(resp) {
-						console.log(resp);
-						$scope.submission.fileIds[index] = resp.data.fileId;
-						currentFile.uploaded = true;
-					},
-					function(resp) {
-						$scope.errorMessages.push(resp.data.message);
-						resetForm();
-					}, function(evt) {
-						currentFile.progress = Math.floor(evt.loaded / evt.total * 100);
-					}
-				));	
+			angular.forEach($scope.assignment.requiredFiles, function(file) {
+				$scope.submission.files.push(file.selectedFile);
 			});
-			$q.all(uploadPromises).then(function() {
-				if($scope.errorMessages.length === 0) { // Only upload submission if no errors.
-					$scope.uploading = false;
-					SubmissionService.uploadNewSubmission(
-						$scope.submission, 
-						function(resp) {
-							console.log("Finished submission");
-							$scope.submitted = true;
-							$scope.timeLeft = 3;
-							redirectPage(resp);
-						},
-						function(resp) {
-							$scope.errorMessages.push(resp.message);
-						}
-					);
-				}
-				if($scope.errorMessages.length !== 0) {
+			SubmissionService.uploadNewSubmission(
+				$scope.submission, 
+				function(resp) {
+					console.log("Finished submission");
+					$scope.submitted = true;
+					$scope.timeLeft = 3;
+					redirectPage(resp.data.submissionId);
+				},
+				function(resp) {
+					$scope.errorMessages.push(resp.message);
 					DialogService.showErrorDialog('Submission Upload Error', 'There has been an error while uploading your submission. Please review and try again.');
 					$scope.submitted = false;
 				}
-			});
+			);
 		};
 		
 		$scope.isValid = function(file) {
@@ -107,12 +80,6 @@ define([], function() {
 		
 		function getFileExtension(fileName) {
 			return fileName.split('.')[1];
-		}
-		
-		function resetForm() {
-			$scope.submitting = false;
-			$scope.submitted = false;
-			$scope.uploading = false;
 		}
 		
 		function redirectPage(submissionId) {

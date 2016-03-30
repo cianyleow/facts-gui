@@ -20,15 +20,14 @@ define(['angular',
 		$stateProvider
 			.state('authorize', {
 				url: '/authorize',
-				views: {
-					root: {
-						templateUrl: 'app/modules/base/partials/authorization.tpl.html',
-						controller: 'base.controllers.authorization'
-					}
-				}
+				templateUrl: 'modules/base/partials/authorization.tpl.html',
+				controller: 'base.controllers.authorization-controller'
 			})
-			.state('app', {
-				url: '/',
+			.state('base', {
+				abstract: true,
+				templateUrl: 'modules/base/partials/framework.tpl.html'
+			})
+			.state('base.app', {
 				abstract: true,
 				views: {
 					root: {
@@ -42,9 +41,16 @@ define(['angular',
 						templateUrl: 'modules/base/partials/toolbar.tpl.html',
 						controller: 'base.controllers.toolbar-controller'
 					}
-				},
+				}
+			})
+			.state('base.app.marker', {
+				url: '/marker',
+				abstract: true,
 				data: {
-					displayName: 'FACTS'
+					displayName: 'Marker'
+				},
+				resolve: {
+					$title: function() { return 'Marker'; }
 				}
 			});
 	}]);
