@@ -31,12 +31,12 @@
 		<md-card-content>
 			<md-content>
 				<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
-					<span><h3>No assignments!</h3></span>
+					<span><h3>No assignments! {{assignments}}</h3></span>
 				</span>
 				<md-list ng-show="assignments.length">
 					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
 						<div class="md-list-item-text">
-							<h3>{{assignment.title}}</h3>
+							<h3>{{assignment.name}}</h3>
 							<p><due-date date-string="assignment.dueTime"></due-date></p>
 						</div>
 						<md-button class="md-secondary" ui-sref="base.app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
