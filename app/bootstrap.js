@@ -14,7 +14,8 @@ require.config({
 		'angular-ui-title': 'bower_components/angular-ui-router-title/angular-ui-router-title',
 		'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload.min',
 		'angular-material-data-table': 'bower_components/angular-material-data-table/dist/md-data-table.min',
-		'n3-charts-pie-chart': 'bower_components/n3-charts/pie-chart.min'
+		'n3-charts-pie-chart': 'bower_components/n3-charts/pie-chart.min',
+		'd3': 'bower_components/d3/d3.min'
 	},
 	shim: {
 		'angular': { exports: 'angular'},
