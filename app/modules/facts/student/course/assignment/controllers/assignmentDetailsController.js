@@ -4,5 +4,6 @@ define([], function() {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = assignment.get().$object;
 		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
+		$scope.markComponents = assignment.getList('markComponents').$object;
 	}];
 });

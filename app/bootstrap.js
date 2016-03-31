@@ -13,7 +13,8 @@ require.config({
 		'angular-ui-breadcrumbs': 'bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs',
 		'angular-ui-title': 'bower_components/angular-ui-router-title/angular-ui-router-title',
 		'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload.min',
-		'angular-material-data-table': 'bower_components/angular-material-data-table/dist/md-data-table.min'
+		'angular-material-data-table': 'bower_components/angular-material-data-table/dist/md-data-table.min',
+		'n3-charts-pie-chart': 'bower_components/n3-charts/pie-chart.min'
 	},
 	shim: {
 		'angular': { exports: 'angular'},
@@ -29,7 +30,8 @@ require.config({
 		'angular-ui-breadcrumbs': {deps: ['angular']},
 		'angular-ui-title': {deps: ['angular']},
 		'ng-file-upload': {deps: ['angular']},
-		'angular-material-data-table': {deps: ['angular']}
+		'angular-material-data-table': {deps: ['angular']},
+		'n3-charts-pie-chart': {deps: ['angular']}
 	},	
 	deps: ['app']
 });
