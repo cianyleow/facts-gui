@@ -39,7 +39,7 @@ define(['angular', './controllers/controllers', './submission/submissionModule']
 						});
 					}],
 					$title: ['assignment', function(assignment) {
-						return 'Assignment: ' + assignment.title;
+						return 'Assignment: ' + assignment.name;
 					}]
 				}
 			});

@@ -1,6 +1,8 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$stateParams', 'Restangular', 'facts.services.assignment', function($scope, $stateParams, Restangular, AssignmentService) {
-		$scope.assignment = AssignmentService.getAssignment($stateParams.assignmentId);
+	return['$scope', '$stateParams', 'Restangular', function($scope, $stateParams, Restangular) {
+		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
+		$scope.assignment = assignment.get().$object;
+		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 	}];
 });
