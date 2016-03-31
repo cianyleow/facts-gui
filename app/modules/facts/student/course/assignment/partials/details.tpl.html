@@ -13,7 +13,32 @@
 					<md-content>
 						<strong>Title: </strong>{{assignment.name}}<br />
 						<strong>Description: </strong>{{assignment.description}}<br/>
-						<due-date date-string="assignment.dueTime"></due-date>
+						<due-date date-string="assignment.dueTime"></due-date><br />
+						<strong>Supplied Files:</strong>
+						<table md-table>
+							<thead md-head>
+								<tr md-row>
+									<th md-column>#</th>
+									<th md-column>File Name</th>
+									<th md-column>File Size</th>
+									<th md-column>File Hash</th>
+									<th md-column>Download</th>
+								</tr>
+							</thead>
+							<tbody md-body>
+								<tr md-row ng-repeat="file in suppliedFiles">
+									<td md-cell>{{$index+1}}</td>
+									<td md-cell>{{file.name}}.{{file.extension}}</td>
+									<td md-cell>{{file.size | bytes}}</td>
+									<td md-cell>{{file.hash}}</td>
+									<td md-cell>
+										<md-button class="md-icon-button" aria-label="Download" ng-click="download(file.fileId)">
+											<ng-md-icon icon="file_download"></ng-md-icon>
+										</md-button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</md-content>
 				</md-card-content>
 			</md-card>
