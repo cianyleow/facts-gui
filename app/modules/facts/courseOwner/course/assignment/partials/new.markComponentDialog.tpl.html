@@ -1,0 +1,40 @@
+<md-dialog aria-label="New Mark Component" flex-gt-xs="50" flex-xs ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>New Mark Component</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+          <ng-md-icon icon="close"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+		<form>
+			<md-input-container class="md-block">
+				<label>Name</label>
+				<input ng-model="markComponent.name"/>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Max Mark</label>
+				<input ng-model="markComponent.maxMark"/>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Description (optional)</label>
+				<textarea ng-model="markComponent.description" md-maxlength="255" rows="5" style="height: 87px;"></textarea>
+			</md-input-container>
+		</form>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-primary" ng-click="check(markComponent)">
+       Add
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;">
+        Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

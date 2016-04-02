@@ -1,0 +1,32 @@
+<md-dialog aria-label="New Supplied File" flex-gt-xs="50" flex-xs ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>New Supplied File</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+          <ng-md-icon icon="close"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+		<p>Uplod any file necessary for this assignment.</p>
+		<form>
+			<md-input-container class="md-block">
+				<input data-file ng-model="suppliedFile.file" type="file" aria-label="Supplied File Input"/>
+			</md-input-container>
+		</form>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-primary" ng-click="check(suppliedFile)">
+       Add
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;">
+        Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

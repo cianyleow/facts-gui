@@ -1,0 +1,52 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Course Details</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.edit">
+					<ng-md-icon icon="edit"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+			<strong>Course Name:</strong> {{course.name}} ({{course.shortName}})<br />
+			<strong>Course Owner:</strong> Dr. David Thomas<br />
+			<strong>Description:</strong> {{course.description}}<br />
+			<strong># Assignments:</strong> {{assignments.length}}
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card flex>
+	<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Assignments</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-raised" aria-label="View All" ui-sref="base.app.courseOwner.courses.details.assignments">
+					View All
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
+					<span><h3>No open assignments! {{assignments}}</h3></span>
+				</span>
+				<md-list ng-show="assignments.length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
+						<div class="md-list-item-text">
+							<h3>{{assignment.name}}</h3>
+							<p><due-date date-string="assignment.dueTime"></due-date></p>
+						</div>
+						<md-button class="md-secondary" ui-sref="base.app.courseOwner.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

@@ -1,0 +1,91 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Review Assignment<span ng-show="assignment.name"> - {{assignment.name}}</span></span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-raised" aria-label="Review new assignment" ng-click="create(assignment)">
+					Create Assignment
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<div layout="row" layout-xs="column">
+				<div flex-xs flex-gt-xs="70" layout="column">
+					<md-card>
+						<md-toolbar>
+							<div class="md-toolbar-tools">
+								<h2>
+									<span>{{assignment.name}}</span>
+								</h2>
+							</div>
+						</md-toolbar>
+						<md-card-content>
+							<md-content>
+								{{assignment.description}}
+								<due-date date-string="assignment.dueTime"></due-date><br />
+								<span layout="row" ng-show="assignment.suppliedFiles.length == 0" layout-align="center center" flex>
+									<span><h2>No supplied files</h2></span>
+								</span>
+								<md-list>
+									<md-list-item class="md-2-line" ng-repeat="suppliedFile in assignment.suppliedFiles">
+										<div class="md-list-item-text">
+											<h3>{{suppliedFile.file.name}} ({{suppliedFile.file.size | bytes}})</h3>
+											<p>{{suppliedFile.file.type}}</p>
+										</div>
+										<ng-md-icon class="md-secondary" aria-label="Download supplied file" icon="file_download"></ng-md-icon>
+									</md-list-item>
+								</md-list>
+							</md-content>
+						</md-card-content>
+					</md-card>
+					<md-card>
+						<md-toolbar>
+							<div class="md-toolbar-tools">
+								<h2>
+									<span>Required Files</span>
+								</h2>
+							</div>
+						</md-toolbar>
+						<md-card-content>
+							<md-content>
+								<span layout="row" ng-show="assignment.requiredFiles.length == 0" layout-align="center center" flex>
+									<span><h2>No required files</h2></span>
+								</span>
+								<md-list>
+									<md-list-item class="md-2-line" ng-repeat="requiredFile in assignment.requiredFiles">
+										<div class="md-list-item-text">
+											<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
+											<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
+										</div>
+									</md-list-item>
+								</md-list>
+							</md-content>
+						</md-card-content>
+					</md-card>
+				</div>
+				<div flex-xs flex-gt-xs="30" layout="column">
+					<md-card>
+						<md-toolbar>
+							<div class="md-toolbar-tools">
+								<h2>
+									<span>Mark Components</span>
+								</h2>
+							</div>
+						</md-toolbar>
+						<md-card-content>
+							<md-content>
+								<span layout="row" ng-show="assignment.markComponents.length == 0" layout-align="center center" flex>
+									<span><h2>No mark components</h2></span>
+								</span>
+								<pie-chart ng-if="markComponentData.length > 0 && markComponentOptions" data="markComponentData" options="markComponentOptions"></pie-chart>
+							</md-content>
+						</md-card-content>
+					</md-card>
+				</div>
+			</div>
+		</md-card-content>
+	</md-card>
+</md-content>

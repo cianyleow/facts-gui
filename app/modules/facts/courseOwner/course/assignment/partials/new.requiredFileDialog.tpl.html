@@ -1,0 +1,42 @@
+<md-dialog aria-label="Required File Dialog" flex-gt-xs="50" flex-xs ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>New Required File</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+          <ng-md-icon icon="close"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+		<div class="md-dialog-content">
+			<form>
+				<md-input-container class="md-block">
+					<label>Full File Name</label>
+					<input ng-model="fileName"/>
+				</md-input-container>
+				<md-slider flex ng-model="requiredFile.maxFileSize" min="1024" max="10485760" step="1024" aria-label="Max file size" class="md-primary"></md-slider>
+				<md-list>
+					<md-list-item class="md-2-line">
+					<div class="md-list-item-text">
+							<h3>{{requiredFile.fileName}} <span ng-if="requiredFile.allowedExtension">[.{{requiredFile.allowedExtension}}]</span></h3>
+							<p>Max File Size {{requiredFile.maxFileSize | bytes}}</p>
+						</div>
+					</md-list-item>
+				</md-list>
+				
+			</form>
+		</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-primary" ng-click="check(requiredFile)">
+       Add
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;">
+        Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,98 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>New Assignment<span ng-show="assignment.name"> - {{assignment.name}}</span></span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-raised" aria-label="Review new assignment" ng-click="review(assignment)">
+					Review Assignment
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-card-content class="tab-with-fab">
+			<md-content layout-padding>
+				<form>
+					<md-button ng-class="{ visible: selectedTab==1 }" class="md-fab md-primary md-fab-bottom-right" ng-click="suppliedFileDialog($event)" aria-label="Add New Supplied File">+</md-button>
+					<md-button ng-class="{ visible: selectedTab==2 }" class="md-fab md-primary md-fab-bottom-right" ng-click="markComponentDialog($event)" aria-label="Add New Mark Component">+</md-button>
+					<md-button ng-class="{ visible: selectedTab==3 }" class="md-fab md-primary md-fab-bottom-right" ng-click="requiredFileDialog($event)" aria-label="Add New Required File">+</md-button>
+					<md-tabs md-selected="selectedTab" md-dynamic-height md-border-bottom>
+						<md-tab label="Basic Details">
+							<md-content class="md-padding">
+								<md-input-container class="md-block" flex-gt-xs>
+									<label>
+										Assignment Name
+									</label>
+									<input ng-model="assignment.name">
+								</md-input-container>
+								<div layout-gt-xs="row">
+									<md-datepicker ng-model="assignment.openTime" md-placeholder="Open time"></md-datepicker>
+									<md-datepicker ng-model="assignment.dueTime" md-placeholder="Due time"></md-datepicker>
+								</div>
+								<md-input-container class="md-block">
+									<label>Description (optional)</label>
+									<textarea ng-model="assignment.description" md-maxlength="255" rows="5" md-select-on-focus style="height: 147px;"></textarea>
+								</md-input-container>
+								<md-checkbox ng-model="assignment.groupBased" aria-label="Is Group based">Group Based</md-checkbox>
+							</md-content>
+						</md-tab>
+						<md-tab label="Supplied Files">
+							<md-content class="md-padding">
+								<span layout="row" ng-show="assignment.suppliedFiles.length == 0" layout-align="center center" flex>
+									<span><h2>No supplied files</h2></span>
+								</span>
+								<md-list>
+									<md-list-item class="md-2-line" ng-repeat="suppliedFile in assignment.suppliedFiles">
+										<div class="md-list-item-text">
+											<h3>{{suppliedFile.file.name}} ({{suppliedFile.file.size | bytes}})</h3>
+											<p>{{suppliedFile.file.type}}</p>
+										</div>
+										<ng-md-icon class="md-secondary" ng-click="removeLine(assignment.suppliedFiles, $index)" aria-label="Remove supplied file" icon="remove_circle_outline"></ng-md-icon>
+									</md-list-item>
+								</md-list>
+							</md-content>
+						</md-tab>
+						<md-tab label="Mark Components">
+							<md-content class="md-padding">
+								<span layout="row" ng-show="assignment.markComponents.length == 0" layout-align="center center" flex>
+									<span><h2>No mark components</h2></span>
+								</span>
+								<md-list>
+									<md-list-item class="md-2-line" ng-repeat="markComponent in assignment.markComponents">
+										<div class="md-list-item-text">
+											<h3>{{ markComponent.name }} ({{ markComponent.maxMark }} marks)</h3>
+											<p>{{ markComponent.description}} </p>
+										</div>
+										<ng-md-icon class="md-secondary" ng-click="removeLine(assignment.markComponent, $index)" aria-label="Remove mark component" icon="remove_circle_outline"></ng-md-icon>
+									</md-list-item>
+								</md-list>
+							</md-content>
+						</md-tab>
+						<md-tab label="Required Files">
+							<md-content class="md-padding">
+								<span layout="row" ng-show="assignment.requiredFiles.length == 0" layout-align="center center" flex>
+									<span><h2>No required files</h2></span>
+								</span>
+								<md-list>
+									<md-list-item class="md-2-line" ng-repeat="requiredFile in assignment.requiredFiles">
+										<div class="md-list-item-text">
+											<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
+											<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
+										</div>
+										<ng-md-icon class="md-secondary" ng-click="removeLine(assignment.requiredFiles, $index)" aria-label="Remove required file" icon="remove_circle_outline"></ng-md-icon>
+									</md-list-item>
+								</md-list>
+							</md-content>
+						</md-tab>
+						<md-tab ng-if="assignment.groupBased" label="Group Requirements">
+							<md-content class="md-padding">
+							
+							</md-content>
+						</md-tab>
+					</md-tabs>
+				</form>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>

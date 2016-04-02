@@ -1,0 +1,27 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>My Courses</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<span flex layout="row" layout-align="center center" ng-show="!ownedCourses.length">
+					<span><h3>No owned courses!</h3></span>
+				</span>
+				<md-list ng-show="ownedCourses.length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in ownedCourses">
+						<div class="md-list-item-text">
+							<h3>{{course.shortName}}: {{course.name}}</h3>
+							<p>{{course.description}}</p>
+						</div>
+						<md-button class="md-secondary" ui-sref="base.app.courseOwner.courses.details({courseId: course.courseId})">View Course</md-button>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</md-card-content>
+	</md-card>
+</md-content>
