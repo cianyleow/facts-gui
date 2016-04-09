@@ -21,7 +21,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				resolve: {
 					$title: ['assignment', function(assignment) {
-						return 'New Submission: ' + assignment.title;
+						return 'New Submission: ' + assignment.name;
 					}]
 				}
 			})
@@ -38,7 +38,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				resolve: {
 					$title: ['assignment', function(assignment) {
-						return 'Submission: ' + assignment.title;
+						return 'Submission: ' + assignment.name;
 					}]
 				}
 			});
