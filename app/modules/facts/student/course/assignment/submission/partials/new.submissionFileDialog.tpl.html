@@ -1,34 +1,34 @@
 <md-dialog aria-label="New Supplied File" flex-gt-xs="50" flex-xs ng-cloak>
-  <form name="submissionFileForm">
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] Upload</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
-          <ng-md-icon icon="close"></ng-md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div class="md-dialog-content">
-			<md-input-container class="md-block">
-				<input required data-file name="submissionFile" valid-submission-file required-file="requiredFile" ng-model="file" type="file" aria-label="Submission File Input"/>
-				<div ng-messages="submissionFileForm.submissionFile.$error" multiple role="alert">
-					<div ng-message="required">A file is required for upload.</div>
-					<div ng-message="validuploadsize">File is too large.</div>
-					<div ng-message="validfilename">File name does not match the required name.</div>
-				</div>
-			</md-input-container>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <span flex></span>
-      <md-button class="md-primary" ng-click="check(file)">
-       Add
-      </md-button>
-      <md-button ng-click="cancel()" style="margin-right:20px;">
-        Cancel
-      </md-button>
-    </md-dialog-actions>
-  </form>
+	<form name="submissionFileForm" ng-submit="submissionFileForm.$valid && check(file)">
+		<md-toolbar>
+		  <div class="md-toolbar-tools">
+			<h2>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] Upload</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+			  <ng-md-icon icon="close"></ng-md-icon>
+			</md-button>
+		  </div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<md-input-container class="md-block">
+					<input required data-file name="submissionFile" valid-submission-file required-file="requiredFile" ng-model="file" type="file" aria-label="Submission File Input"/>
+					<div ng-messages="submissionFileForm.submissionFile.$error" multiple role="alert">
+						<div ng-message="required">A file is required for upload.</div>
+						<div ng-message="validuploadsize">File is too large. {{file.size | bytes}} > {{requiredFile.maxFileSize | bytes }}</div>
+						<div ng-message="validfilename">File name does not match the required name.</div>
+					</div>
+				</md-input-container>
+			</div>
+		</md-dialog-content>
+		<md-dialog-actions layout="row">
+		  <span flex></span>
+		  <md-button class="md-primary" type="submit">
+		   Add
+		  </md-button>
+		  <md-button ng-click="cancel()" style="margin-right:20px;">
+			Cancel
+		  </md-button>
+		</md-dialog-actions>
+	</form>
 </md-dialog>
