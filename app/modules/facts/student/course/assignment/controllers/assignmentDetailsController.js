@@ -7,7 +7,8 @@ define([], function() {
 		$scope.suppliedFiles = assignment.getList('suppliedFiles').$object;
 		$scope.markComponentOptions =  {thickness: 50};
 		$scope.markComponentData = [];
-		$scope.markComponents = assignment.getList('markComponents').then(function(data) {
+		assignment.getList('markComponents').then(function(data) {
+			$scope.markComponents = data;
 			$scope.markComponentData = PieChartService.getPieChartLines(data);
 		});
 		
