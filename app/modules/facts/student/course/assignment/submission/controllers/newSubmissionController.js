@@ -1,15 +1,13 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$interval', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $interval, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
+	return['$scope', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
-		assignment.get().then(function(_assignment) {
-			$scope.assignment = assignment;
-			$scope.assignment.submissionFiles = [];
-		});
+		$scope.assignment = assignment.get().$object;
+		
 		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 					
 		$scope.submission = {
-			comments: '',
+			comment: '',
 			submissionFiles: []
 		};
 		
@@ -22,7 +20,7 @@ define([], function() {
 			.cancel('Cancel');
 			$mdDialog.show(confirm)
 			.then(function() {
-				$scope.assignment.submissionFiles.splice(index, 1);
+				$scope.submission.submissionFiles.splice(index, 1);
 				submissionFile.file = undefined;
 				$scope.requiredFiles.push(submissionFile);
 			});
@@ -42,14 +40,27 @@ define([], function() {
 			function(file) {
 				$scope.requiredFiles.splice(index, 1);
 				requiredFile.file = file;
-				$scope.assignment.submissionFiles.push(requiredFile);
+				$scope.submission.submissionFiles.push(requiredFile);
 			}, function() {
 				
 			});
 		};
 		
-		$scope.sendSubmission = function() {
-			$scope.errorMessages = [];
+		$scope.submit = function(submission) {
+			console.log(submission);
+			var baseSubmission = angular.copy(submission);
+			baseSubmission.submissionFiles = undefined;
+			Restangular.one('assignments', $stateParams.assignmentId).all('submissions').post(baseSubmission).then(function(_submission) {
+				console.log(_submission);
+			});
+			
+			// Send XML submission to get creation time, then upload files.
+			
+			// Cycle through file uploads and get back file IDs
+			
+			// Send through initial submission, file IDs/requirment IDs and if all is okay, update assignment to correctly submitted. Otherwise report failure.
+			
+	/*		$scope.errorMessages = [];
 			$scope.submitting = true;
 			$scope.submitted = false;
 			
@@ -72,57 +83,7 @@ define([], function() {
 					DialogService.showErrorDialog('Submission Upload Error', 'There has been an error while uploading your submission. Please review and try again.');
 					$scope.submitted = false;
 				}
-			);
+			);*/
 		};
-		
-		$scope.isValid = function(file) {
-			var valid = file.selectedFile.size <= file.maximumSize;
-			valid = valid && getFileName(file.selectedFile.name) == file.fileName;
-			valid = valid && objectArrayContains(file.allowedExtensions, function(elem) {
-				return elem.fileType;
-			}, getFileExtension(file.selectedFile.name));
-			file.valid = valid;
-			file.valid = true;
-			return file.valid;
-		};
-		
-		$scope.canSubmit = function() {
-			var canSubmit = true;
-			angular.forEach($scope.requiredFiles, function(requiredFile) {
-				canSubmit = canSubmit && requiredFile.hasOwnProperty('file');
-			});
-			return canSubmit;
-		};
-		
-		function objectArrayContains(array, accessor, value) {
-			var i = 0;
-			for(i = 0; i < array.length; i++) {
-				if(accessor(array[i]) == value) {
-					return true;
-				}
-			}
-			return false;
-		}
-		
-		function getFileName(fileName) {
-			return fileName.split('.')[0];
-		}
-		
-		function getFileExtension(fileName) {
-			return fileName.split('.')[1];
-		}
-		
-		function redirectPage(submissionId) {
-			$interval(
-				function() {
-					$scope.timeLeft--;
-					if($scope.timeLeft === 0) {
-						$state.go('app.courses.details.assignments.details.submissions.details', {submissionId: submissionId});
-					}
-				}, 
-				1000, 
-				3
-			);
-		}
 	}];
 });

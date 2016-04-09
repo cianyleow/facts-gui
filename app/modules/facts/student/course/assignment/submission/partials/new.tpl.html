@@ -9,7 +9,7 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content layout-padding>
-				<form novalidate name="newSubmissionForm" ng-submit="requiredFiles.length === 0 && newSubmissionForm.$valid && submit(submission, requiredFiles)">
+				<form novalidate name="newSubmissionForm" ng-submit="requiredFiles.length === 0 && newSubmissionForm.$valid && submit(submission)">
 					<md-list>
 						<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles" ng-hide="requiredFile.hidden">
 							<div class="md-list-item-text">
@@ -18,10 +18,10 @@
 							</div>
 							<ng-md-icon class="md-secondary" aria-label="Upload required file" icon="file_upload" ng-click="addSubmissionFile($event, requiredFile, $index)"></ng-md-icon>
 						</md-list-item>
-						<span layout="row" ng-show="requiredFiles.length > 0 && assignment.submissionFiles.length === 0" layout-align="center center" flex>
+						<span layout="row" ng-show="requiredFiles.length > 0 && submission.submissionFiles.length === 0" layout-align="center center" flex>
 							<span><h2>No submission files</h2></span>
 						</span>
-						<md-list-item class="md-2-line" ng-repeat="submissionFile in assignment.submissionFiles" ng-model="submissionFile" ng-click="removeSubmissionFile($event, submissionFile, $index)">
+						<md-list-item class="md-2-line" ng-repeat="submissionFile in submission.submissionFiles" ng-model="submissionFile" ng-click="removeSubmissionFile($event, submissionFile, $index)">
 							<div class="md-list-item-text">
 								<h3>Added: {{submissionFile.file.name}} ({{submissionFile.file.size | bytes}})</h3>
 								<p>Click to remove</p>
@@ -31,8 +31,8 @@
 					</md-list>
 					<md-input-container class="md-block">
 						<label>Comment</label>
-						<textarea rows="5" ng-model="submission.comments" name="comments" md-maxlength="150" rows="3" md-select-on-focus style="height: 87px;"></textarea>
-						<div ng-messages="newSubmissionForm.comments.$error" role="alert">
+						<textarea rows="5" ng-model="submission.comment" name="comment" md-maxlength="150" rows="3" md-select-on-focus style="height: 87px;"></textarea>
+						<div ng-messages="newSubmissionForm.comment.$error" role="alert">
 							<div ng-message="md-maxlength">This comment is too long.</div>
 						</div>
 					</md-input-container>
