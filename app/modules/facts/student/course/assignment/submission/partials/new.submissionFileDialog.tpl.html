@@ -2,7 +2,7 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>New Supplied File</h2>
+        <h2>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] Upload</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
           <ng-md-icon icon="close"></ng-md-icon>
@@ -11,17 +11,16 @@
     </md-toolbar>
     <md-dialog-content>
       <div class="md-dialog-content">
-		<p>Upload any file necessary for this assignment.</p>
 		<form>
 			<md-input-container class="md-block">
-				<input data-file ng-model="suppliedFile.file" type="file" aria-label="Supplied File Input"/>
+				<input data-file ng-model="file" type="file" aria-label="Required File Input"/>
 			</md-input-container>
 		</form>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <span flex></span>
-      <md-button class="md-primary" ng-click="check(suppliedFile)">
+      <md-button class="md-primary" ng-click="check(file)">
        Add
       </md-button>
       <md-button ng-click="cancel()" style="margin-right:20px;">

@@ -1,6 +1,6 @@
 <md-content layout="column">
 	<md-card flex>
-		<md-toolbar class="md-whiteframe-4dp">
+		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
 					<span>New Submission: {{assignment.name}}</span>
@@ -14,11 +14,18 @@
 							<span><h2>No required files</h2></span>
 						</span>
 						<md-list>
-							<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles">
-								<div class="md-list-item-text">
-									<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
-									<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
-								</div>
+							<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles" ng-click="removeUploadedFile($event, requiredFile)" aria-label="Remove uploaded file">
+									<div class="md-list-item-text" ng-if="requiredFile.file">
+										<h3>Added: {{requiredFile.file.name}} ({{requiredFile.file.size | bytes}})</h3>
+										<p>Click to remove</p>
+									</div>
+									
+									<div class="md-list-item-text" ng-if="!requiredFile.file">
+										<h3>Required: {{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] {{requiredFile.file.name}}</h3>
+										<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
+									</div>
+									<ng-md-icon ng-if="!requiredFile.file" class="md-secondary" aria-label="Upload required file" icon="file_upload" ng-click="uploadRequiredFile($event, requiredFile)"></ng-md-icon>
+									<ng-md-icon ng-if="requiredFile.file" class="md-secondary" aria-label="Valid submission file" style="fill: #4CAF50" icon="check_circle"></ng-md-icon>
 							</md-list-item>
 						</md-list>
 					<md-input-container class="md-block">

@@ -1,24 +1,46 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$q', '$interval', '$timeout', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $q, $interval, $timeout, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
-		Restangular.one('assignments', $stateParams.assignmentId).get().then(function(assignment) {
-			assignment.requiredFiles = assignment.one($stateParams.assignmentId).getList('requiredFiles').$object;
-			$scope.assignment = assignment;
-		});
-		$scope.errorMessages = [];
-		
-		$scope.secondForms = {
-			0: '0 seconds',
-			one: '{} second',
-			other: '{} seconds'
-		};
-		
-		$scope.submitted = false;
-		
+	return['$scope', '$interval', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $interval, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
+		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
+		$scope.assignment = assignment.get().$object;
+		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
+					
 		$scope.submission = {
 			comments: '',
-			fileIds: [],
-			assignment_id: $stateParams.assignmentId
+			submissionFiles: []
+		};
+		
+		$scope.removeUploadedFile = function(targetEvent, requiredFile) {
+			if(requiredFile.hasOwnProperty('file')) {
+				var confirm = $mdDialog.confirm().title('Remove Submission File')
+				.textContent('Remove submission file: ' + requiredFile.file.name + '?')
+				.ariaLabel('Remove submission file')
+				.targetEvent(targetEvent)
+				.ok('Remove')
+				.cancel('Cancel')
+				$mdDialog.show(confirm)
+				.then(function() {
+					requiredFile.file = undefined;
+				});
+			}
+		};
+		
+		$scope.uploadRequiredFile = function(targetEvent, requiredFile) {
+			DialogService.showCustomDialog(function($scope, $mdDialog) {
+				$scope.requiredFile = requiredFile;
+				$scope.cancel = function() {
+					$mdDialog.cancel();
+				};
+				
+				$scope.check = function(file) {
+					$mdDialog.hide(file);
+				}
+			}, 'modules/facts/student/course/assignment/submission/partials/new.submissionFileDialog.tpl.html', angular.element(document.body), targetEvent,
+			function(file) {
+				requiredFile.file = file;
+			}, function() {
+				
+			});
 		};
 		
 		$scope.sendSubmission = function() {
@@ -29,7 +51,7 @@ define([], function() {
 			$scope.submission.files = [];
 			
 			// Upload files and get back fileIds
-			angular.forEach($scope.assignment.requiredFiles, function(file) {
+			angular.forEach($scope.requiredFiles, function(file) {
 				$scope.submission.files.push(file.selectedFile);
 			});
 			SubmissionService.uploadNewSubmission(
@@ -60,8 +82,8 @@ define([], function() {
 		};
 		
 		$scope.canSubmit = function() {
-			var canSubmit = $scope.assignment.requiredFiles;
-			angular.forEach($scope.assignment.requiredFiles, function(file) {
+			var canSubmit = $scope.requiredFiles;
+			angular.forEach($scope.requiredFiles, function(file) {
 				canSubmit = canSubmit && file.selectedFile && file.valid;
 			});
 			return canSubmit;
