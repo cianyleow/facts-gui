@@ -1,7 +1,10 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$q', '$interval', '$timeout', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'facts.services.assignment', 'facts.services.submission', function($scope, $q, $interval, $timeout, $state, $stateParams, DialogService, FileService, AssignmentService, SubmissionService) {
-		$scope.assignment = AssignmentService.getAssignment($stateParams.assignmentId);
+	return['$scope', '$q', '$interval', '$timeout', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $q, $interval, $timeout, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
+		Restangular.one('assignments', $stateParams.assignmentId).get().then(function(assignment) {
+			assignment.requiredFiles = assignment.one($stateParams.assignmentId).getList('requiredFiles').$object;
+			$scope.assignment = assignment;
+		});
 		$scope.errorMessages = [];
 		
 		$scope.secondForms = {
