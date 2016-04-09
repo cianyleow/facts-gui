@@ -29,8 +29,11 @@
 							</md-list-item>
 						</md-list>
 					<md-input-container class="md-block">
-						<label>Comments (Optional)</label>
-						<textarea rows="5" ng-model="submission.comments" md-maxlength="150" rows="5" md-select-on-focus style="height: 147px;"></textarea>
+						<label>Comment</label>
+						<textarea rows="5" ng-model="submission.comments" name="comments" md-maxlength="150" rows="3" md-select-on-focus style="height: 87px;"></textarea>
+						<div ng-messages="newSubmissionForm.comments.$error" role="alert">
+							<div ng-message="md-maxlength">This comment is too long.</div>
+						</div>
 					</md-input-container>
 					<div layout="row">
 						<md-button class="md-raised md-primary" ng-disabled="!canSubmit()" ng-click="sendSubmission()">Submit</md-button>

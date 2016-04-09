@@ -1,5 +1,5 @@
 <md-dialog aria-label="New Supplied File" flex-gt-xs="50" flex-xs ng-cloak>
-  <form>
+  <form name="submissionFileForm">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] Upload</h2>
@@ -11,11 +11,14 @@
     </md-toolbar>
     <md-dialog-content>
       <div class="md-dialog-content">
-		<form>
 			<md-input-container class="md-block">
-				<input data-file ng-model="file" type="file" aria-label="Required File Input"/>
+				<input required data-file name="submissionFile" valid-submission-file required-file="requiredFile" ng-model="file" type="file" aria-label="Submission File Input"/>
+				<div ng-messages="submissionFileForm.submissionFile.$error" multiple role="alert">
+					<div ng-message="required">A file is required for upload.</div>
+					<div ng-message="validuploadsize">File is too large.</div>
+					<div ng-message="validfilename">File name does not match the required name.</div>
+				</div>
 			</md-input-container>
-		</form>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">

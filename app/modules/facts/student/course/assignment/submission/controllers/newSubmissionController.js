@@ -17,7 +17,7 @@ define([], function() {
 				.ariaLabel('Remove submission file')
 				.targetEvent(targetEvent)
 				.ok('Remove')
-				.cancel('Cancel')
+				.cancel('Cancel');
 				$mdDialog.show(confirm)
 				.then(function() {
 					requiredFile.file = undefined;
@@ -33,7 +33,29 @@ define([], function() {
 				};
 				
 				$scope.check = function(file) {
-					$mdDialog.hide(file);
+					$scope.errors = [];
+					var validity = isValid(requiredFile, file);
+					if(validity.status) {
+						$mdDialog.hide(file);
+					} else {
+						$scope.errors = validity.errors;
+					}
+				};
+				
+				function isValid(requiredFile, file) {
+					var validity = {errors: [], status: true};
+					var fileSize = file.size <= requiredFile.maxFileSize;
+					var fileName = validity.status && getFileName(file.name) == requiredFile.fileName;
+					var extension = validity.status = validity.status && getFileExtension(file.name) == requiredFile.allowedExtension;
+					return validity;
+				}
+				
+				function getFileName(fileName) {
+					return fileName.split('.')[0];
+				}
+				
+				function getFileExtension(fileName) {
+					return fileName.split('.')[1];
 				}
 			}, 'modules/facts/student/course/assignment/submission/partials/new.submissionFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(file) {
@@ -82,9 +104,9 @@ define([], function() {
 		};
 		
 		$scope.canSubmit = function() {
-			var canSubmit = $scope.requiredFiles;
-			angular.forEach($scope.requiredFiles, function(file) {
-				canSubmit = canSubmit && file.selectedFile && file.valid;
+			var canSubmit = true;
+			angular.forEach($scope.requiredFiles, function(requiredFile) {
+				canSubmit = canSubmit && requiredFile.hasOwnProperty('file');
 			});
 			return canSubmit;
 		};
