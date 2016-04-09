@@ -3,58 +3,32 @@
 		<md-toolbar class="md-whiteframe-4dp">
 			<div class="md-toolbar-tools">
 				<h2>
-					<span>New Submission: {{assignment.title}}</span>
+					<span>New Submission: {{assignment.name}}</span>
 				</h2>
 			</div>
 		</md-toolbar>
-		<div ng-if="errorMessages.length > 0" class="error-text-box error-text md-caption">
-			Submission Errors:
-			<ul>
-				<li ng-repeat="errorMessage in errorMessages">
-					{{errorMessage}}
-				</li>
-			</ul>
-		</div>
-		<md-card-content ng-class="{'md-whiteframe-10dp': error}">
+		<md-card-content>
 			<md-content layout-padding>
 				<form novalidate name="newSubmissionForm" ng-show="!submitting">
-					<h3>Required Files</h3>
-					<table md-table class="submission-files">
-						<thead md-head>
-							<tr md-row>
-								<th md-column>File Name</th>
-								<th md-column>Allowed Extension(s)</th>
-								<th md-column>Max File Size</th>
-								<th md-column>File</th>
-								<th md-column>File Info</th>
-							</tr>
-						</thead>
-						<tbody md-body>
-							<tr md-row ng-repeat="file in assignment.requiredFiles" ng-class="{invalid: file.selectedFile && !isValid(file)}">
-								<td md-cell>{{file.fileName}}</td>
-								<td md-cell><span ng-repeat="type in file.allowedExtensions">{{type.fileType}}{{$last ? ''  : ', '}}</span></td>
-								<td md-cell>{{file.maximumSize | bytes}}</td>
-								<td md-cell><input data-file type="file" ng-model="file.selectedFile"/></td>
-								<td md-cell><span ng-show="file.selectedFile">{{file.selectedFile.type}} ({{file.selectedFile.size | bytes}})</span></td>
-							</tr>
-						</tbody>
-					</table>
+					<span layout="row" ng-show="requiredFiles.length == 0" layout-align="center center" flex>
+							<span><h2>No required files</h2></span>
+						</span>
+						<md-list>
+							<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles">
+								<div class="md-list-item-text">
+									<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
+									<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
+								</div>
+							</md-list-item>
+						</md-list>
 					<md-input-container class="md-block">
 						<label>Comments (Optional)</label>
 						<textarea rows="5" ng-model="submission.comments" md-maxlength="150" md-select-on-focus></textarea>
 					</md-input-container>
 					<div layout="row">
-						<flex><md-button class="md-raised md-primary" ng-disabled="!canSubmit()" ng-click="sendSubmission()">Submit</md-button>
+						<md-button class="md-raised md-primary" ng-disabled="!canSubmit()" ng-click="sendSubmission()">Submit</md-button>
 					</div>
 				</form>
-				<div layout="column" ng-show="submitting">
-					<h3 ng-if="!submitted">Sending submission...</h3>
-					<h3 ng-if="submitted">Successful submission!</h3>
-					<md-progress-linear md-mode="indeterminate" ng-if="!submitted"></md-progress-linear>
-					<md-progress-linear md-mode="determinate" ng-if="submitted"></md-progress-linear>
-					<span ng-if="submitted">Submission submitted successfully...redirecting in <ng-pluralize count="timeLeft" when="secondForms"/></span>
-				</div>
-				
 			</md-content>
 		</md-card-content>
 	</md-card>
