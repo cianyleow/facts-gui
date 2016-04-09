@@ -92,3 +92,7 @@ md-sidenav {
 .tab-with-fab md-content md-tabs md-tabs-canvas {
 	background: white;
 }
+
+md-card-content.login-error {
+	color: #F44336;
+}

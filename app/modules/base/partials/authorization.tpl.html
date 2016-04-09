@@ -1,6 +1,9 @@
 <div layout="row" layout-align="center center">
 	<md-card flex-xs="100" flex-gt-xs="20">
 		<img src="http://www.uq.edu.au/uqabroad/images/_partners/imperialcollegelondon.jpg" class="md-card-image">
+		<md-card-content class="login-error" ng-if="error">
+			Invalid login details. Please try again.
+		</md-card-content>
 		<md-card-title>
 			<md-card-title-text>
 				<span class="md-headline">FACTS Login</span>

@@ -5,7 +5,11 @@ define([], function() {
 		$scope.user = {};
 		
 		$scope.authenticate = function(user) {	
-			AuthenticationService.login(user, function(){});
+			$scope.error = false;
+			AuthenticationService.login(user, function(response){
+				console.log("Authentication Error:" + response);
+				$scope.error = true;
+			});
 		};
 	}];
 });
