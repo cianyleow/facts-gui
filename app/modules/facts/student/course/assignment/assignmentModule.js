@@ -24,7 +24,7 @@ define(['angular', './controllers/controllers', './submission/submissionModule']
 			.state('base.app.courses.details.assignments.details', {
 				url: '/:assignmentId',
 				data: {
-					displayName: '{{assignment.title}}'
+					displayName: '{{assignment.name}}'
 				},
 				views: {
 					'mainContent@base.app': {
