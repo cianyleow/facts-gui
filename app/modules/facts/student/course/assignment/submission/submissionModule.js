@@ -14,8 +14,8 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 					displayName: 'New Submission'
 				},
 				views: {
-					'mainContent@app': {
-						templateUrl: 'modules/facts/student/course/assignment/submission/new.tpl.html',
+					'mainContent@base.app': {
+						templateUrl: 'modules/facts/student/course/assignment/submission/partials/new.tpl.html',
 						controller: 'facts.student.course.assignment.submission.controllers.new'
 					}
 				},
@@ -31,8 +31,8 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 					displayName: 'Submission'
 				},
 				views: {
-					'mainContent@app': {
-						templateUrl: 'modules/facts/student/course/assignment/submission/details.tpl.html',
+					'mainContent@base.app': {
+						templateUrl: 'modules/facts/student/course/assignment/submission/partials/details.tpl.html',
 						controller: 'facts.student.course.assignment.submission.controllers.details'
 					}
 				},
