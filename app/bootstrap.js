@@ -15,7 +15,8 @@ require.config({
 		'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload.min',
 		'angular-material-data-table': 'bower_components/angular-material-data-table/dist/md-data-table.min',
 		'n3-charts-pie-chart': 'bower_components/n3-charts/pie-chart.min',
-		'd3': 'bower_components/d3/d3.min'
+		'd3': 'bower_components/d3/d3.min',
+		'ng-messages': 'bower_components/angular-messages/angular-messages.min'
 	},
 	shim: {
 		'angular': { exports: 'angular'},
@@ -32,7 +33,8 @@ require.config({
 		'angular-ui-title': {deps: ['angular']},
 		'ng-file-upload': {deps: ['angular']},
 		'angular-material-data-table': {deps: ['angular']},
-		'n3-charts-pie-chart': {deps: ['angular']}
+		'n3-charts-pie-chart': {deps: ['angular']},
+		'ng-messages': {deps: ['angular']}
 	},	
 	deps: ['app']
 });
