@@ -2,7 +2,10 @@ define([], function() {
 	'use strict';
 	return['$scope', '$interval', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $interval, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
-		$scope.assignment = assignment.get().$object;
+		assignment.get().then(function(_assignment) {
+			$scope.assignment = assignment;
+			$scope.assignment.submissionFiles = [];
+		});
 		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 					
 		$scope.submission = {
@@ -10,56 +13,36 @@ define([], function() {
 			submissionFiles: []
 		};
 		
-		$scope.removeUploadedFile = function(targetEvent, requiredFile) {
-			if(requiredFile.hasOwnProperty('file')) {
-				var confirm = $mdDialog.confirm().title('Remove Submission File')
-				.textContent('Remove submission file: ' + requiredFile.file.name + '?')
-				.ariaLabel('Remove submission file')
-				.targetEvent(targetEvent)
-				.ok('Remove')
-				.cancel('Cancel');
-				$mdDialog.show(confirm)
-				.then(function() {
-					requiredFile.file = undefined;
-				});
-			}
+		$scope.removeSubmissionFile = function(targetEvent, submissionFile, index) {
+			var confirm = $mdDialog.confirm().title('Remove Submission File')
+			.textContent('Remove submission file: ' + submissionFile.file.name + '?')
+			.ariaLabel('Remove submission file')
+			.targetEvent(targetEvent)
+			.ok('Remove')
+			.cancel('Cancel');
+			$mdDialog.show(confirm)
+			.then(function() {
+				$scope.assignment.submissionFiles.splice(index, 1);
+				submissionFile.file = undefined;
+				$scope.requiredFiles.push(submissionFile);
+			});
 		};
 		
-		$scope.uploadRequiredFile = function(targetEvent, requiredFile) {
+		$scope.addSubmissionFile = function(targetEvent, requiredFile, index) {
 			DialogService.showCustomDialog(function($scope, $mdDialog) {
 				$scope.requiredFile = requiredFile;
 				$scope.cancel = function() {
 					$mdDialog.cancel();
 				};
 				
-				$scope.check = function(file) {
-					$scope.errors = [];
-					var validity = isValid(requiredFile, file);
-					if(validity.status) {
-						$mdDialog.hide(file);
-					} else {
-						$scope.errors = validity.errors;
-					}
+				$scope.add = function(file) {
+					$mdDialog.hide(file);
 				};
-				
-				function isValid(requiredFile, file) {
-					var validity = {errors: [], status: true};
-					var fileSize = file.size <= requiredFile.maxFileSize;
-					var fileName = validity.status && getFileName(file.name) == requiredFile.fileName;
-					var extension = validity.status = validity.status && getFileExtension(file.name) == requiredFile.allowedExtension;
-					return validity;
-				}
-				
-				function getFileName(fileName) {
-					return fileName.split('.')[0];
-				}
-				
-				function getFileExtension(fileName) {
-					return fileName.split('.')[1];
-				}
 			}, 'modules/facts/student/course/assignment/submission/partials/new.submissionFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(file) {
+				$scope.requiredFiles.splice(index, 1);
 				requiredFile.file = file;
+				$scope.assignment.submissionFiles.push(requiredFile);
 			}, function() {
 				
 			});
