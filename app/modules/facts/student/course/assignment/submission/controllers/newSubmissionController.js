@@ -47,62 +47,17 @@ define([], function() {
 		};
 		
 		$scope.submit = function(submission) {
-			console.log(submission);
 			var baseSubmission = angular.copy(submission);
 			baseSubmission.submissionFiles = undefined;
-			Restangular.one('assignments', $stateParams.assignmentId).all('submissions').post(baseSubmission).then(function(_submission) {
-				var newSubmissionId = _submission.submissionId;
-				var fileUploadPromises = [];
-				
-				angular.forEach(submission.submissionFiles, function(submissionFile, index) {
-					fileUploadPromises.push(FileService.uploadFile('submissions/' + newSubmissionId + '/requiredFiles/' + submissionFile.fileRequirementId, {file: submissionFile.file}));
-				});
-				
-				$q.all(fileUploadPromises).then(function(resp) {
-					console.log("submitting:" +resp);
-					_submission.submittedFiles = [];
-					angular.forEach(resp, function(submittedFile) {
-						_submission.submittedFiles.push({fileId: submittedFile.data.fileId});
-					});
-					Restangular.one('submissions', newSubmissionId).all('validate').post(_submission).then(function(success) {
-						console.log(success.submissionStatus);
-					});
-				}, function(fail) {
-					console.log(fail);
-				});
-				
+			var fd = new FormData();
+			fd.append("submission", JSON.stringify(baseSubmission));
+			angular.forEach(submission.submissionFiles, function(submissionFile) {
+				fd.append("files", submissionFile.file);
 			});
 			
-			// Send XML submission to get creation time, then upload files.
-			
-			// Cycle through file uploads and get back file IDs
-			
-			// Send through initial submission, file IDs/requirment IDs and if all is okay, update assignment to correctly submitted. Otherwise report failure.
-			
-	/*		$scope.errorMessages = [];
-			$scope.submitting = true;
-			$scope.submitted = false;
-			
-			$scope.submission.files = [];
-			
-			// Upload files and get back fileIds
-			angular.forEach($scope.requiredFiles, function(file) {
-				$scope.submission.files.push(file.selectedFile);
+			Restangular.one('assignments', $stateParams.assignmentId).all('submissions').withHttpConfig({transformRequest: angular.identiy}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_submission) {
+				console.log(_submission);
 			});
-			SubmissionService.uploadNewSubmission(
-				$scope.submission, 
-				function(resp) {
-					console.log("Finished submission");
-					$scope.submitted = true;
-					$scope.timeLeft = 3;
-					redirectPage(resp.data.submissionId);
-				},
-				function(resp) {
-					$scope.errorMessages.push(resp.message);
-					DialogService.showErrorDialog('Submission Upload Error', 'There has been an error while uploading your submission. Please review and try again.');
-					$scope.submitted = false;
-				}
-			);*/
 		};
 	}];
 });
