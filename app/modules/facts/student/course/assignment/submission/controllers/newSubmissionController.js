@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', function($scope, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService) {
+	return['$scope', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', '$q', function($scope, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService, $q) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = assignment.get().$object;
 		
@@ -51,7 +51,26 @@ define([], function() {
 			var baseSubmission = angular.copy(submission);
 			baseSubmission.submissionFiles = undefined;
 			Restangular.one('assignments', $stateParams.assignmentId).all('submissions').post(baseSubmission).then(function(_submission) {
-				console.log(_submission);
+				var newSubmissionId = _submission.submissionId;
+				var fileUploadPromises = [];
+				
+				angular.forEach(submission.submissionFiles, function(submissionFile, index) {
+					fileUploadPromises.push(FileService.uploadFile('submissions/' + newSubmissionId + '/requiredFiles/' + submissionFile.fileRequirementId, {file: submissionFile.file}));
+				});
+				
+				$q.all(fileUploadPromises).then(function(resp) {
+					console.log("submitting:" +resp);
+					_submission.submittedFiles = [];
+					angular.forEach(resp, function(submittedFile) {
+						_submission.submittedFiles.push({fileId: submittedFile.data.fileId});
+					});
+					Restangular.one('submissions', newSubmissionId).all('validate').post(_submission).then(function(success) {
+						console.log(success.submissionStatus);
+					});
+				}, function(fail) {
+					console.log(fail);
+				});
+				
 			});
 			
 			// Send XML submission to get creation time, then upload files.
