@@ -33,10 +33,8 @@ define(['angular', './controllers/controllers', './submission/submissionModule']
 					}
 				},
 				resolve: {
-					assignment: ['$stateParams', 'Restangular', function($stateParams, Restangular) {
-						return Restangular.one('assignments', $stateParams.assignmentId).get().then(function(_assignment) {
-							return _assignment;
-						});
+					assignment: ['$stateParams', 'facts.services.assignment', function($stateParams, AssignmentService) {
+						return AssignmentService.loadAssignment($stateParams.assignmentId);
 					}],
 					$title: ['assignment', function(assignment) {
 						return 'Assignment: ' + assignment.name;
