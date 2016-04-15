@@ -6,6 +6,19 @@
 					<span>Assignment Workflow</span>
 				</h2>
 				<span flex></span>
+				<md-menu md-position-mode="target-right target">
+					<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-menu-item ng-repeat="action in actions">
+							<md-button ng-click="action.action(assignment)" aria-label="action.description">
+								<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+								{{action.description}}
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
 			</div>
 		</md-toolbar>
 		<md-card-content>
@@ -34,40 +47,25 @@
 							<md-toolbar>
 								<div class="md-toolbar-tools">
 									<h2>
-										<span>Assignment Details</span>
+										<span>{{assignment.name}}</span>
 									</h2>
 								</div>
 							</md-toolbar>
 							<md-card-content>
 								<md-content>
-									<strong>Title: </strong>{{assignment.name}}<br />
-									<strong>Description: </strong>{{assignment.description}}<br/>
-									<due-date date-string="assignment.dueTime"></due-date><br />
-									<strong>Supplied Files:</strong>
-									<table md-table>
-										<thead md-head>
-											<tr md-row>
-												<th md-column>#</th>
-												<th md-column>File Name</th>
-												<th md-column>File Size</th>
-												<th md-column>File Hash</th>
-												<th md-column>Download</th>
-											</tr>
-										</thead>
-										<tbody md-body>
-											<tr md-row ng-repeat="file in suppliedFiles">
-												<td md-cell>{{$index+1}}</td>
-												<td md-cell>{{file.name}}.{{file.extension}}</td>
-												<td md-cell>{{file.size | bytes}}</td>
-												<td md-cell>{{file.hash}}</td>
-												<td md-cell>
-													<md-button class="md-icon-button" aria-label="Download" ng-click="download(file.fileId)">
-														<ng-md-icon icon="file_download"></ng-md-icon>
-													</md-button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+									{{assignment.description}}
+									<span layout="row" ng-show="suppliedFiles.length == 0" layout-align="center center" flex>
+										<span><h2>No supplied files</h2></span>
+									</span>
+									<md-list>
+										<md-list-item class="md-2-line" ng-repeat="suppliedFile in suppliedFiles">
+											<div class="md-list-item-text">
+												<h3>{{suppliedFile.name}}.{{suppliedFile.extension}} ({{suppliedFile.size | bytes}})</h3>
+												<p>{{suppliedFile.contentType}}</p>
+											</div>
+											<ng-md-icon class="md-secondary" aria-label="Download supplied file" icon="file_download" ng-click="download(suppliedFile.fileId)"></ng-md-icon>
+										</md-list-item>
+									</md-list>
 								</md-content>
 							</md-card-content>
 						</md-card>
@@ -81,24 +79,17 @@
 							</md-toolbar>
 							<md-card-content>
 								<md-content>
-									<table md-table>
-										<thead md-head>
-											<tr md-row>
-												<th md-column>#</th>
-												<th md-column>File Name</th>
-												<th md-column>Allowed Extension</th>
-												<th md-column>Max File Size</th>
-											</tr>
-										</thead>
-										<tbody md-body>
-											<tr md-row ng-repeat="file in requiredFiles">
-												<td md-cell>{{$index+1}}</td>
-												<td md-cell>{{file.fileName}}</td>
-												<td md-cell>{{file.allowedExtension}}</td>
-												<td md-cell>{{file.maxFileSize | bytes}}</td>
-											</tr>
-										</tbody>
-									</table>
+									<span layout="row" ng-show="requiredFiles.length == 0" layout-align="center center" flex>
+										<span><h2>No required files</h2></span>
+									</span>
+									<md-list>
+										<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles">
+											<div class="md-list-item-text">
+												<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
+												<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
+											</div>
+										</md-list-item>
+									</md-list>
 								</md-content>
 							</md-card-content>
 						</md-card>

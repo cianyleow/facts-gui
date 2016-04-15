@@ -16,5 +16,16 @@ define([], function() {
 				$window.open('http://localhost:8080/files/' + fileLink.link + '/download');
 			});
 		};
+		
+		$scope.actions = [
+			{
+				action: function(assignment) {
+					console.log('Assign markers!');
+				},
+				icon: 'link',
+				description: 'Assign Markers'
+				
+			}
+		];
 	}];
 });
