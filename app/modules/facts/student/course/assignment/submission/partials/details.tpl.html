@@ -15,15 +15,15 @@
 							<span layout="row" ng-show="submissionFiles.length == 0" layout-align="center center" flex>
 								<span><h2>No submission files</h2></span>
 							</span>
-						<md-list>
-							<md-list-item class="md-2-line" ng-repeat="submissionFile in submissionFiles">
-								<div class="md-list-item-text">
-									<h3>{{submissionFile.name}}.{{submissionFile.extension}} ({{submissionFile.size | bytes}})</h3>
-									<p>Hash: {{submissionFile.hash}}</p>
-								</div>
-								<ng-md-icon class="md-secondary" aria-label="Download submission file" icon="file_download" ng-click="download(submissionFile.fileId)"></ng-md-icon>
-							</md-list-item>
-						</md-list>			
+							<md-list>
+								<md-list-item class="md-2-line" ng-repeat="submissionFile in submissionFiles">
+									<div class="md-list-item-text">
+										<h3>{{submissionFile.name}}.{{submissionFile.extension}} ({{submissionFile.size | bytes}})</h3>
+										<p>Hash: {{submissionFile.hash}}</p>
+									</div>
+									<ng-md-icon class="md-secondary" aria-label="Download submission file" icon="file_download" ng-click="download(submissionFile.fileId)"></ng-md-icon>
+								</md-list-item>
+							</md-list>			
 						</md-content>
 					</md-card-content>
 				</md-card>

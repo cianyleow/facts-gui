@@ -43,15 +43,15 @@ define(['angular',
 					}
 				}
 			})
+			.state('base.app.courseOwner', {
+				url: '/courseOwner',
+				abstract: true,
+				template: '<ui-view></ui-view>',
+			})
 			.state('base.app.marker', {
 				url: '/marker',
 				abstract: true,
-				data: {
-					displayName: 'Marker'
-				},
-				resolve: {
-					$title: function() { return 'Marker'; }
-				}
+				template: '<ui-view></ui-view>',
 			});
 	}]);
 	return base;

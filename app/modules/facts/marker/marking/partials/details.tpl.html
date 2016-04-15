@@ -1,0 +1,92 @@
+<md-content layout="column">
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Submission Details</span>
+				</h2>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<p>{{submission.comment}}</p>
+				<span layout="row" ng-show="submissionFiles.length == 0" layout-align="center center" flex>
+					<span><h2>No submission files</h2></span>
+				</span>
+				<md-list>
+					<md-list-item class="md-2-line" ng-repeat="submissionFile in submissionFiles">
+						<div class="md-list-item-text">
+							<h3>{{submissionFile.name}}.{{submissionFile.extension}} ({{submissionFile.size | bytes}})</h3>
+							<p>Hash: {{submissionFile.hash}}</p>
+						</div>
+						<ng-md-icon class="md-secondary" aria-label="Download submission file" icon="file_download" ng-click="download(submissionFile.fileId)"></ng-md-icon>
+					</md-list-item>
+				</md-list>	
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<div layout="row" layout-xs="column">
+		<div flex-xs flex-gt-xs="50" layout="column">
+			<md-card>
+			<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Comments</span>
+						</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Comments settings" ui-sref="app.courses.details.assignments">
+							<ng-md-icon aria-label="Comments settings" icon="settings"></ng-md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						<span flex layout="row" layout-align="center center" ng-show="!comments.length">
+							<span><h3>No comments!</h3></span>
+						</span>
+						<md-list ng-show="assignments.length">
+							<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
+								<div class="md-list-item-text">
+									<h3>{{assignment.title}}</h3>
+									<p><due-date date-string="assignment.dueTime"></due-date><!--{{assignment.dueTime | dueDate}}--></p>
+								</div>
+								<md-button class="md-secondary" ui-sref="app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
+		</div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+			<md-card>
+			<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Marks</span>
+						</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Marks settings" ui-sref="app.courses.details.assignments">
+							<ng-md-icon aria-label="Marks settings" icon="settings"></ng-md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						<span flex layout="row" layout-align="center center" ng-show="!markComponents.length">
+							<span><h3>No mark components!</h3></span>
+						</span>
+						<md-list ng-show="assignments.length">
+							<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
+								<div class="md-list-item-text">
+									<h3>{{assignment.title}}</h3>
+									<p><due-date date-string="assignment.dueTime"></due-date><!--{{assignment.dueTime | dueDate}}--></p>
+								</div>
+								<md-button class="md-secondary" ui-sref="app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
+</md-content>

@@ -8,7 +8,7 @@ define(['angular', './controllers/controllers', './marking/markingModule'], func
 			.state('base.app.marker.dashboard', {
 				url: '/dashboard',
 				views: {
-					'mainContent@app': {
+					'mainContent@base.app': {
 						templateUrl: 'modules/facts/marker/partials/dashboard.tpl.html',
 						controller: 'facts.marker.controllers.dashboard'
 					}

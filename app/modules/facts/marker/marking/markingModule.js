@@ -7,7 +7,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 			.state('base.app.marker.marking', {
 				url: '/marking',
 				views: {
-					'mainContent@app': {
+					'mainContent@base.app': {
 							templateUrl: 'modules/facts/marker/marking/partials/markings.tpl.html',
 							controller: 'facts.marker.marking.controllers.markings'
 						}
@@ -17,6 +17,21 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				resolve: {
 					$title: function() { return 'Marking'; }
+				}
+			})
+			.state('base.app.marker.marking.details', {
+				url: '/{feedbackId}',
+				views: {
+					'mainContent@base.app': {
+						templateUrl: 'modules/facts/marker/marking/partials/details.tpl.html',
+						controller: 'facts.marker.marking.controllers.details'
+					}
+				},
+				data: {
+					displayName: 'Submission #'
+				},
+				resolve: {
+					$title: function() { return 'Submission #'; }
 				}
 			});
 	}]);
