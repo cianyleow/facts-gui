@@ -35,7 +35,7 @@ define(['angular',
 					},
 					sidenav: {
 						templateUrl: 'modules/base/partials/sidenav.tpl.html',
-						controller: 'base.controllers.sidenav-controller'
+						controller: 'base.controllers.sidenav.student.controller'
 					},
 					toolbar: {
 						templateUrl: 'modules/base/partials/toolbar.tpl.html',
@@ -46,12 +46,22 @@ define(['angular',
 			.state('base.app.courseOwner', {
 				url: '/courseOwner',
 				abstract: true,
-				template: '<ui-view></ui-view>',
+				views: {
+					'sidenav@base': {
+						templateUrl: 'modules/base/partials/sidenav.tpl.html',
+						controller: 'base.controllers.sidenav.courseOwner.controller'
+					},
+				}
 			})
 			.state('base.app.marker', {
 				url: '/marker',
 				abstract: true,
-				template: '<ui-view></ui-view>',
+				views: {
+					'sidenav@base': {
+						templateUrl: 'modules/base/partials/sidenav.tpl.html',
+						controller: 'base.controllers.sidenav.marker.controller'
+					},
+				}
 			});
 	}]);
 	return base;
