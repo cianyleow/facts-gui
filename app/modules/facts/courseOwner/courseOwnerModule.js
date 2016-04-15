@@ -5,11 +5,6 @@ define(['angular', './controllers/controllers', './course/courseModule'], functi
 	
 	student.config(['$stateProvider', function($stateProvider) {
 		$stateProvider
-			.state('base.app.courseOwner', {
-				url: '/courseOwner',
-				abstract: true,
-				template: '<ui-view></ui-view>',
-			})
 			.state('base.app.courseOwner.dashboard', {
 				url: '/dashboard',
 				views: {

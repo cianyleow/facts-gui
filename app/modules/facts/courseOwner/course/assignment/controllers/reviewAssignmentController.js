@@ -11,57 +11,18 @@ define([], function() {
 		$scope.create = function(assignment) {
 			// Create assignment
 			var baseAssignment = angular.copy(assignment);
+			baseAssignment.groupBased = undefined;
 			baseAssignment.suppliedFiles = undefined;
-			Restangular.one('courses', $stateParams.courseId).all('assignments').post(baseAssignment).then(function(returnedAssignment) {
-				var newAssignmentId = returnedAssignment.assignmentId;
-				var fileUploadPromises = [];
-				
-				angular.forEach(assignment.suppliedFiles, function(suppliedFile) {
-					fileUploadPromises.push(FileService.uploadFile('assignments/' + newAssignmentId + '/suppliedFiles', {file: suppliedFile.file}));
-				});
-				
-				$q.all(fileUploadPromises).then(function(resp) {
-					console.log(resp);
-				}, function(fail) {
-					console.log(fail);
-				});
+			var fd = new FormData();
+			fd.append("assignment", JSON.stringify(baseAssignment));
+			angular.forEach(assignment.suppliedFiles, function(suppliedFile) {
+				fd.append("files", suppliedFile.file);
+			});
+			
+			Restangular.one('courses', $stateParams.courseId).all('assignments').withHttpConfig({transformRequest: angular.identity}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_assignment) {
+				console.log(_assignment);
 				
 			});
-			// Add requiredFiles
-			
-			// Add mark components
-			
-			// Upload files
-			
-//			var uploadAssignment = angular.copy(assignment);
-//			uploadAssignment.suppliedFiles = undefined;
-			
-//			var formData = new FormData();
-//			formData.append('refTemplateDTO', angular.toJson(uploadAssignment));
-//			formData.append('file', assignment.suppliedFiles[0]);
-//			$http.post('http://localhost:8080/assignments', formData, {
-//				transformRequest: angular.identity,
-//				headers: {'Content-Type': undefined }
-//			});
-			
-//			Restangular.all('assignments').withHttpConfig({transformRequest: angular.identity}).customPOST(formData, undefined, undefined, {'Content-Type': undefined});
-/*			
-			console.log(assignmentData);
-			FileService.uploadFile('assignments', new FormData(assignment), function(success) {
-				
-			}, function(error) {
-				
-			}, function(progress) {
-				
-			});*/
 		};
 	}];
 });
-
-/*
-To do for file upload - encode everything else as JSON array and then add files afterwards.
-On server side, have to allow for fact that files are being uploaded... feel like I need to change the request type.
-Anyway, for later.
-
-
-*/
