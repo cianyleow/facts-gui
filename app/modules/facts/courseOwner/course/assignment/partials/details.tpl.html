@@ -1,121 +1,125 @@
 <md-content layout="column">
-	<div layout="row" layout-xs="column">
-		<div flex-xs flex-gt-xs="70" layout="column">
-			<md-card>
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-						<h2>
-							<span>Assignment Details</span>
-						</h2>
-					</div>
-				</md-toolbar>
-				<md-card-content>
-					<md-content>
-						<strong>Title: </strong>{{assignment.name}}<br />
-						<strong>Description: </strong>{{assignment.description}}<br/>
-						<due-date date-string="assignment.dueTime"></due-date><br />
-						<strong>Supplied Files:</strong>
-						<table md-table>
-							<thead md-head>
-								<tr md-row>
-									<th md-column>#</th>
-									<th md-column>File Name</th>
-									<th md-column>File Size</th>
-									<th md-column>File Hash</th>
-									<th md-column>Download</th>
-								</tr>
-							</thead>
-							<tbody md-body>
-								<tr md-row ng-repeat="file in suppliedFiles">
-									<td md-cell>{{$index+1}}</td>
-									<td md-cell>{{file.name}}.{{file.extension}}</td>
-									<td md-cell>{{file.size | bytes}}</td>
-									<td md-cell>{{file.hash}}</td>
-									<td md-cell>
-										<md-button class="md-icon-button" aria-label="Download" ng-click="download(file.fileId)">
-											<ng-md-icon icon="file_download"></ng-md-icon>
-										</md-button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</md-content>
-				</md-card-content>
-			</md-card>
-			<md-card>
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-						<h2>
-							<span>Required Files</span>
-						</h2>
-					</div>
-				</md-toolbar>
-				<md-card-content>
-					<md-content>
-						<table md-table>
-							<thead md-head>
-								<tr md-row>
-									<th md-column>#</th>
-									<th md-column>File Name</th>
-									<th md-column>Allowed Extension</th>
-									<th md-column>Max File Size</th>
-								</tr>
-							</thead>
-							<tbody md-body>
-								<tr md-row ng-repeat="file in requiredFiles">
-									<td md-cell>{{$index+1}}</td>
-									<td md-cell>{{file.fileName}}</td>
-									<td md-cell>{{file.allowedExtension}}</td>
-									<td md-cell>{{file.maxFileSize | bytes}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</md-content>
-				</md-card-content>
-			</md-card>
-		</div>
-		<div flex-xs flex-gt-xs="30" layout="column">
-			<md-card>
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-						<h2>
-							<span>Mark Components</span>
-						</h2>
-					</div>
-				</md-toolbar>
-				<md-card-content>
-					<md-content>
-						<pie-chart data="markComponentData" options="markComponentOptions"></pie-chart>
-					</md-content>
-				</md-card-content>
-			</md-card>
-		</div>
-	</div>
 	<md-card flex>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
-					<span>Submissions</span>
+					<span>Assignment Workflow</span>
 				</h2>
 				<span flex></span>
-				<md-button class="md-raised" aria-label="New Submission" ui-sref="base.app.courses.details.assignments.details.submissions.new">
-					New Submission
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				Some tools go here...
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Assignment Preview</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.assignments.details.edit">
+					<ng-md-icon icon="edit"></ng-md-icon>
 				</md-button>
 			</div>
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!submissions.length">
-					<span><h3>No submissions!</h3></span>
-				</span>
-				<md-list ng-show="assignments.length">
-					<md-list-item class="md-2-line" ng-repeat="submission in submissions">
-						<div class="md-list-item-text">
-							<h3>{{submission.title}}</h3>
-							<p>Due: {{submission.description}}</p>
-						</div>
-					</md-list-item>
-				</md-list>
+				<div layout="row" layout-xs="column">
+					<div flex-xs flex-gt-xs="70" layout="column">
+						<md-card>
+							<md-toolbar>
+								<div class="md-toolbar-tools">
+									<h2>
+										<span>Assignment Details</span>
+									</h2>
+								</div>
+							</md-toolbar>
+							<md-card-content>
+								<md-content>
+									<strong>Title: </strong>{{assignment.name}}<br />
+									<strong>Description: </strong>{{assignment.description}}<br/>
+									<due-date date-string="assignment.dueTime"></due-date><br />
+									<strong>Supplied Files:</strong>
+									<table md-table>
+										<thead md-head>
+											<tr md-row>
+												<th md-column>#</th>
+												<th md-column>File Name</th>
+												<th md-column>File Size</th>
+												<th md-column>File Hash</th>
+												<th md-column>Download</th>
+											</tr>
+										</thead>
+										<tbody md-body>
+											<tr md-row ng-repeat="file in suppliedFiles">
+												<td md-cell>{{$index+1}}</td>
+												<td md-cell>{{file.name}}.{{file.extension}}</td>
+												<td md-cell>{{file.size | bytes}}</td>
+												<td md-cell>{{file.hash}}</td>
+												<td md-cell>
+													<md-button class="md-icon-button" aria-label="Download" ng-click="download(file.fileId)">
+														<ng-md-icon icon="file_download"></ng-md-icon>
+													</md-button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</md-content>
+							</md-card-content>
+						</md-card>
+						<md-card>
+							<md-toolbar>
+								<div class="md-toolbar-tools">
+									<h2>
+										<span>Required Files</span>
+									</h2>
+								</div>
+							</md-toolbar>
+							<md-card-content>
+								<md-content>
+									<table md-table>
+										<thead md-head>
+											<tr md-row>
+												<th md-column>#</th>
+												<th md-column>File Name</th>
+												<th md-column>Allowed Extension</th>
+												<th md-column>Max File Size</th>
+											</tr>
+										</thead>
+										<tbody md-body>
+											<tr md-row ng-repeat="file in requiredFiles">
+												<td md-cell>{{$index+1}}</td>
+												<td md-cell>{{file.fileName}}</td>
+												<td md-cell>{{file.allowedExtension}}</td>
+												<td md-cell>{{file.maxFileSize | bytes}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</md-content>
+							</md-card-content>
+						</md-card>
+					</div>
+					<div flex-xs flex-gt-xs="30" layout="column">
+						<md-card>
+							<md-toolbar>
+								<div class="md-toolbar-tools">
+									<h2>
+										<span>Mark Components</span>
+									</h2>
+								</div>
+							</md-toolbar>
+							<md-card-content>
+								<md-content>
+									<pie-chart data="markComponentData" options="markComponentOptions"></pie-chart>
+								</md-content>
+							</md-card-content>
+						</md-card>
+					</div>
+				</div>
 			</md-content>
 		</md-card-content>
 	</md-card>
