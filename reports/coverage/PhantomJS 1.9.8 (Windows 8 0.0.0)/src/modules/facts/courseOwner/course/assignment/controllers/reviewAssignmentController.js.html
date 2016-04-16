@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ./src/modules/facts/courseOwner/course/assignment/controllers/reviewAssignmentController.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">./src/modules/facts/courseOwner/course/assignment/controllers/reviewAssignmentController.js</span></h1>
+    <h2>
+        Statements: <span class="metric">11.76% <small>(2 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">20% <small>(1 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">11.76% <small>(2 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../../../index.html">All files</a> &#187; <a href="index.html">./src/modules/facts/courseOwner/course/assignment/controllers/</a> &#187; reviewAssignmentController.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define([], function() {
+	'use strict';
+	return['$scope', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'base.services.piechart', 'facts.services.assignment', <span class="fstat-no" title="function not covered" >function($scope, Restangular, $state, $stateParams, $q, FileService, PieChartService, AssignmentService) {</span>
+<span class="cstat-no" title="statement not covered" >		if(!AssignmentService.hasAssignmentForReview()) {</span>
+<span class="cstat-no" title="statement not covered" >			$state.go('base.app.courseOwner.courses.details.assignments.new');</span>
+		}
+<span class="cstat-no" title="statement not covered" >		$scope.assignment = AssignmentService.getAssignmentForReview();</span>
+<span class="cstat-no" title="statement not covered" >		$scope.markComponentData = PieChartService.getPieChartLines($scope.assignment.markComponents);</span>
+<span class="cstat-no" title="statement not covered" >		$scope.markComponentOptions = {thickness: 30};</span>
+		
+<span class="cstat-no" title="statement not covered" >		$scope.create = <span class="fstat-no" title="function not covered" >function(assignment) {</span></span>
+			// Create assignment
+<span class="cstat-no" title="statement not covered" >			var baseAssignment = angular.copy(assignment);</span>
+<span class="cstat-no" title="statement not covered" >			baseAssignment.groupBased = undefined;</span>
+<span class="cstat-no" title="statement not covered" >			baseAssignment.suppliedFiles = undefined;</span>
+<span class="cstat-no" title="statement not covered" >			var fd = new FormData();</span>
+<span class="cstat-no" title="statement not covered" >			fd.append("assignment", JSON.stringify(baseAssignment));</span>
+<span class="cstat-no" title="statement not covered" >			angular.forEach(assignment.suppliedFiles, <span class="fstat-no" title="function not covered" >function(suppliedFile) {</span></span>
+<span class="cstat-no" title="statement not covered" >				fd.append("files", suppliedFile.file);</span>
+			});
+			
+<span class="cstat-no" title="statement not covered" >			Restangular.one('courses', $stateParams.courseId).all('assignments').withHttpConfig({transformRequest: angular.identity}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(<span class="fstat-no" title="function not covered" >function(_assignment) {</span></span>
+<span class="cstat-no" title="statement not covered" >				console.log(_assignment);</span>
+				
+			});
+		};
+	}];
+});</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Apr 16 2016 15:41:09 GMT+0100 (GMT Daylight Time)</div>
+</div>
+<script src="../../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../../sorter.js"></script>
+</body>
+</html>

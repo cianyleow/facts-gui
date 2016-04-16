@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ./src/modules/facts/courseOwner/course/assignment/controllers/newAssignmentController.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">./src/modules/facts/courseOwner/course/assignment/controllers/newAssignmentController.js</span></h1>
+    <h2>
+        Statements: <span class="metric">4.88% <small>(2 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">4.35% <small>(1 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">4.88% <small>(2 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../../../index.html">All files</a> &#187; <a href="index.html">./src/modules/facts/courseOwner/course/assignment/controllers/</a> &#187; newAssignmentController.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define([], function() {
+	'use strict';
+	return['$scope', '$mdDialog', '$state', '$stateParams', 'Restangular', 'base.services.piechart', 'base.services.dialog', 'facts.services.assignment', <span class="fstat-no" title="function not covered" >function($scope, $mdDialog, $state, $stateParams, Restangular, PieChartService, DialogService, AssignmentService) {</span>
+<span class="cstat-no" title="statement not covered" >	$scope.assignment = AssignmentService.getAssignmentForReview();</span>
+<span class="cstat-no" title="statement not covered" >	$scope.selectedTab = 0;</span>
+	
+<span class="cstat-no" title="statement not covered" >	$scope.reviewing = false;</span>
+	
+<span class="cstat-no" title="statement not covered" >	$scope.review = <span class="fstat-no" title="function not covered" >function(assignment) {</span></span>
+<span class="cstat-no" title="statement not covered" >		AssignmentService.putAssignmenForReview(assignment);</span>
+<span class="cstat-no" title="statement not covered" >		$state.go('base.app.courseOwner.courses.details.assignments.new.review');</span>
+	};
+	
+<span class="cstat-no" title="statement not covered" >	$scope.removeLine = <span class="fstat-no" title="function not covered" >function(array, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >		array.splice(index, 1);</span>
+	};
+	
+<span class="cstat-no" title="statement not covered" >	$scope.suppliedFileDialog = <span class="fstat-no" title="function not covered" >function(targetEvent) {</span></span>
+<span class="cstat-no" title="statement not covered" >		DialogService.showCustomDialog(<span class="fstat-no" title="function not covered" >function($scope, $mdDialog) {</span></span>
+<span class="cstat-no" title="statement not covered" >			$scope.suppliedFile = {};</span>
+<span class="cstat-no" title="statement not covered" >			$scope.cancel = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >				$mdDialog.cancel();</span>
+			};
+			
+<span class="cstat-no" title="statement not covered" >			$scope.check = <span class="fstat-no" title="function not covered" >function(suppliedFile) {</span></span>
+<span class="cstat-no" title="statement not covered" >				$mdDialog.hide(suppliedFile);</span>
+			};
+		}, 'modules/facts/courseOwner/course/assignment/partials/new.suppliedFileDialog.tpl.html', angular.element(document.body), targetEvent, 
+<span class="fstat-no" title="function not covered" >		function(suppliedFile) {</span>
+<span class="cstat-no" title="statement not covered" >			$scope.assignment.suppliedFiles.push(suppliedFile);</span>
+		}, <span class="fstat-no" title="function not covered" >function() {</span>
+			
+		});
+	};
+<span class="cstat-no" title="statement not covered" >	$scope.markComponentDialog = <span class="fstat-no" title="function not covered" >function(targetEvent) {</span></span>
+<span class="cstat-no" title="statement not covered" >		DialogService.showCustomDialog(<span class="fstat-no" title="function not covered" >function($scope, $mdDialog) {</span></span>
+<span class="cstat-no" title="statement not covered" >			$scope.markComponent = {};</span>
+<span class="cstat-no" title="statement not covered" >			$scope.cancel = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >				$mdDialog.cancel();</span>
+			};
+			
+<span class="cstat-no" title="statement not covered" >			$scope.check = <span class="fstat-no" title="function not covered" >function(markComponent) {</span></span>
+<span class="cstat-no" title="statement not covered" >				$mdDialog.hide(markComponent);</span>
+			};
+		}, 'modules/facts/courseOwner/course/assignment/partials/new.markComponentDialog.tpl.html', angular.element(document.body), targetEvent, 
+<span class="fstat-no" title="function not covered" >		function(markComponent) {</span>
+<span class="cstat-no" title="statement not covered" >			$scope.assignment.markComponents.push(markComponent);</span>
+		}, <span class="fstat-no" title="function not covered" >function() {</span>
+			
+		});
+	};
+<span class="cstat-no" title="statement not covered" >	$scope.requiredFileDialog = <span class="fstat-no" title="function not covered" >function(targetEvent) {</span></span>
+<span class="cstat-no" title="statement not covered" >		DialogService.showCustomDialog(<span class="fstat-no" title="function not covered" >function($scope, $mdDialog) {</span></span>
+<span class="cstat-no" title="statement not covered" >			$scope.fileName = "";</span>
+<span class="cstat-no" title="statement not covered" >			$scope.requiredFile = {maxFileSize: 1048576};</span>
+<span class="cstat-no" title="statement not covered" >			$scope.$watch('fileName', <span class="fstat-no" title="function not covered" >function(newValue) {</span></span>
+<span class="cstat-no" title="statement not covered" >				var parts = newValue.split('.');</span>
+<span class="cstat-no" title="statement not covered" >				$scope.requiredFile.fileName = parts[0];</span>
+<span class="cstat-no" title="statement not covered" >				if(parts.length == 2) {</span>
+<span class="cstat-no" title="statement not covered" >					$scope.requiredFile.allowedExtension = parts[1];</span>
+				} else {
+<span class="cstat-no" title="statement not covered" >					$scope.requiredFile.allowedExtension = "";</span>
+				}
+			});
+<span class="cstat-no" title="statement not covered" >			$scope.cancel = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >				$mdDialog.cancel();</span>
+			};
+			
+<span class="cstat-no" title="statement not covered" >			$scope.check = <span class="fstat-no" title="function not covered" >function(requiredFile) {</span></span>
+<span class="cstat-no" title="statement not covered" >				$mdDialog.hide(requiredFile);</span>
+			};
+		}, 'modules/facts/courseOwner/course/assignment/partials/new.requiredFileDialog.tpl.html', angular.element(document.body), targetEvent, 
+<span class="fstat-no" title="function not covered" >		function(requiredFile) {</span>
+<span class="cstat-no" title="statement not covered" >			$scope.assignment.requiredFiles.push(requiredFile);</span>
+		}, <span class="fstat-no" title="function not covered" >function() {</span>
+			
+		});
+	};
+	
+	}];
+});</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Apr 16 2016 15:41:09 GMT+0100 (GMT Daylight Time)</div>
+</div>
+<script src="../../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../../sorter.js"></script>
+</body>
+</html>

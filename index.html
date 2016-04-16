@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title ng-bind="($title || 'Home') + ' - FACTS'"></title>
+	<base href="/">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	
+	<link rel="stylesheet" type="text/css" href="src/bower_components/angular-material/angular-material.min.css"/>
+	<link rel="stylesheet" type="text/css" href="src/bower_components/angular-upload/src/directives/btnUpload.min.css"/>
+	<link rel="stylesheet" type="text/css" href="src/bower_components/angular-material-data-table/dist/md-data-table.min.css"/>
+
+	<!-- build:css(.) src/css/facts.css -->
+	<link rel="stylesheet" href="src/css/assignmentCalendar.css" type="text/css"/>
+	<link rel="stylesheet" href="src/css/dueDate.css" type="text/css"/>
+    <link rel="stylesheet" href="src/css/app.css" type="text/css"/>
+	<!-- endbuild -->
+
+	<!-- process:remove -->
+	<script type="text/javascript" data-main="bootstrap" src="src/bower_components/requirejs/require.js"></script>
+	<!-- /process -->
+
+	<!-- process:insert -->
+	<script type="text/javascript" data-main="./bootstrap.prod" src="src/bower_components/requirejs/require.js"></script>
+	<!-- /process -->
+</head>
+<body id="app">
+	<ui-view></ui-view>
+</body>
+</html>
