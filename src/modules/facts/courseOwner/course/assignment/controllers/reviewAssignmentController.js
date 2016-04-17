@@ -1,4 +1,4 @@
-define([], function(angular, FormData) {
+define([], function() {
 	'use strict';
 	return['$scope', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'base.services.piechart', 'facts.services.assignment', function($scope, Restangular, $state, $stateParams, $q, FileService, PieChartService, AssignmentService) {
 		if(!AssignmentService.hasAssignmentForReview()) {
@@ -21,7 +21,6 @@ define([], function(angular, FormData) {
 			
 			Restangular.one('courses', $stateParams.courseId).all('assignments').withHttpConfig({transformRequest: angular.identity}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_assignment) {
 				console.log(_assignment);
-				
 			});
 		};
 	}];

@@ -19,6 +19,7 @@
     "spyOn": true,
     "inject": true,
     "expect": true,
-    "afterEach": true
+    "afterEach": true,
+    "localStorage": false
   }
 }

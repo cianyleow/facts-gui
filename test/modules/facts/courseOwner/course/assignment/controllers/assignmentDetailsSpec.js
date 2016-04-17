@@ -1,13 +1,11 @@
 define(['baseTestSetup'], function(baseTestSetup) {
     'use strict';
     describe('facts.courseOwner.course.assignment.controllers.details', function() {
-        var AssignmentDetailsController, scope, PieChartService;
+        var AssignmentDetailsController, scope;
         baseTestSetup();
 
-        beforeEach(inject(function($rootScope, $controller, $injector) {
+        beforeEach(inject(function($rootScope, $controller) {
             scope = $rootScope.$new();
-            PieChartService = $injector.get('base.services.piechart');
-            spyOn(PieChartService, 'getPieChartLines').andCallFake(function() {return []});
             AssignmentDetailsController = $controller('facts.courseOwner.course.assignment.controllers.details', {
                 $scope: scope,
                 $stateParams: {assignmentId: 1}

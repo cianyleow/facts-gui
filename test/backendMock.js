@@ -23,7 +23,13 @@ define(['fixtures'], function(fixtures) {
         // Login
         $httpBackend.when('POST', /^api\/login/)
             .respond(function(method, url, data) {
-                return [201, data, {'X-AUTH-TOKEN': 'asdf'}]
+                return [201, data, {'X-AUTH-TOKEN': 'asdf'}];
+            });
+
+        // COURSES
+        $httpBackend.when('POST', /^api\/courses\/[\d]+\/assignments$/)
+            .respond(function(method, url, data) {
+                return [201, data];
             });
 
         // ASSIGNMENTS
