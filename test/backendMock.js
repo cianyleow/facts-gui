@@ -31,7 +31,17 @@ define(['fixtures'], function(fixtures) {
         mockPost('api/assignments');
         mockPatch('api/assignments');
         $httpBackend.when('GET', /^api\/assignments\/[\d]+$/)
-            .respond(fixtures['api/assignments'].assignments[0]);
+            .respond(fixtures['api/assignments'][0]);
+        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/requiredFiles$/)
+            .respond(fixtures['api/requiredFiles']);
+        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/markComponents$/)
+            .respond(fixtures['api/markComponents']);
+        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/suppliedFiles$/)
+            .respond(fixtures['api/suppliedFiles']);
+
+        // Files
+        $httpBackend.when('GET', /^api\/files\/[\d]+\/link$/)
+            .respond({link: 'link'});
 
         // TEMPLATES - Just return a blank template.
         $httpBackend.whenGET(/^.*\.tpl\.html$/).respond(
