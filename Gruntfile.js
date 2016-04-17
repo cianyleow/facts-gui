@@ -117,8 +117,7 @@ module.exports = function (grunt) {
             },
             test: {
                 configFile: 'karma.conf.js',
-                singleRun: true,
-                browsers: ['Chrome']
+                singleRun: true
             },
             cover: {
                 configFile: 'karma.conf.js',
