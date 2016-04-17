@@ -8,7 +8,7 @@ define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-tit
 		function(RestangularProvider, $locationProvider, $httpProvider) {
 			$locationProvider.html5Mode(true).hashPrefix('!');
 			
-			RestangularProvider.setBaseUrl('/api');
+			RestangularProvider.setBaseUrl('api');
 			
 			// We can not inject $state directly as this gives a circular dependency
             $httpProvider.interceptors.push(['$q', '$injector', function($q, $injector) {
