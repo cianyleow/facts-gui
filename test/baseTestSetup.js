@@ -9,6 +9,10 @@ define(['backendMock',
                 $urlRouterProvider.deferIntercept();
             }));
 
+            beforeEach(function() {
+                localStorage.clear();
+            });
+
             beforeEach(inject(function($httpBackend) {
                 backendMock($httpBackend);
             }));
