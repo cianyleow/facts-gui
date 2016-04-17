@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.submission', '$q', function($scope, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, SubmissionService, $q) {
+	return['$scope', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', function($scope, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = assignment.get().$object;
 		
@@ -50,9 +50,9 @@ define([], function() {
 			var baseSubmission = angular.copy(submission);
 			baseSubmission.submissionFiles = undefined;
 			var fd = new FormData();
-			fd.append("submission", JSON.stringify(baseSubmission));
+			fd.append('submission', JSON.stringify(baseSubmission));
 			angular.forEach(submission.submissionFiles, function(submissionFile) {
-				fd.append("files", submissionFile.file);
+				fd.append('files', submissionFile.file);
 			});
 			
 			Restangular.one('assignments', $stateParams.assignmentId).all('submissions').withHttpConfig({transformRequest: angular.identiy}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_submission) {

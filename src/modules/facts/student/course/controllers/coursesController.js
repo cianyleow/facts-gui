@@ -15,7 +15,7 @@ define([], function() {
 					}
 				});
 				$scope.allCourses = courses;
-			});	
-		});		
+			});
+		});
 	}];
 });

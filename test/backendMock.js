@@ -1,6 +1,6 @@
-define(['fixtures'], function(fixtures) {
+define([], function() {
     'use strict';
-    return function($httpBackend) {
+    return function() {
        
     };
 });

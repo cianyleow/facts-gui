@@ -10,11 +10,13 @@ define([], function() {
 			},
 			controller: ['$scope', '$log', function($scope, $log) {
 				$log.debug('Course ID: ' + $scope.courseId);
-				Date.prototype.addDays = function(days) {
-					var dat = new Date(this.valueOf());
+
+				var addDays = function(date, days) {
+					var dat = new Date(date.valueOf());
 					dat.setDate(dat.getDate() + days);
 					return dat;
 				};
+
 				var today = new Date();
 				$scope.startDate = new Date(2016, 0, 11, 0, 0, 0);
 				var currentDate = new Date($scope.startDate);
@@ -30,7 +32,7 @@ define([], function() {
 						item.today = true;
 					}
 					weekArray.push(item);
-					currentDate = new Date(currentDate.addDays(1));
+					currentDate = new Date(addDays(currentDate, 1));
 					if(i % 7 == 6) {
 						$scope.dateArray.push(weekArray);
 						weekArray = [];
@@ -38,7 +40,7 @@ define([], function() {
 					i++;
 				}
 			}],
-			link: function(scope, el, attrs) {
+			link: function(scope) {
 				scope.$watch('assignmentsList', function(assignmentsList) {
 					if(assignmentsList) {
 						var i;

@@ -8,9 +8,9 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				url: '/marking',
 				views: {
 					'mainContent@base.app': {
-							templateUrl: 'modules/facts/marker/marking/partials/markings.tpl.html',
-							controller: 'facts.marker.marking.controllers.markings'
-						}
+						templateUrl: 'modules/facts/marker/marking/partials/markings.tpl.html',
+						controller: 'facts.marker.marking.controllers.markings'
+					}
 				},
 				data: {
 					displayName: 'Marking'

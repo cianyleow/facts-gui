@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return ['$scope', 'Restangular', '$state', 'facts.services.enrollment', function($scope, Restangular, $state, EnrollmentService) {
+	return ['$scope', 'Restangular', function($scope, Restangular) {
 		var userSelf = Restangular.one('self');
 		
 		$scope.user = userSelf.get().$object;

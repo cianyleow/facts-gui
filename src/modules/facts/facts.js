@@ -7,7 +7,7 @@ define(['angular',
 	function(angular, services, directives) {
 		'use strict';
 		var configFn = ['facts.student', 'facts.courseOwner', 'facts.marker'];
-		var facts = angular.module('facts', configFn);	
+		var facts = angular.module('facts', configFn);
 		services.init(facts);
 		directives.init(facts);
 		return facts;

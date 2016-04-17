@@ -24,7 +24,7 @@ define([], function() {
 					if(modelValue === undefined) {
 						return true;
 					} else {
-						return modelValue.name === (scope.requiredFile.fileName + "." + scope.requiredFile.allowedExtension);
+						return modelValue.name === (scope.requiredFile.fileName + '.' + scope.requiredFile.allowedExtension);
 					}
 				};
 			}

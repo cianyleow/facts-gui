@@ -1,4 +1,4 @@
-define([], function() {
+define([], function(angular) {
 	'use strict';
 	return['$scope', '$q', '$interval', '$timeout', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'facts.services.assignment', 'facts.services.submission', function($scope, $q, $interval, $timeout, $state, $stateParams, DialogService, FileService, AssignmentService, SubmissionService) {
 		$scope.assignment = AssignmentService.getAssignment($stateParams.assignmentId);
@@ -15,7 +15,7 @@ define([], function() {
 		$scope.submission = {
 			comments: '',
 			fileIds: [],
-			assignment_id: $stateParams.assignmentId
+			assignmentId: $stateParams.assignmentId
 		};
 		
 		$scope.sendSubmission = function() {
@@ -30,9 +30,9 @@ define([], function() {
 				$scope.submission.files.push(file.selectedFile);
 			});
 			SubmissionService.uploadNewSubmission(
-				$scope.submission, 
+				$scope.submission,
 				function(resp) {
-					console.log("Finished submission");
+					console.log('Finished submission');
 					$scope.submitted = true;
 					$scope.timeLeft = 3;
 					redirectPage(resp.data.submissionId);
@@ -89,8 +89,8 @@ define([], function() {
 					if($scope.timeLeft === 0) {
 						$state.go('app.courses.details.assignments.details.submissions.details', {submissionId: submissionId});
 					}
-				}, 
-				1000, 
+				},
+				1000,
 				3
 			);
 		}

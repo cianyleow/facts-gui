@@ -1,7 +1,7 @@
 define([
 		'./markingsController',
 		'./markingDetailsController'
-	], 
+	],
 	function(MarkingsController, MarkingDetailsController) {
 		'use strict';
 		return {

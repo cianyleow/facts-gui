@@ -20,7 +20,7 @@ define([], function() {
 		$scope.actions = [
 			{
 				action: function(assignment) {
-					console.log('Assign markers!');
+					console.log('Assign markers!' + assignment);
 				},
 				icon: 'link',
 				description: 'Assign Markers'

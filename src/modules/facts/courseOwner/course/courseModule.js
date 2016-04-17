@@ -8,9 +8,9 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 				url: '/courses',
 				views: {
 					'mainContent@base.app': {
-							templateUrl: 'modules/facts/courseOwner/course/partials/courses.tpl.html',
-							controller: 'facts.courseOwner.course.controllers.courses'
-						}
+						templateUrl: 'modules/facts/courseOwner/course/partials/courses.tpl.html',
+						controller: 'facts.courseOwner.course.controllers.courses'
+					}
 				},
 				data: {
 					displayName: 'Courses'
@@ -26,9 +26,9 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 				},
 				views: {
 					'mainContent@base.app': {
-							templateUrl: 'modules/facts/courseOwner/course/partials/details.tpl.html',
-							controller: 'facts.courseOwner.course.controllers.details'
-						}
+						templateUrl: 'modules/facts/courseOwner/course/partials/details.tpl.html',
+						controller: 'facts.courseOwner.course.controllers.details'
+					}
 				},
 				resolve: {
 					course: ['$stateParams', 'Restangular', function($stateParams, Restangular) {
@@ -38,7 +38,7 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 						});
 					}],
 					$title: ['course', function(course) {
-						return course.shortName + ": " + course.name;
+						return course.shortName + ': ' + course.name;
 					}]
 				}
 			});

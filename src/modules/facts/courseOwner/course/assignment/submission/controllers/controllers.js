@@ -1,7 +1,7 @@
 define([
 		'./newSubmissionController',
 		'./submissionDetailsController'
-	], 
+	],
 	function(NewSubmissionController, SubmissionDetailsController) {
 		'use strict';
 		return {

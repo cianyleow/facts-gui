@@ -3,7 +3,7 @@ define([
 		'./assignmentsController',
 		'./submission/newSubmissionController',
 		'./submission/submissionDetailsController'
-	], 
+	],
 	function(AssignmentDetailsController, AssignmentsController, NewSubmissionController, SubmissionDetailsController) {
 		'use strict';
 		return {

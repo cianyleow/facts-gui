@@ -1,7 +1,7 @@
 define([
 		'./assignmentDetailsController',
 		'./assignmentsController'
-	], 
+	],
 	function(AssignmentDetailsController, AssignmentsController) {
 		'use strict';
 		return {

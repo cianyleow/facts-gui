@@ -13,8 +13,8 @@ define(['angular',
 	
 	base.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		// Always redirect to dashboard if unknown or base entry.
-		$urlRouterProvider.when("", "/dashboard");
-		$urlRouterProvider.when("/", "/dashboard");
+		$urlRouterProvider.when('', '/dashboard');
+		$urlRouterProvider.when('/', '/dashboard');
 		$urlRouterProvider.otherwise('/dashboard');
 		
 		$stateProvider

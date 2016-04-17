@@ -1,4 +1,4 @@
-define([], function() {
+define([], function(angular, FormData) {
 	'use strict';
 	return['$scope', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'base.services.piechart', 'facts.services.assignment', function($scope, Restangular, $state, $stateParams, $q, FileService, PieChartService, AssignmentService) {
 		if(!AssignmentService.hasAssignmentForReview()) {
@@ -14,9 +14,9 @@ define([], function() {
 			baseAssignment.groupBased = undefined;
 			baseAssignment.suppliedFiles = undefined;
 			var fd = new FormData();
-			fd.append("assignment", JSON.stringify(baseAssignment));
+			fd.append('assignment', JSON.stringify(baseAssignment));
 			angular.forEach(assignment.suppliedFiles, function(suppliedFile) {
-				fd.append("files", suppliedFile.file);
+				fd.append('files', suppliedFile.file);
 			});
 			
 			Restangular.one('courses', $stateParams.courseId).all('assignments').withHttpConfig({transformRequest: angular.identity}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_assignment) {
