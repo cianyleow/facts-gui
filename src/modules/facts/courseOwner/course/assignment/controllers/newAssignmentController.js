@@ -7,7 +7,7 @@ define([], function() {
 		$scope.reviewing = false;
 
 		$scope.review = function(assignment) {
-			AssignmentService.putAssignmenForReview(assignment);
+			AssignmentService.putAssignmentForReview(assignment);
 			$state.go('base.app.courseOwner.courses.details.assignments.new.review');
 		};
 
