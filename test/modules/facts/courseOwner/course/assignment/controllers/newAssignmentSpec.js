@@ -39,7 +39,7 @@ define(['baseTestSetup', 'fixtures'], function(baseTestSetup, fixtures) {
             expect(scope.assignment.name).toBeUndefined();
         });
 
-        it('Review action should put the assignment', function($httpBackend) {
+        it('Review action should put the assignment', function() {
             scope.review(assignment);
             expect(AssignmentService.putAssignmentForReview).toHaveBeenCalledWith(assignment);
         });
@@ -53,19 +53,19 @@ define(['baseTestSetup', 'fixtures'], function(baseTestSetup, fixtures) {
             var array = ['a', 'b', 'c'];
             scope.removeLine(array, 1);
             var result = ['a', 'c'];
-            expect(array).toEqual(result)
-        })
+            expect(array).toEqual(result);
+        });
 
         it('Removing line from bare array does nothing', function() {
             var array = [];
             scope.removeLine(array, 1);
             expect(array).toBe(array);
-        })
+        });
 
         it('Removing incorrect index does nothing', function() {
             var array = ['a', 'b', 'c'];
             scope.removeLine(array, 100);
             expect(array).toBe(array);
-        })
+        });
     });
 });
