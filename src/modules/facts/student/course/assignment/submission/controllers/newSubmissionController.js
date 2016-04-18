@@ -36,7 +36,7 @@ define([], function() {
 				$scope.add = function(file) {
 					$mdDialog.hide(file);
 				};
-			}, 'modules/facts/student/course/assignment/submission/partials/new.submissionFileDialog.tpl.html', angular.element(document.body), targetEvent,
+			}, 'src/modules/facts/student/course/assignment/submission/partials/new.submissionFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(file) {
 				$scope.requiredFiles.splice(index, 1);
 				requiredFile.file = file;

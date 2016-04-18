@@ -25,7 +25,7 @@ define([], function() {
 				$scope.check = function(suppliedFile) {
 					$mdDialog.hide(suppliedFile);
 				};
-			}, 'modules/facts/courseOwner/course/assignment/partials/new.suppliedFileDialog.tpl.html', angular.element(document.body), targetEvent,
+			}, 'src/modules/facts/courseOwner/course/assignment/partials/new.suppliedFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(suppliedFile) {
 				$scope.assignment.suppliedFiles.push(suppliedFile);
 			}, function() {
@@ -42,7 +42,7 @@ define([], function() {
 				$scope.check = function(markComponent) {
 					$mdDialog.hide(markComponent);
 				};
-			}, 'modules/facts/courseOwner/course/assignment/partials/new.markComponentDialog.tpl.html', angular.element(document.body), targetEvent,
+			}, 'src/modules/facts/courseOwner/course/assignment/partials/new.markComponentDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(markComponent) {
 				$scope.assignment.markComponents.push(markComponent);
 			}, function() {
@@ -69,7 +69,7 @@ define([], function() {
 				$scope.check = function(requiredFile) {
 					$mdDialog.hide(requiredFile);
 				};
-			}, 'modules/facts/courseOwner/course/assignment/partials/new.requiredFileDialog.tpl.html', angular.element(document.body), targetEvent,
+			}, 'src/modules/facts/courseOwner/course/assignment/partials/new.requiredFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(requiredFile) {
 				$scope.assignment.requiredFiles.push(requiredFile);
 			}, function() {

@@ -11,7 +11,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/courseOwner/course/assignment/partials/assignments.tpl.html',
+						templateUrl: 'src/modules/facts/courseOwner/course/assignment/partials/assignments.tpl.html',
 						controller: 'facts.courseOwner.course.assignment.controllers.assignments'
 					}
 				},
@@ -28,7 +28,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/courseOwner/course/assignment/partials/new.tpl.html',
+						templateUrl: 'src/modules/facts/courseOwner/course/assignment/partials/new.tpl.html',
 						controller: 'facts.courseOwner.course.assignment.controllers.new'
 					}
 				},
@@ -45,7 +45,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/courseOwner/course/assignment/partials/details.tpl.html',
+						templateUrl: 'src/modules/facts/courseOwner/course/assignment/partials/details.tpl.html',
 						controller: 'facts.courseOwner.course.assignment.controllers.details'
 					}
 				},
@@ -67,7 +67,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				},
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/courseOwner/course/assignment/partials/review.tpl.html',
+						templateUrl: 'src/modules/facts/courseOwner/course/assignment/partials/review.tpl.html',
 						controller: 'facts.courseOwner.course.assignment.controllers.review'
 					}
 				},

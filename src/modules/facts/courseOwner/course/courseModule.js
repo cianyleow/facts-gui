@@ -8,7 +8,7 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 				url: '/courses',
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/courseOwner/course/partials/courses.tpl.html',
+						templateUrl: 'src/modules/facts/courseOwner/course/partials/courses.tpl.html',
 						controller: 'facts.courseOwner.course.controllers.courses'
 					}
 				},
@@ -26,7 +26,7 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 				},
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/courseOwner/course/partials/details.tpl.html',
+						templateUrl: 'src/modules/facts/courseOwner/course/partials/details.tpl.html',
 						controller: 'facts.courseOwner.course.controllers.details'
 					}
 				},
