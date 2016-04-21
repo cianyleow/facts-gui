@@ -1,0 +1,36 @@
+<md-dialog aria-label="New Comment Dialog" flex-gt-xs="50" flex-xs ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>New Comment</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+          <ng-md-icon icon="close"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+		<div class="md-dialog-content">
+			<form>
+				<md-input-container class="md-block">
+					<label>Comment</label>
+					<textarea required ng-model="comment.comment" md-maxlength="255" rows="5" md-select-on-focus style="height: 147px;"></textarea>
+				</md-input-container>
+                <md-checkbox ng-model="comment.secret" aria-label="Secret comment">
+                    Secret
+                </md-checkbox>
+				
+			</form>
+		</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-primary" ng-click="check(comment)">
+       Add
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;">
+        Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
