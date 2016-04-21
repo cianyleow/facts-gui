@@ -8,7 +8,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				url: '/marking',
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/marker/marking/partials/markings.tpl.html',
+						templateUrl: 'src/modules/facts/marker/marking/partials/markings.tpl.html',
 						controller: 'facts.marker.marking.controllers.markings'
 					}
 				},
@@ -23,7 +23,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 				url: '/{feedbackId}',
 				views: {
 					'mainContent@base.app': {
-						templateUrl: 'modules/facts/marker/marking/partials/details.tpl.html',
+						templateUrl: 'src/modules/facts/marker/marking/partials/details.tpl.html',
 						controller: 'facts.marker.marking.controllers.details'
 					}
 				},
