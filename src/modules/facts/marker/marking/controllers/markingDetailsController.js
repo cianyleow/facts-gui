@@ -16,10 +16,21 @@ define([], function() {
 						$scope.marks.push({markComponent: _markComponent});
 					});
 				});
+				Restangular.one('assignments', _assignment.assignmentId).getList('suppliedFiles').then(function(_suppliedFiles) {
+					$scope.suppliedFiles = _suppliedFiles;
+				});
 			});
 		});
 		$scope.comments = feedback.getList('comments').$object;
 		$scope.marks = feedback.getList('marks').$object;
+
+		$scope.saveMark = function(mark) {
+			if(mark.newMark <= mark.markComponent.maxMark) {
+				mark.mark = mark.newMark;
+			}
+			mark.newMark = undefined;
+			mark.editMode = false;
+		};
 
 		$scope.submissionActions = [
 			{
@@ -31,22 +42,13 @@ define([], function() {
 			}
 		];
 
-		$scope.markActions = [
-			{
-				description: 'Add Mark',
-				icon: 'add',
-				action: function(targetEvent) {
-
-				}
-			}
-		];
-
 		$scope.commentActions = [
 			{
 				description: 'Add Comment',
 				icon: 'add',
 				action: function(targetEvent) {
-					DialogService.showCustomDialog(function($scope, $mdDialog) {
+					DialogService.showCustomDialog(
+						function($scope, $mdDialog) {
 							$scope.comment = {
 								secret: false
 							};
