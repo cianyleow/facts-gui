@@ -1,45 +1,45 @@
 {
   "name": "facts-gui",
   "description": "Imperial College EE MEng project to create an assessment management platform.",
-  "main": "index.js",
+  "main": "",
   "authors": [
     "Cian Leow"
   ],
   "license": "MIT",
   "keywords": [
-    "material",
-    "angular"
+    "facts",
+    "assessment",
+    "management"
   ],
-  "moduleType": [],
-  "homepage": "http://www.doc.ic.ac.uk/~cyl312/facts",
-  "private": true,
+  "homepage": "https://github.com/cianyleow/facts-gui",
+  "moduleType": [
+    "es6"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "src/bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.8",
-    "angular-ui-router": "~0.2.15",
-    "angular-file-upload": "~2.2.0",
-    "restangular": "~1.5.1",
-    "requirejs": "~2.1.22",
-    "angular-material": "~1.0.1",
-    "angular-utils-ui-breadcrumbs": "~0.2.2",
-    "lodash": "3.10.1",
-    "angular-ui-router-title": "~0.0.4",
-    "angular-upload": "~1.0.12",
-    "angular-material-data-table": "~0.9.11",
-    "ng-file-upload": "~12.0.1",
-    "d3": "~3.5.16",
-    "angular-messages": "~1.5.3"
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "angular-file-upload": "^2.2.0",
+    "restangular": "^1.5.2",
+    "requirejs": "^2.2.0",
+    "angular-material": "^1.1.0-rc4",
+    "angular-utils-ui-breadcrumbs": "^0.2.2",
+    "lodash": "^4.11.2",
+    "angular-ui-router-title": "^0.0.4",
+    "angular-upload": "^1.0.12",
+    "angular-material-data-table": "^0.10.7",
+    "ng-file-upload": "^12.0.4",
+    "d3": "^3.5.16",
+    "angular-messages": "^1.5.5"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.8"
-  },
-  "resolutions": {
-    "angular": "1.5.3"
+    "angular-mocks": "^1.5.5"
   }
 }
