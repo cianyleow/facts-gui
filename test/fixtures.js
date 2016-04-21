@@ -38,7 +38,7 @@ define([], function() {
                 "description":null
             }
         ],
-        "api/suppliedFiles": [
+        "api/files": [
             {
                 "fileId":5,
                 "name":"spec-475-6-0",
@@ -48,6 +48,20 @@ define([], function() {
                 "hash":"cd0f2f501ae9fe34c839a32b46a47652c0d44aaf2b5c48563d29e67ff9d72056",
                 "creationTime":"2016-04-02",
             }
+        ],
+        "api/feedback": [
+
+        ],
+        "api/submissions": [
+            {
+                "submissionId": 1
+            }
+        ],
+        "api/marks": [
+
+        ],
+        "api/comments": [
+
         ]
     };
 });

@@ -19,8 +19,7 @@ define(['fixtures'], function(fixtures) {
         }
 
         // Actual mocking here
-
-        // Login
+        // LOGIN
         $httpBackend.when('POST', /^api\/login/)
             .respond(function(method, url, data) {
                 return [201, data, {'X-AUTH-TOKEN': 'asdf'}];
@@ -31,6 +30,20 @@ define(['fixtures'], function(fixtures) {
             .respond(function(method, url, data) {
                 return [201, data];
             });
+
+        // FEEDBACK
+        $httpBackend.when('GET', /^api\/feedback\/[\d]+$/)
+            .respond(fixtures['api/feedback'][0]);
+        $httpBackend.when('GET', /^api\/feedback\/[\d]+\/submission+$/)
+            .respond(fixtures['api/submissions'][0]);
+        $httpBackend.when('GET', /^api\/feedback\/[\d]+\/marks+$/)
+            .respond(fixtures['api/marks']);
+        $httpBackend.when('GET', /^api\/feedback\/[\d]+\/comments+$/)
+            .respond(fixtures['api/comments']);
+
+        // SUBMISSIONS
+        $httpBackend.when('GET', /^api\/submissions\/[\d]+\/submissionFiles/)
+            .respond(fixtures['api/files']);
 
         // ASSIGNMENTS
         mockRoot('api/assignments');
@@ -43,7 +56,7 @@ define(['fixtures'], function(fixtures) {
         $httpBackend.when('GET', /^api\/assignments\/[\d]+\/markComponents$/)
             .respond(fixtures['api/markComponents']);
         $httpBackend.when('GET', /^api\/assignments\/[\d]+\/suppliedFiles$/)
-            .respond(fixtures['api/suppliedFiles']);
+            .respond(fixtures['api/files']);
 
         // Files
         $httpBackend.when('GET', /^api\/files\/[\d]+\/link$/)
