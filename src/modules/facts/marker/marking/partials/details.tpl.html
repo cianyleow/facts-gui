@@ -5,6 +5,20 @@
 				<h2>
 					<span>Submission Details</span>
 				</h2>
+				<span flex></span>
+				<md-menu md-position-mode="target-right target" ng-show="submissionActions.length">
+					<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-menu-item ng-repeat="action in submissionActions">
+							<md-button ng-click="action.action(assignment)" aria-label="action.description">
+								<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+								{{action.description}}
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
 			</div>
 		</md-toolbar>
 		<md-card-content>
@@ -34,9 +48,19 @@
 							<span>Comments</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Comments settings" ui-sref="app.courses.details.assignments">
-							<ng-md-icon aria-label="Comments settings" icon="settings"></ng-md-icon>
-						</md-button>
+						<md-menu md-position-mode="target-right target" ng-show="commentActions.length">
+							<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
+								<ng-md-icon icon="more_vert"></ng-md-icon>
+							</md-button>
+							<md-menu-content width="4">
+								<md-menu-item ng-repeat="action in commentActions">
+									<md-button ng-click="action.action(assignment)" aria-label="action.description">
+										<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+										{{action.description}}
+									</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
 					</div>
 				</md-toolbar>
 				<md-card-content>
@@ -65,9 +89,19 @@
 							<span>Marks</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Marks settings" ui-sref="app.courses.details.assignments">
-							<ng-md-icon aria-label="Marks settings" icon="settings"></ng-md-icon>
-						</md-button>
+						<md-menu md-position-mode="target-right target" ng-show="markActions.length">
+							<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
+								<ng-md-icon icon="more_vert"></ng-md-icon>
+							</md-button>
+							<md-menu-content width="4">
+								<md-menu-item ng-repeat="action in markActions">
+									<md-button ng-click="action.action(assignment)" aria-label="action.description">
+										<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+										{{action.description}}
+									</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
 					</div>
 				</md-toolbar>
 				<md-card-content>
