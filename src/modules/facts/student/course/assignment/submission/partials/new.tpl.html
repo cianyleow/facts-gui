@@ -16,7 +16,7 @@
 								<h3>Required: {{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] {{requiredFile.file.name}}</h3>
 								<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
 							</div>
-							<ng-md-icon class="md-secondary" aria-label="Upload required file" icon="file_upload" ng-click="addSubmissionFile($event, requiredFile, $index)"></ng-md-icon>
+							<md-icon class="md-secondary" aria-label="Upload required file" ng-click="addSubmissionFile($event, requiredFile, $index)">file_upload</md-icon>
 						</md-list-item>
 						<span layout="row" ng-show="requiredFiles.length > 0 && submission.submissionFiles.length === 0" layout-align="center center" flex>
 							<span><h2>No submission files</h2></span>
@@ -26,7 +26,7 @@
 								<h3>Added: {{submissionFile.file.name}} ({{submissionFile.file.size | bytes}})</h3>
 								<p>Click to remove</p>
 							</div>
-							<ng-md-icon class="md-secondary" aria-label="Valid submission file" style="fill: #4CAF50" icon="check_circle"></ng-md-icon>
+							<md-icon class="md-secondary" aria-label="Valid submission file" style="fill: #4CAF50">check_circle</md-icon>
 						</md-list-item>
 					</md-list>
 					<md-input-container class="md-block">

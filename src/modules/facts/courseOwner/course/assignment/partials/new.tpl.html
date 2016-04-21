@@ -48,7 +48,7 @@
 											<h3>{{suppliedFile.file.name}} ({{suppliedFile.file.size | bytes}})</h3>
 											<p>{{suppliedFile.file.type}}</p>
 										</div>
-										<ng-md-icon class="md-secondary" ng-click="removeLine(assignment.suppliedFiles, $index)" aria-label="Remove supplied file" icon="remove_circle_outline"></ng-md-icon>
+										<md-icon class="md-secondary" ng-click="removeLine(assignment.suppliedFiles, $index)" aria-label="Remove supplied file">remove_circle_outline</md-icon>
 									</md-list-item>
 								</md-list>
 							</md-content>
@@ -64,7 +64,7 @@
 											<h3>{{ markComponent.name }} ({{ markComponent.maxMark }} marks)</h3>
 											<p>{{ markComponent.description}} </p>
 										</div>
-										<ng-md-icon class="md-secondary" ng-click="removeLine(assignment.markComponent, $index)" aria-label="Remove mark component" icon="remove_circle_outline"></ng-md-icon>
+										<md-icon class="md-secondary" ng-click="removeLine(assignment.markComponent, $index)" aria-label="Remove mark component">remove_circle_outline</md-icon>
 									</md-list-item>
 								</md-list>
 							</md-content>
@@ -80,7 +80,7 @@
 											<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
 											<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
 										</div>
-										<ng-md-icon class="md-secondary" ng-click="removeLine(assignment.requiredFiles, $index)" aria-label="Remove required file" icon="remove_circle_outline"></ng-md-icon>
+										<md-icon class="md-secondary" ng-click="removeLine(assignment.requiredFiles, $index)" aria-label="Remove required file">remove_circle_outline</md-icon>
 									</md-list-item>
 								</md-list>
 							</md-content>

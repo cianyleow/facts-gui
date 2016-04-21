@@ -56,13 +56,13 @@
 				<span flex></span>
 				{{submission.creationTime | date}}
 				<md-menu md-position-mode="target-right target" ng-show="submissionActions.length">
-					<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
-						<ng-md-icon icon="more_vert"></ng-md-icon>
+					<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
+						<md-icon aria-label="More options">more_vert</md-icon>
 					</md-button>
 					<md-menu-content width="4">
 						<md-menu-item ng-repeat="action in submissionActions">
 							<md-button ng-click="action.action(assignment)" aria-label="action.description">
-								<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+								<md-icon md-menu-align-target>{{action.icon}}</md-icon>
 								{{action.description}}
 							</md-button>
 						</md-menu-item>
@@ -99,12 +99,12 @@
 						<span flex></span>
 						<md-menu md-position-mode="target-right target" ng-show="commentActions.length">
 							<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
-								<ng-md-icon icon="more_vert"></ng-md-icon>
+								<md-icon>more_vert</md-icon>
 							</md-button>
 							<md-menu-content width="4">
 								<md-menu-item ng-repeat="action in commentActions">
 									<md-button ng-click="action.action(assignment)" aria-label="action.description">
-										<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+										<md-icon md-menu-align-target>{{action.icon}}</md-icon>
 										{{action.description}}
 									</md-button>
 								</md-menu-item>
@@ -139,12 +139,12 @@
 						<span flex></span>
 						<md-menu md-position-mode="target-right target" ng-show="markActions.length">
 							<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
-								<ng-md-icon icon="more_vert"></ng-md-icon>
+								<md-icon>more_vert</md-icon>
 							</md-button>
 							<md-menu-content width="4">
 								<md-menu-item ng-repeat="action in markActions">
 									<md-button ng-click="action.action(assignment)" aria-label="action.description">
-										<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+										<md-icon md-menu-align-target>{{action.icon}}</md-icon>
 										{{action.description}}
 									</md-button>
 								</md-menu-item>
@@ -170,15 +170,9 @@
 										/ {{mark.markComponent.maxMark}})</h3>
 									<p>{{mark.markComponent.description}}</p>
 								</div>
-								<md-button class="md-icon-button" ng-show="!mark.editMode" ng-click="mark.editMode = true">
-									<ng-md-icon icon="edit"></ng-md-icon>
-								</md-button>
-								<md-button ng-show="mark.editMode" class="md-icon-button" ng-click="saveMark(mark)">
-									<ng-md-icon icon="check" style="fill: #4CAF50;"></ng-md-icon>
-								</md-button>
-								<md-button ng-show="mark.editMode" class="md-icon-button" ng-click="mark.editMode = false">
-									<ng-md-icon icon="cancel" style="fill: #F44336;"></ng-md-icon>
-								</md-button>
+								<md-icon class="md-secondary" ng-show="!mark.editMode" ng-click="mark.editMode = true">edit</md-icon>
+								<md-icon class="md-secondary" ng-show="mark.editMode" ng-click="saveMark(mark)">check</md-icon>
+								<md-icon class="md-secondary" ng-show="mark.editMode" ng-click="mark.editMode = false">cancel</md-icon>
 							</md-list-item>
 						</md-list>
 					</md-content>

@@ -8,12 +8,12 @@
 				<span flex></span>
 				<md-menu md-position-mode="target-right target">
 					<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
-						<ng-md-icon icon="more_vert"></ng-md-icon>
+						<md-icon>more_vert</md-icon>
 					</md-button>
 					<md-menu-content width="4">
 						<md-menu-item ng-repeat="action in actions">
 							<md-button ng-click="action.action(assignment)" aria-label="action.description">
-								<ng-md-icon md-menu-align-target icon="{{action.icon}}"></ng-md-icon>
+								<md-icon md-menu-align-target>action.icon</md-icon>
 								{{action.description}}
 							</md-button>
 						</md-menu-item>
@@ -35,7 +35,7 @@
 				</h2>
 				<span flex></span>
 				<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.assignments.details.edit">
-					<ng-md-icon icon="edit"></ng-md-icon>
+					<md-icon>edit</md-icon>
 				</md-button>
 			</div>
 		</md-toolbar>
@@ -63,7 +63,7 @@
 												<h3>{{suppliedFile.name}}.{{suppliedFile.extension}} ({{suppliedFile.size | bytes}})</h3>
 												<p>{{suppliedFile.contentType}}</p>
 											</div>
-											<ng-md-icon class="md-secondary" aria-label="Download supplied file" icon="file_download" ng-click="download(suppliedFile.fileId)"></ng-md-icon>
+											<md-icon class="md-secondary" aria-label="Download supplied file" ng-click="download(suppliedFile.fileId)">file_download</md-icon>
 										</md-list-item>
 									</md-list>
 								</md-content>

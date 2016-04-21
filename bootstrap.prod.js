@@ -8,7 +8,6 @@ require.config({
 		'angular-material': 'src/bower_components/angular-material/angular-material',
 		'angular-animate': 'src/bower_components/angular-animate/angular-animate',
 		'angular-aria': 'src/bower_components/angular-aria/angular-aria',
-		'angular-material-icons': 'src/bower_components/angular-material-icons/angular-material-icons',
 		'angular-ui-breadcrumbs': 'src/bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs',
 		'angular-ui-title': 'src/bower_components/angular-ui-router-title/angular-ui-router-title',
 		'ng-file-upload': 'src/bower_components/ng-file-upload/ng-file-upload.min',
@@ -27,7 +26,6 @@ require.config({
 		'angular-material': {
 			deps: ['angular-animate', 'angular-aria']
 		},
-		'angular-material-icons': {deps: ['angular']},
 		'angular-ui-breadcrumbs': {deps: ['angular']},
 		'angular-ui-title': {deps: ['angular']},
 		'ng-file-upload': {deps: ['angular']},

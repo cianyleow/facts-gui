@@ -27,7 +27,6 @@
     "restangular": "~1.5.1",
     "requirejs": "~2.1.22",
     "angular-material": "~1.0.1",
-    "angular-material-icons": "~0.6.0",
     "angular-utils-ui-breadcrumbs": "~0.2.2",
     "lodash": "3.10.1",
     "angular-ui-router-title": "~0.0.4",
