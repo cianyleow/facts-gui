@@ -1,24 +1,79 @@
 <md-content layout="column">
+	<div layout="row" layout-xs="column">
+		<div flex-xs flex-gt-xs="40">
+			<md-card flex>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>{{course.shortName}}: {{course.name}}</span>
+						</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.edit">
+							<md-icon>edit</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						{{course.description}}
+						<md-list>
+							<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners">
+								<div class="md-list-item-text">
+									<h3>{{courseOwner.title}} {{courseOwner.firstName}} {{courseOwner.lastName}} ({{courseOwner.userName}})</h3>
+									<p>Course Owner</p>
+								</div>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
+			<md-card flex>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Markers</span>
+						</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.markers.manage">
+							<md-icon>settings</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						<md-list>
+							<md-list-item ng-repeat="marker in markers">
+
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
+		</div>
+		<div flex-xs flex-gt-xs="60">
+			<md-card flex>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Enrollments</span>
+						</h2>
+						<span flex></span>
+						320 total
+						<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.enrollments.manage">
+							<md-icon>settings</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+
+					</md-content>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
 	<md-card flex>
 		<md-toolbar>
-			<div class="md-toolbar-tools">
-				<h2>
-					<span>{{course.shortName}}: {{course.name}}</span>
-				</h2>
-				<span flex></span>
-				<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.edit">
-					<md-icon>edit</md-icon>
-				</md-button>
-			</div>
-		</md-toolbar>
-		<md-card-content>
-			<md-content>
-				{{course.description}}
-			</md-content>
-		</md-card-content>
-	</md-card>
-	<md-card flex>
-	<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
 					<span>Assignments</span>
