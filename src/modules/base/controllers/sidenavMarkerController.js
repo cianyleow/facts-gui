@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return ['$scope', function($scope) {
+	return ['$scope', 'Restangular', function($scope, Restangular) {
 		
 		$scope.menu = [
 			{
@@ -26,5 +26,9 @@ define([], function() {
 		];
 		
 		$scope.currentPeriod = 'Spring 15/16';
+
+		$scope.courses = Restangular.one('self').getList('marked').$object;
+
+		$scope.baselink = 'base.app.marker.courses.details'
 	}];
 });

@@ -1,7 +1,7 @@
 <md-toolbar class="md-tall md-hue-2">
 	<span flex>FACTS</span>
-  </md-toolbar>
-  <md-list>
+</md-toolbar>
+<md-list>
   <md-list-item md-ink-ripple ng-repeat="item in menu" ui-sref-active="active">
 	<a ui-sref="{{item.link}}">
 	  <md-item-content layout="row" layout-align="start center">
@@ -16,7 +16,7 @@
   <md-divider></md-divider>
   <md-subheader>My Courses ({{currentPeriod}})</md-subheader>
   <md-list-item ng-repeat="item in courses" ui-sref-active="active">
-	<a ui-sref="base.app.courses.details({courseId: item.courseId})">
+	<a ui-sref="{{baselink}}({courseId: item.courseId})">
 	  <md-item-content md-ink-ripple layout="row" layout-align="start center">
 		<div class="inset">
 			{{item.shortName}} - {{item.name | limitTo : 12}}<span ng-show="item.name.length > 12">...</span>
