@@ -23,7 +23,8 @@ define(['angular',
 		
 		$stateProvider
 			.state('authorize', {
-				url: '/authorize',
+				url: '/authorize?redirect',
+				params: {'redirect': null},
 				templateUrl: 'src/modules/base/partials/authorization.tpl.html',
 				controller: 'base.controllers.authorization-controller'
 			})
@@ -46,12 +47,12 @@ define(['angular',
 						controller: 'base.controllers.toolbar-controller'
 					}
 				}, resolve: {
-					'user':  ['base.services.authentication', '$log', '$state', function(AuthenticationService, $log, $state) {
+					'user':  ['base.services.authentication', '$log', '$state', '$location', function(AuthenticationService, $log, $state, $location) {
 						return AuthenticationService.check().then(function(user) {
 							return user;
 						}, function(message) {
 							$log.info('User is not authenticated (' + message +'), redirecting to authorize state.');
-							$state.go('authorize');
+							$state.go('authorize', {redirect: $location.url()});
 						});
 					}]
 				}
