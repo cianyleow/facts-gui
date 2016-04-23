@@ -33,7 +33,7 @@ define(['angular', './controllers/controllers', './submission/submissionModule']
 					}
 				},
 				resolve: {
-					assignment: ['$stateParams', 'facts.services.assignment', function($stateParams, AssignmentService) {
+					assignment: ['$stateParams', 'facts.services.assignment', 'user', function($stateParams, AssignmentService) {
 						return AssignmentService.loadAssignment($stateParams.assignmentId);
 					}],
 					$title: ['assignment', function(assignment) {

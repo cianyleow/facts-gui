@@ -47,12 +47,13 @@ define(['angular',
 						controller: 'base.controllers.toolbar-controller'
 					}
 				}, resolve: {
-					'user':  ['base.services.authentication', '$log', '$state', '$location', function(AuthenticationService, $log, $state, $location) {
+					'user':  ['base.services.authentication', '$log', '$state', '$location', '$q', function(AuthenticationService, $log, $state, $location, $q) {
 						return AuthenticationService.check().then(function(user) {
 							return user;
 						}, function(message) {
 							$log.info('User is not authenticated (' + message +'), redirecting to authorize state.');
 							$state.go('authorize', {redirect: $location.url()});
+							return $q.reject();
 						});
 					}]
 				}

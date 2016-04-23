@@ -31,7 +31,7 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 					}
 				},
 				resolve: {
-					course: ['$stateParams', 'facts.services.course', function($stateParams, CourseService) {
+					course: ['$stateParams', 'facts.services.course', 'user', function($stateParams, CourseService) {
 						return CourseService.loadCourse($stateParams.courseId);
 					}],
 					$title: ['course', function(course) {
