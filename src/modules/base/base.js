@@ -15,8 +15,11 @@ define(['angular',
 		// Redirect to correct dashboard based on user/user preferences.
 		$urlRouterProvider.when('/', ['base.services.token', 'base.services.user', '$state', function(TokenService, UserService, $state) {
 			var user = TokenService.userInfo();
-			var to = UserService.defaultState(user);
-			$state.go(to);
+			if(user === null || user.defaultState === null) {
+				$state.go('authorize');
+			} else {
+				$state.go(user.defaultState);
+			}
 		}]);
 
 		$urlRouterProvider.otherwise('/dashboard');
