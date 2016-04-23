@@ -13,7 +13,11 @@ define(['angular',
 	
 	base.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		// Redirect to correct dashboard based on user/user preferences.
-		$urlRouterProvider.when('/', '/dashboard');
+		$urlRouterProvider.when('/', ['base.services.token', 'base.services.user', '$state', function(TokenService, UserService, $state) {
+			var user = TokenService.userInfo();
+			var to = UserService.defaultState(user);
+			$state.go(to);
+		}]);
 
 		$urlRouterProvider.otherwise('/dashboard');
 		
@@ -42,7 +46,7 @@ define(['angular',
 						controller: 'base.controllers.toolbar-controller'
 					}
 				}, resolve: {
-					'user':  ['base.services.authentication', 'base.services.user', '$log', '$state', function(AuthenticationService, UserService, $log, $state) {
+					'user':  ['base.services.authentication', '$log', '$state', function(AuthenticationService, $log, $state) {
 						return AuthenticationService.check().then(function(user) {
 							return user;
 						}, function(message) {
