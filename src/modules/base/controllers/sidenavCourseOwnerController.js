@@ -1,9 +1,6 @@
 define([], function() {
 	'use strict';
-	return ['$scope', 'Restangular', function($scope, Restangular) {
-		var userSelf = Restangular.one('self');
-		
-		$scope.user = userSelf.get().$object;
+	return ['$scope', function($scope) {
 		
 		$scope.menu = [
 			{
@@ -34,7 +31,5 @@ define([], function() {
 		];
 		
 		$scope.currentPeriod = 'Spring 15/16';
-		
-		$scope.courses = userSelf.getList('courses').$object;
 	}];
 });
