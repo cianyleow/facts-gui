@@ -92,3 +92,11 @@ md-sidenav {
 md-card-content.login-error {
 	color: #F44336;
 }
+
+md-icon.positive {
+	color: #4CAF50;
+}
+
+md-icon.negative {
+	color: #F44336;
+}
