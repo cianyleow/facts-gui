@@ -8,6 +8,7 @@
 							<span>{{course.shortName}}: {{course.name}}</span>
 						</h2>
 						<span flex></span>
+						{{course.academicPeriod.name}}
 						<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.edit">
 							<md-icon>edit</md-icon>
 						</md-button>
@@ -55,10 +56,10 @@
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>Enrollments</span>
+							<span>Students</span>
 						</h2>
 						<span flex></span>
-						320 total
+						{{students.length}} total
 						<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.enrollments.manage">
 							<md-icon>settings</md-icon>
 						</md-button>
@@ -66,7 +67,12 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-
+						<md-chips ng-model="students" readonly="true">
+							<md-chip-template>
+								<strong>{{$chip.firstName}} {{$chip.lastName}}</strong>
+								<em>({{$chip.userName}})</em>
+							</md-chip-template>
+						</md-chips>
 					</md-content>
 				</md-card-content>
 			</md-card>

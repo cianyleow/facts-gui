@@ -5,6 +5,7 @@ define([], function() {
 		$scope.course = course.get().$object;
 		$scope.assignments = course.getList('assignments').$object;
 		$scope.courseOwners = course.getList('courseOwners').$object;
-		$scope.marker = course.getList('markers').$object;
+		$scope.markers = course.getList('markers').$object;
+		$scope.students = course.getList('students').$object;
 	}];
 });
