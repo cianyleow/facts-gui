@@ -16,21 +16,27 @@
 			</md-card-title-text>
 		</md-card-title>
 		<md-card-content>
-			<form name="authorizationForm">
+			<form name="authorizationForm" ng-submit="authorizationForm.$valid && authenticate(user)">
 				<div class="row">
 					<md-input-container class="md-block" flex>
 						<label>Username</label>
-						<input ng-model="user.username" type="text">
+						<input ng-model="user.username" type="text" name="username" required>
+						<div ng-messages="authorizationForm.username.$error">
+							<div ng-message="required">Username is required</div>
+						</div>
 					</md-input-container>
 				</div>
 				<div class="row">
 					<md-input-container class="md-block" flex>
 						<label>Password</label>
-						<input ng-model="user.password" type="password">
+						<input ng-model="user.password" type="password" name="password" required>
+						<div ng-messages="authorizationForm.password.$error">
+							<div ng-message="required">Password is required</div>
+						</div>
 					</md-input-container>
 				</div>
 				<div class="row">
-					<md-button ng-click="authenticate(user)" class="md-raised md-primary">Login</md-button>
+					<md-button type="submit" ng-disabled="!authorizationForm.$valid" class="md-raised md-primary">Login</md-button>
 				</div>
 			</form>
 		</md-card-content>
