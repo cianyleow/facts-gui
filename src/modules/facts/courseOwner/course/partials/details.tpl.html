@@ -3,7 +3,7 @@
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
-					<span>Course Details</span>
+					<span>{{course.shortName}}: {{course.name}}</span>
 				</h2>
 				<span flex></span>
 				<md-button class="md-icon-button" aria-label="Edit" ui-sref="base.app.courseOwner.courses.details.edit">
@@ -13,10 +13,7 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-			<strong>Course Name:</strong> {{course.name}} ({{course.shortName}})<br />
-			<strong>Course Owner:</strong> Dr. David Thomas<br />
-			<strong>Description:</strong> {{course.description}}<br />
-			<strong># Assignments:</strong> {{assignments.length}}
+				{{course.description}}
 			</md-content>
 		</md-card-content>
 	</md-card>
