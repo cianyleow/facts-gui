@@ -7,9 +7,25 @@
 			{{ $title }}
 		</h3>
 		<span flex></span>
-		<md-button class="md-icon-button" aria-label="Logout" ng-click="logout()">
-			<md-icon>power_settings_new</md-icon>
-		</md-button>
+		<md-menu md-position-mode="target-right target">
+			<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
+				<md-icon aria-label="More options">more_vert</md-icon>
+			</md-button>
+			<md-menu-content width="4">
+				<md-menu-item>
+					<md-button aria-label="User Details">
+						<md-icon md-menu-align-target>account_circle</md-icon>
+						{{userDetails}}
+					</md-button>
+				</md-menu-item>
+				<md-menu-item ng-repeat="action in actions">
+					<md-button ng-click="action.action($event)" aria-label="action.description">
+						<md-icon md-menu-align-target>{{action.icon}}</md-icon>
+						{{action.description}}
+					</md-button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
 	</div>
 	<md-subheader class="md-primary">
 		<ui-breadcrumbs displayname-property="data.displayName" template-url="src/modules/base/partials/breadcrumbs.tpl.html"></ui-breadcrumbs>

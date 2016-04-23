@@ -1,0 +1,35 @@
+<md-dialog aria-label="Role Change Dialog" flex-gt-xs="30" flex-xs ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Change Role</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close button">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-select ng-model="newRole">
+                    <md-option ng-value="role" ng-repeat="role in roles">{{role}}</md-option>
+                </md-select>
+                <div>
+                    Current Role: {{currentRole}}
+                </div>
+                <div>
+                    New Role: {{newRole}}
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-primary" ng-click="change(newRole)">
+                Change
+            </md-button>
+            <md-button ng-click="cancel()" style="margin-right:20px;">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
