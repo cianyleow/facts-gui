@@ -50,7 +50,7 @@
 							<h3>{{course.shortName}}: {{course.name}}</h3>
 							<p>{{course.description}}</p>
 						</a>
-						<md-button class="md-secondary" ui-sref="base.app.courses.details({courseId: course.courseId})">Enroll</md-button>
+						<md-button class="md-secondary" ng-click="enroll(course, $index, $event)">Enroll</md-button>
 					</md-list-item>
 				</md-list>
 			</md-content>
