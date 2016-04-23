@@ -7,7 +7,7 @@
 		<md-card-content ng-if="logout">
 			<md-icon>info</md-icon> Logged out successfully!
 		</md-card-content>
-		<md-card-content>
+		<md-card-content ng-if="redirect">
 			<md-icon>link</md-icon>Redirecting to {{redirect}} after login.
 		</md-card-content>
 		<md-card-title>
