@@ -5,6 +5,8 @@ define([], function() {
 		$scope.user = {};
 		
 		$scope.redirect = $stateParams.redirect;
+
+		$scope.logout = $stateParams.logout;
 		
 		$scope.authenticate = function(user) {
 			$scope.error = false;

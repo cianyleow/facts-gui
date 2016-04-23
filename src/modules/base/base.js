@@ -27,7 +27,10 @@ define(['angular',
 		$stateProvider
 			.state('authorize', {
 				url: '/authorize?redirect',
-				params: {'redirect': null},
+				params: {
+					'redirect': null,
+					'logout': false
+				},
 				templateUrl: 'src/modules/base/partials/authorization.tpl.html',
 				controller: 'base.controllers.authorization-controller'
 			})

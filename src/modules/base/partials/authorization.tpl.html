@@ -2,7 +2,13 @@
 	<md-card flex-xs="100" flex-gt-xs="20">
 		<img src="http://www.uq.edu.au/uqabroad/images/_partners/imperialcollegelondon.jpg" class="md-card-image">
 		<md-card-content class="login-error" ng-if="error">
-			Invalid login details. Please try again.
+			<md-icon>error</md-icon> Invalid login details. Please try again.
+		</md-card-content>
+		<md-card-content ng-if="logout">
+			<md-icon>info</md-icon> Logged out successfully!
+		</md-card-content>
+		<md-card-content>
+			<md-icon>link</md-icon>Redirecting to {{redirect}} after login.
 		</md-card-content>
 		<md-card-title>
 			<md-card-title-text>
@@ -10,7 +16,6 @@
 			</md-card-title-text>
 		</md-card-title>
 		<md-card-content>
-			<span ng-if="redirect">Redirecting to {{redirect}} after login.</span>
 			<form name="authorizationForm">
 				<div class="row">
 					<md-input-container class="md-block" flex>
