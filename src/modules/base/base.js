@@ -25,7 +25,22 @@ define(['angular',
 			})
 			.state('base', {
 				abstract: true,
-				templateUrl: 'src/modules/base/partials/framework.tpl.html'
+				templateUrl: 'src/modules/base/partials/framework.tpl.html',
+				resolve: {
+					'user':  ['base.services.user', '$log', '$http', '$state', function(UserService, $log, $http, $state) {
+						return $http.get('api/self').then(function(_user) {
+							UserService.setUser(_user);
+							return _user;
+						}, function(response) {
+							if(response.status === 401 || response.status === 403) {
+								$log.info('User is unauthorized, redirecting to authorize state.');
+								$state.go('authorize');
+							} else {
+								$log.error('Unexpected error from backend');
+							}
+						});
+					}]
+				}
 			})
 			.state('base.app', {
 				abstract: true,
