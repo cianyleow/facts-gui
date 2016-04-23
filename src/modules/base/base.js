@@ -12,9 +12,9 @@ define(['angular',
 	services.init(base);
 	
 	base.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-		// Always redirect to dashboard if unknown or base entry.
-		$urlRouterProvider.when('', '/dashboard');
+		// Redirect to correct dashboard based on user/user preferences.
 		$urlRouterProvider.when('/', '/dashboard');
+
 		$urlRouterProvider.otherwise('/dashboard');
 		
 		$stateProvider
@@ -25,22 +25,7 @@ define(['angular',
 			})
 			.state('base', {
 				abstract: true,
-				templateUrl: 'src/modules/base/partials/framework.tpl.html',
-				resolve: {
-					'user':  ['base.services.user', '$log', '$http', '$state', function(UserService, $log, $http, $state) {
-						return $http.get('api/self').then(function(_user) {
-							UserService.setUser(_user);
-							return _user;
-						}, function(response) {
-							if(response.status === 401 || response.status === 403) {
-								$log.info('User is unauthorized, redirecting to authorize state.');
-								$state.go('authorize');
-							} else {
-								$log.error('Unexpected error from backend');
-							}
-						});
-					}]
-				}
+				templateUrl: 'src/modules/base/partials/framework.tpl.html'
 			})
 			.state('base.app', {
 				abstract: true,
@@ -56,6 +41,15 @@ define(['angular',
 						templateUrl: 'src/modules/base/partials/toolbar.tpl.html',
 						controller: 'base.controllers.toolbar-controller'
 					}
+				}, resolve: {
+					'user':  ['base.services.authentication', 'base.services.user', '$log', '$state', function(AuthenticationService, UserService, $log, $state) {
+						return AuthenticationService.check().then(function(user) {
+							return user;
+						}, function(message) {
+							$log.info('User is not authenticated (' + message +'), redirecting to authorize state.');
+							$state.go('authorize');
+						});
+					}]
 				}
 			})
 			.state('base.app.courseOwner', {
