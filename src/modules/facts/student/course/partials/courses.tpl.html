@@ -13,12 +13,12 @@
 					<span><h3>No enrolled courses!</h3></span>
 				</span>
 				<md-list ng-show="enrolledCourses.length">
-					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in enrolledCourses">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in enrolledCourses" ui-sref="base.app.courses.details({courseId: course.courseId})">
 						<div class="md-list-item-text">
 							<h3>{{course.shortName}}: {{course.name}}</h3>
 							<p>{{course.description}}</p>
 						</div>
-						<md-button class="md-secondary" ui-sref="base.app.courses.details({courseId: course.courseId})">View Course</md-button>
+						<md-icon class="md-secondary" aria-label="Settings" ng-click="settings(course, $index, $event)">settings</md-icon>
 					</md-list-item>
 				</md-list>
 			</md-content>

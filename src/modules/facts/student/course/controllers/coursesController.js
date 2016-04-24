@@ -18,6 +18,62 @@ define([], function() {
 			});
 		});
 
+		$scope.settings = function(course, idx, event) {
+			var custom = $mdDialog.show({
+				controller: function($scope) {
+					$scope.course = course;
+
+					Restangular.one('self').one('enrollments', course.courseId).get().then(function(_enrollment) {
+						$scope.enrollment = _enrollment;
+						$scope.enrollmentLevel = {level: _enrollment.enrollmentLevel};
+					});
+
+					$scope.enrollmentLevels = [
+						{
+							id: 0,
+							level: 'NO_CREDIT',
+							description: 'Not for credit'
+						},
+						{
+							id: 1,
+							level: 'SUBMISSION_CREDIT',
+							description: 'Credit for Submissions'
+						},
+						{
+							id:2,
+							level: 'EXAM_CREDIT',
+							description: 'Credit for Exams'
+						}
+					];
+
+					$scope.save = function(enrollment, enrollmentLevel) {
+						enrollment.enrollmentLevel = enrollmentLevel.level;
+						Restangular.one('enrollments', enrollment.enrollmentId).customPUT(enrollment).then(function(_enrollment) {
+
+						}, function(error) {
+
+						});
+					};
+
+					$scope.unenroll = function(enrollment) {
+						Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
+
+						}, function(error) {
+
+						});
+					};
+
+					$scope.cancel = function() {
+						$mdDialog.cancel();
+					}
+				},
+				templateUrl: 'src/modules/facts/student/course/partials/settings.tpl.html',
+				parent: angular.element(document.body),
+				targetEvent: event,
+				clickOutsideToClose: true
+			});
+		};
+
 		$scope.enroll = function(course, idx, event) {
 			var confirm = $mdDialog.confirm()
 				.title('Enroll in ' + course.shortName)
