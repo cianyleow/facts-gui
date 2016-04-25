@@ -39,13 +39,6 @@ define([], function() {
 				}
 			},
 			{
-				icon: 'settings',
-				description: 'Settings',
-				action: function() {
-
-				}
-			},
-			{
 				icon: 'power_settings_new',
 				description: 'Logout',
 				action: function() {
