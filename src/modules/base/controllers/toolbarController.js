@@ -28,19 +28,21 @@ define([], function() {
 							targetEvent: targetEvent,
 							clickOutsideToClose: true
 						}
-					).then(function(newRole) {
-						console.log(newRole);
-						userInfo.currentRole = newRole;
-					}, function() {
+					).then(
+						function(newRole) {
+							console.log(newRole);
+							userInfo.currentRole = newRole;
+						}, function() {
 
-					});
+						}
+					);
 				}
 			},
 			{
 				icon: 'settings',
 				description: 'Settings',
 				action: function() {
-					alert('Settings!');
+					
 				}
 			},
 			{

@@ -19,7 +19,7 @@ define([], function() {
 		});
 
 		$scope.settings = function(course, idx, event) {
-			var custom = $mdDialog.show({
+			$mdDialog.show({
 				controller: function($scope) {
 					$scope.course = course;
 
@@ -48,9 +48,9 @@ define([], function() {
 
 					$scope.save = function(enrollment, enrollmentLevel) {
 						enrollment.enrollmentLevel = enrollmentLevel.level;
-						Restangular.one('enrollments', enrollment.enrollmentId).customPUT(enrollment).then(function(_enrollment) {
+						Restangular.one('enrollments', enrollment.enrollmentId).customPUT(enrollment).then(function() {
 
-						}, function(error) {
+						}, function() {
 
 						});
 					};
@@ -58,14 +58,14 @@ define([], function() {
 					$scope.unenroll = function(enrollment) {
 						Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
 
-						}, function(error) {
+						}, function() {
 
 						});
 					};
 
 					$scope.cancel = function() {
 						$mdDialog.cancel();
-					}
+					};
 				},
 				templateUrl: 'src/modules/facts/student/course/partials/settings.tpl.html',
 				parent: angular.element(document.body),
@@ -77,18 +77,18 @@ define([], function() {
 		$scope.enroll = function(course, idx, event) {
 			var confirm = $mdDialog.confirm()
 				.title('Enroll in ' + course.shortName)
-				.textContent('Are you sure you want to enroll in ' + course.shortName + ": " + course.name + '?')
+				.textContent('Are you sure you want to enroll in ' + course.shortName + ': ' + course.name + '?')
 				.ariaLabel('Enroll in course')
 				.targetEvent(event)
 				.ok('Enroll')
 				.cancel('Cancel');
 			$mdDialog.show(confirm).then(function() {
-				Restangular.one('courses', course.courseId).all('enrollments').post().then(function(_enrollment) {
+				Restangular.one('courses', course.courseId).all('enrollments').post().then(function() {
 					$scope.enrolledCourses.push(course);
 					$scope.allCourses[idx].enrolled = true;
-					$mdToast.show($mdToast.simple().textContent('Enrolled in ' + course.shortName + ": " + course.name).position('top right'));
-				}, function(error) {
-					$mdToast.show($mdToast.simple().textContent('Failed to enroll in ' + course.shortName + ": " + course.name).position('top right'));
+					$mdToast.show($mdToast.simple().textContent('Enrolled in ' + course.shortName + ': ' + course.name).position('top right'));
+				}, function() {
+					$mdToast.show($mdToast.simple().textContent('Failed to enroll in ' + course.shortName + ': ' + course.name).position('top right'));
 				});
 			});
 		};

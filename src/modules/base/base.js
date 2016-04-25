@@ -52,7 +52,8 @@ define(['angular',
 						templateUrl: 'src/modules/base/partials/toolbar.tpl.html',
 						controller: 'base.controllers.toolbar-controller'
 					}
-				}, resolve: {
+				},
+				resolve: {
 					'user':  ['base.services.authentication', '$log', '$state', '$location', '$q', function(AuthenticationService, $log, $state, $location, $q) {
 						return AuthenticationService.check().then(function(user) {
 							return user;

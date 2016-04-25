@@ -13,7 +13,7 @@ define([], function() {
                     Restangular.one('files', $scope.fileId).one('link').get().then(function(fileLink) {
                         $window.open('api/files/' + fileLink.link + '/download');
                     });
-                }
+                };
             }]
         };
     }];

@@ -29,6 +29,6 @@ define([], function() {
 
 		$scope.courses = Restangular.one('self').getList('marked').$object;
 
-		$scope.baselink = 'base.app.marker.courses.details'
+		$scope.baselink = 'base.app.marker.courses.details';
 	}];
 });
