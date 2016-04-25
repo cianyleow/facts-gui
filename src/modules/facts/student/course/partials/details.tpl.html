@@ -3,43 +3,70 @@
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
-					<span>Course Details</span>
+					<span>{{course.shortName}}: {{course.name}}</span>
 				</h2>
+				<span flex></span>
+				<span ng-if="!enrollment.edit && !enrollment.failed">{{enrollmentLevels[enrollment.enrollmentLevel].value}}</span>
+				<span ng-if="!enrollment.edit && !enrollment.failed">
+					<md-button class="md-icon-button" ng-click="enrollment.edit = true">
+						<md-icon aria-label="Save enrollment">edit</md-icon>
+					</md-button>
+				</span>
+				<md-select aria-label="Enrollment level select" ng-model="enrollment._enrollmentLevel" ng-if="enrollment.edit" md-on-close="saveEnrollment(enrollment)">
+					<md-option ng-value="enrollmentLevel.key" ng-repeat="enrollmentLevel in enrollmentLevels">{{enrollmentLevel.value}}</md-option>
+				</md-select>
+				<span ng-if="enrollment.edit">
+					<md-button class="md-icon-button" ng-click="cancelEnrollmentEdit(enrollment)">
+						<md-icon aria-label="Save enrollment">close</md-icon>
+					</md-button>
+				</span>
+				<span ng-if="enrollment.failed" class="md-caption">
+					Failed to change enrollment level <md-icon aria-label="Enrollment change error">error</md-icon>
+				</span>
+				</div>
 			</div>
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-			<strong>Course Name:</strong> {{course.name}} ({{course.shortName}})<br />
-			<strong>Course Owner:</strong> Dr. David Thomas<br />
-			<strong>Description:</strong> {{course.description}}<br />
-			<strong># Assignments:</strong> {{assignments.length}}
+				{{course.description}}
+				<md-list>
+					<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners">
+						<div class="md-list-item-text">
+							<h3>{{courseOwner.title}} {{courseOwner.firstName}} {{courseOwner.lastName}} ({{courseOwner.userName}})</h3>
+							<p>Course Owner</p>
+						</div>
+					</md-list-item>
+				</md-list>
 			</md-content>
 		</md-card-content>
 	</md-card>
 	<md-card flex>
-	<md-toolbar>
+		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
-					<span>Assignments</span>
+					<span>Active Assignments</span>
 				</h2>
 				<span flex></span>
-				<md-button class="md-raised" aria-label="View All" ui-sref="base.app.courses.details.assignments">
-					View All
+				{{assignments.length}} total
+				<md-button class="md-icon-button" aria-label="View All" ui-sref="base.app.courses.details.assignments">
+					<md-tooltip>
+						View all assignments
+					</md-tooltip>
+					<md-icon aria-label="View list">view_list</md-icon>
 				</md-button>
 			</div>
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
 				<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
-					<span><h3>No assignments! {{assignments}}</h3></span>
+					<span><h3>No assignments!</h3></span>
 				</span>
 				<md-list ng-show="assignments.length">
-					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments" ui-sref="base.app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">
 						<div class="md-list-item-text">
 							<h3>{{assignment.name}}</h3>
 							<p><due-date date-string="assignment.dueTime"></due-date></p>
 						</div>
-						<md-button class="md-secondary" ui-sref="base.app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
 					</md-list-item>
 				</md-list>
 			</md-content>
