@@ -50,7 +50,8 @@ module.exports = function (grunt) {
                             'bootstrap.prod.js',
                             'src/modules/**/*.tpl.html',
                             'src/bower_components/**',
-                            'src/flatify/**'
+                            'src/flatify/**',
+                            'src/img/**'
                         ]
                     }
                 ]
