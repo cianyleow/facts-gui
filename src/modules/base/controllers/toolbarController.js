@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return ['$scope', 'base.services.authentication', '$log', '$mdSidenav', 'base.services.token', '$mdDialog', function($scope, AuthenticationService, $log, $mdSidenav, TokenService, $mdDialog) {
+	return ['$scope', '$state', 'base.services.authentication', '$log', '$mdSidenav', 'base.services.token', '$mdDialog', function($scope, $state, AuthenticationService, $log, $mdSidenav, TokenService, $mdDialog) {
 		var userInfo = TokenService.userInfo();
 
 		$scope.userDetails = userInfo.userDetails.firstName + ' ' + userInfo.userDetails.lastName + ' (' + userInfo.userDetails.userName + ')';
@@ -42,7 +42,7 @@ define([], function() {
 				icon: 'settings',
 				description: 'Settings',
 				action: function() {
-					
+
 				}
 			},
 			{
@@ -51,6 +51,7 @@ define([], function() {
 				action: function() {
 					$log.info('Logging out user');
 					AuthenticationService.logout();
+					$state.go('authorize', {logout: true});
 				}
 			}
 		];
