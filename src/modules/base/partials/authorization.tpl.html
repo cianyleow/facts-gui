@@ -20,7 +20,7 @@
 				<div class="row">
 					<md-input-container class="md-block" flex>
 						<label>Username</label>
-						<input ng-model="user.username" type="text" name="username" required>
+						<input ng-model="user.username" type="text" name="username" required auto-focus="true">
 						<div ng-messages="authorizationForm.username.$error">
 							<div ng-message="required">Username is required</div>
 						</div>
