@@ -1,0 +1,6 @@
+<div layout="row" class="search-filter" ng-class="{open: searchOpen, close: !searchOpen}">
+    <md-button class="md-icon-button" ng-click="toggleSearch()">
+        <md-icon aria-label="Search button">search</md-icon>
+    </md-button>
+    <input type="text" ng-model="term" ng-show="searchOpen" auto-focus="searchOpen" ng-blur="closeSearch()">
+</div>

@@ -69,12 +69,7 @@
 					<span>All Courses</span>
 				</h2>
 				<span flex></span>
-				<div layout="row" class="search-filter" ng-class="{open: search, close: !search}">
-					<md-button class="md-icon-button" ng-click="search = !search">
-						<md-icon aria-label="Search button">search</md-icon>
-					</md-button>
-					<input type="text" ng-model="searchTerm" ng-show="search">
-				</div>
+				<search-filter term="searchTerm"></search-filter>
 			</div>
 		</md-toolbar>
 		<md-card-content>
