@@ -40,5 +40,28 @@ define([], function() {
 				});
 			});
 		};
+
+		$scope.unenroll = function(enrollment, idx, event) {
+			var confirm = $mdDialog.confirm()
+				.title('Unenroll from ' + enrollment.course.shortName)
+				.textContent('Are you sure you want to unenroll from ' + enrollment.course.shortName + ': ' + enrollment.course.name + '?')
+				.ariaLabel('Unenroll from course')
+				.targetEvent(event)
+				.ok('Unenroll')
+				.cancel('Cancel');
+			$mdDialog.show(confirm).then(function() {
+				enrollment.unenrolling = true;
+				enrollment.failed = false;
+				Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
+					$scope.enrollments.splice(idx, 1);
+					$scope.allCourses.push(enrollment.course);
+					$mdToast.show($mdToast.simple().textContent('Unenrolled from ' + enrollment.course.shortName + ': ' + enrollment.course.name).position('top right'));
+				}, function() {
+					enrollment.unenrolling = false;
+					enrollment.failed = true;
+					$mdToast.show($mdToast.simple().textContent('Failed to unenroll from ' + enrollment.course.shortName + ': ' + enrollment.course.name).position('top right'));
+				});
+			});
+		};
 	}];
 });
