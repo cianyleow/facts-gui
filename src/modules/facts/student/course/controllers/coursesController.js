@@ -18,7 +18,7 @@ define([], function() {
 			});
 		});
 
-		$scope.enroll = function(course, idx, event) {
+		$scope.enroll = function(course, event) {
 			var confirm = $mdDialog.confirm()
 				.title('Enroll in ' + course.shortName)
 				.textContent('Are you sure you want to enroll in ' + course.shortName + ': ' + course.name + '?')
@@ -30,7 +30,7 @@ define([], function() {
 				course.enrolling = true;
 				course.failed = false;
 				Restangular.one('courses', course.courseId).all('enrollments').post().then(function(_enrollment) {
-					$scope.allCourses.splice(idx, 1);
+					$scope.allCourses.splice($scope.allCourses.indexOf(course), 1);
 					$scope.enrollments.push(_enrollment);
 					$mdToast.show($mdToast.simple().textContent('Enrolled in ' + course.shortName + ': ' + course.name).position('top right'));
 				}, function() {
@@ -41,7 +41,7 @@ define([], function() {
 			});
 		};
 
-		$scope.unenroll = function(enrollment, idx, event) {
+		$scope.unenroll = function(enrollment, event) {
 			var confirm = $mdDialog.confirm()
 				.title('Unenroll from ' + enrollment.course.shortName)
 				.textContent('Are you sure you want to unenroll from ' + enrollment.course.shortName + ': ' + enrollment.course.name + '?')
@@ -53,7 +53,7 @@ define([], function() {
 				enrollment.unenrolling = true;
 				enrollment.failed = false;
 				Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
-					$scope.enrollments.splice(idx, 1);
+					$scope.enrollments.splice($scope.enrollments.indexOf(enrollment), 1);
 					$scope.allCourses.push(enrollment.course);
 					$mdToast.show($mdToast.simple().textContent('Unenrolled from ' + enrollment.course.shortName + ': ' + enrollment.course.name).position('top right'));
 				}, function() {
