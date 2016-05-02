@@ -16,7 +16,7 @@ define([], function() {
 		};
 
 		$scope.suppliedFileDialog = function(targetEvent) {
-			DialogService.showCustomDialog(function($scope, $mdDialog) {
+			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
 				$scope.suppliedFile = {};
 				$scope.cancel = function() {
 					$mdDialog.cancel();
@@ -25,7 +25,7 @@ define([], function() {
 				$scope.check = function(suppliedFile) {
 					$mdDialog.hide(suppliedFile);
 				};
-			}, 'src/modules/facts/courseOwner/course/assignment/partials/new.suppliedFileDialog.tpl.html', angular.element(document.body), targetEvent,
+			}], 'src/modules/facts/courseOwner/course/assignment/partials/new.suppliedFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(suppliedFile) {
 				$scope.assignment.suppliedFiles.push(suppliedFile);
 			}, function() {
@@ -33,7 +33,7 @@ define([], function() {
 			});
 		};
 		$scope.markComponentDialog = function(targetEvent) {
-			DialogService.showCustomDialog(function($scope, $mdDialog) {
+			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
 				$scope.markComponent = {};
 				$scope.cancel = function() {
 					$mdDialog.cancel();
@@ -42,7 +42,7 @@ define([], function() {
 				$scope.check = function(markComponent) {
 					$mdDialog.hide(markComponent);
 				};
-			}, 'src/modules/facts/courseOwner/course/assignment/partials/new.markComponentDialog.tpl.html', angular.element(document.body), targetEvent,
+			}], 'src/modules/facts/courseOwner/course/assignment/partials/new.markComponentDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(markComponent) {
 				$scope.assignment.markComponents.push(markComponent);
 			}, function() {
@@ -50,7 +50,7 @@ define([], function() {
 			});
 		};
 		$scope.requiredFileDialog = function(targetEvent) {
-			DialogService.showCustomDialog(function($scope, $mdDialog) {
+			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
 				$scope.fileName = '';
 				$scope.requiredFile = {maxFileSize: 1048576};
 				$scope.$watch('fileName', function(newValue) {
@@ -69,7 +69,7 @@ define([], function() {
 				$scope.check = function(requiredFile) {
 					$mdDialog.hide(requiredFile);
 				};
-			}, 'src/modules/facts/courseOwner/course/assignment/partials/new.requiredFileDialog.tpl.html', angular.element(document.body), targetEvent,
+			}], 'src/modules/facts/courseOwner/course/assignment/partials/new.requiredFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(requiredFile) {
 				$scope.assignment.requiredFiles.push(requiredFile);
 			}, function() {
