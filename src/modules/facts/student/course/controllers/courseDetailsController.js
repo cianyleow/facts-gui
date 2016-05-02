@@ -30,7 +30,7 @@ define([], function() {
 			enrollment.edit = false;
 		};
 
-		$scope.saveEnrollment = function(enrollment) {
+		$scope.saveEnrollment = function(enrollment, targetEvent) {
 			if(enrollment.enrollmentLevel === enrollment._enrollmentLevel) {
 				// Do nothing, just return
 				return;
@@ -39,7 +39,7 @@ define([], function() {
 				.title('Change enrollment level for ' + enrollment.course.shortName)
 				.textContent('Change your enrollment level in ' + enrollment.course.shortName + ': ' + enrollment.course.name + ' from ' + $scope.enrollmentLevels[enrollment.enrollmentLevel].value + ' to ' + $scope.enrollmentLevels[enrollment._enrollmentLevel].value + '?')
 				.ariaLabel('Change enrollment')
-				.targetEvent(event)
+				.targetEvent(targetEvent)
 				.ok('Change')
 				.cancel('Cancel');
 			$mdDialog.show(confirm).then(function() {
@@ -47,7 +47,7 @@ define([], function() {
 				enrollment.failed = false;
 				var alteredEnrollment = {
 					enrollmentLevel: enrollment._enrollmentLevel
-				}
+				};
 				Restangular.one('enrollments', enrollment.enrollmentId).customPUT(alteredEnrollment).then(function(_enrollment) {
 					enrollment.changing = false;
 					enrollment.edit = false;

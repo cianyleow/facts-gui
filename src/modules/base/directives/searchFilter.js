@@ -7,7 +7,7 @@ define([], function() {
             scope: {
                 term: '='
             },
-            link: function(scope, element, attr) {
+            link: function(scope) {
                 scope.searchOpen = false;
                 scope.toggleSearch = function() {
                     scope.term = '';

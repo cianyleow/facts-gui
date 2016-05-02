@@ -23,12 +23,5 @@ define(['baseTestSetup'], function(baseTestSetup) {
             expect(scope.markComponents).toBeDefined();
             expect(scope.requiredFiles).toBeDefined();
         }));
-
-        it('Should make call to server to get download link with associated fileId', inject(function($httpBackend) {
-            $httpBackend.flush();
-            scope.download(5);
-            $httpBackend.expectGET(/^api\/files\/5\/link/);
-            $httpBackend.flush();
-        }));
     });
 });

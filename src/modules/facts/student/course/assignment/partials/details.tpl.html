@@ -21,7 +21,7 @@
 									<h3>{{suppliedFile.name}}.{{suppliedFile.extension}} ({{suppliedFile.size | bytes}})</h3>
 									<p>{{suppliedFile.contentType}}</p>
 								</div>
-								<md-icon class="md-secondary" aria-label="Download supplied file" ng-click="download(suppliedFile.fileId)">file_download</md-icon>
+								<download-button class="md-secondary" file-id="suppliedFile.fileId"></download-button>
 							</md-list-item>
 						</md-list>
 					</md-content>

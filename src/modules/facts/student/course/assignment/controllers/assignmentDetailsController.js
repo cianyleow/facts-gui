@@ -11,11 +11,5 @@ define([], function() {
 			$scope.markComponents = data;
 			$scope.markComponentData = PieChartService.getPieChartLines(data);
 		});
-		
-		$scope.download = function(fileId) {
-			Restangular.one('files', fileId).one('link').get().then(function(fileLink) {
-				$window.open('http://localhost:8080/files/' + fileLink.link + '/download');
-			});
-		};
 	}];
 });

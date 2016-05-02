@@ -6,7 +6,7 @@ define([], function() {
             scope: {
                 autoFocus: '='
             },
-            link: function(scope, element, attr) {
+            link: function(scope, element) {
                 scope.$watch('autoFocus', function(autoFocus) {
                     if(autoFocus) {
                         $timeout(function() {

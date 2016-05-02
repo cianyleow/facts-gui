@@ -21,7 +21,7 @@
 										<h3>{{submissionFile.name}}.{{submissionFile.extension}} ({{submissionFile.size | bytes}})</h3>
 										<p>Hash: {{submissionFile.hash}}</p>
 									</div>
-									<md-icon class="md-secondary" aria-label="Download submission file" ng-click="download(submissionFile.fileId)">file_download</md-icon>
+									<download-button file-id="submissionFile.fileId"></download-button>
 								</md-list-item>
 							</md-list>			
 						</md-content>
