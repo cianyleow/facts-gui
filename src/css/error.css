@@ -1,0 +1,10 @@
+.error .icon md-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #C62828;
+}
+.error .message {
+    line-height: 48px;
+    color: #424242;
+}

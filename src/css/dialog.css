@@ -1,0 +1,28 @@
+.dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -65px;
+    margin-left: -150px;
+    width: 300px;
+    height: auto;
+    background: #FFF;
+    z-index: 101;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    opacity: 1;
+}
+.dialog button.cancel {
+    margin-top: 10px !important;
+}
+.overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.6;
+    z-index: 100;
+}

@@ -1,0 +1,23 @@
+.slide.ng-enter {
+    transition: max-height 3s ease-out;
+    max-height: 0;
+    overflow: hidden;
+}
+.slide.ng-enter-active {
+    max-height: 500px;
+}
+
+.fade.ng-enter {
+    transition: opacity 0.25s linear;
+    opacity: 0;
+}
+.fade.ng-enter-active {
+    opacity: 1;
+}
+.fade.ng-leave {
+    transition: opacity 0.25s linear;
+    opacity: 1;
+}
+.fade.ng-leave-active {
+    opacity: 0;
+}
