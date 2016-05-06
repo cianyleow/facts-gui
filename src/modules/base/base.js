@@ -26,7 +26,7 @@ define(['angular',
 		
 		$stateProvider
 			.state('authorize', {
-				url: '/authorize?redirect',
+				url: '/authorize',
 				params: {
 					'redirect': null,
 					'logout': false
