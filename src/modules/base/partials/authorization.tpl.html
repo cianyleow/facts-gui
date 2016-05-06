@@ -1,15 +1,15 @@
 <div layout="row" layout-align="center center">
 	<md-card flex-xs="100" flex-gt-xs="20">
 		<img src="src/img/login-bg.jpg" class="md-card-image">
-		<md-card-content class="login-error" ng-if="error">
-			<md-icon>error</md-icon> Invalid login details. Please try again.
+		<md-card-content ng-repeat="state in states" class="top-box" ng-show="state.enabled" layout="row">
+			<div class="icon">
+				<md-icon class="info">{{state.icon}}</md-icon>
+			</div>
+			<div class="message" flex>
+				{{state.message}}
+			</div>
 		</md-card-content>
-		<md-card-content ng-if="logout">
-			<md-icon>info</md-icon> Logged out successfully!
-		</md-card-content>
-		<md-card-content ng-if="redirect">
-			<md-icon>link</md-icon>Redirecting to {{redirect}} after login.
-		</md-card-content>
+
 		<md-card-title>
 			<md-card-title-text>
 				<span class="md-headline">FACTS Login</span>
@@ -35,8 +35,16 @@
 						</div>
 					</md-input-container>
 				</div>
-				<div class="row">
+				<div layout="row">
 					<md-button type="submit" ng-disabled="!authorizationForm.$valid" class="md-raised md-primary">Login</md-button>
+					<div layout="row" class="login-error" ng-if="error">
+						<div class="icon">
+							<md-icon class="error">error</md-icon>
+						</div>
+						<div class="message">
+							Invalid login details.
+						</div>
+					</div>
 				</div>
 			</form>
 		</md-card-content>

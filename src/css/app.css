@@ -23,6 +23,20 @@ a {
 	text-decoration: none;
 }
 
+.login-error {
+	line-height: 48px;
+	font-size: 12px;
+}
+
+.login-error div.message {
+	padding-left: 5px;
+}
+
+.top-box div.message {
+	padding-left: 5px;
+	line-height: 25px;
+}
+
 .breadcrumb {
 	margin: 0px;
 	padding: 8px 15px;
