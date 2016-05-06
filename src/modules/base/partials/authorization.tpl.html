@@ -37,7 +37,7 @@
 				</div>
 				<div layout="row">
 					<md-button type="submit" ng-disabled="!authorizationForm.$valid" class="md-raised md-primary">Login</md-button>
-					<div layout="row" class="login-error" ng-if="error">
+					<div layout="row" class="login-error" shake-on="attempts" ng-if="error">
 						<div class="icon">
 							<md-icon class="error">error</md-icon>
 						</div>
