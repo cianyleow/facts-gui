@@ -138,12 +138,11 @@
 					<span><h3>No open assignments!</h3></span>
 				</span>
 						<md-list ng-show="assignments.length">
-							<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments">
+							<md-list-item class="md-2-line" ng-repeat="assignment in assignments" ui-sref="base.app.courseOwner.courses.details.assignments.details({assignmentId: assignment.assignmentId})">
 								<div class="md-list-item-text">
 									<h3>{{assignment.name}}</h3>
 									<p><due-date date-string="assignment.dueTime"></due-date></p>
 								</div>
-								<md-button class="md-secondary" ui-sref="base.app.courseOwner.courses.details.assignments.details({assignmentId: assignment.assignmentId})">View Assignment</md-button>
 							</md-list-item>
 						</md-list>
 					</md-content>
