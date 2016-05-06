@@ -4,9 +4,12 @@ define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-tit
 	var configFn = ['ui.router', 'md.data.table', 'ngFileUpload', 'base', 'facts', 'restangular', 'ngMaterial', 'angularUtils.directives.uiBreadcrumbs', 'ui.router.title', 'n3-pie-chart', 'ngMessages'];
 	var app = angular.module('app', configFn);
 	
-	app.config(['RestangularProvider', '$locationProvider', '$httpProvider',
-		function(RestangularProvider, $locationProvider, $httpProvider) {
+	app.config(['RestangularProvider', '$locationProvider', '$httpProvider', '$mdThemingProvider',
+		function(RestangularProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
 			$locationProvider.html5Mode(true).hashPrefix('!');
+
+			$mdThemingProvider.theme('success-toast');
+			$mdThemingProvider.theme('error-toast');
 			
 			RestangularProvider.setBaseUrl('api');
 			

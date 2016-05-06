@@ -1,0 +1,9 @@
+md-toast.md-success-toast-theme div.md-toast-content {
+    background-color: #1B5E20 !important;
+    color: #FFFFFF;
+}
+
+md-toast.md-error-toast-theme div.md-toast-content {
+    background-color: #B71C1C !important;
+    color: #FFFFFF;
+}
