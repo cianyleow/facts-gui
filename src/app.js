@@ -21,7 +21,7 @@ define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-tit
 						return config;
 					},
                     responseError: function(response) {
-                        if(response.status === 401 || response.status === 403) {
+                        if(response.config.url != 'api/login' && (response.status === 401 || response.status === 403)) {
 							$injector.get('base.services.token').clear();
                             $injector.get('$state').transitionTo('authorize');
                         }
