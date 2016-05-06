@@ -6,14 +6,11 @@
 					<span>New Assignment<span ng-show="assignment.name"> - {{assignment.name}}</span></span>
 				</h2>
 				<span flex></span>
-				<md-button class="md-raised" aria-label="Review new assignment" ng-click="review(assignment)">
-					Review Assignment
-				</md-button>
 			</div>
 		</md-toolbar>
 		<md-card-content class="tab-with-fab">
 			<md-content layout-padding>
-				<form>
+				<form ng-submit="review(assignment)" name="newAssignmentForm">
 					<md-button ng-class="{ visible: selectedTab==1 }" class="md-fab md-primary md-fab-bottom-right" ng-click="suppliedFileDialog($event)" aria-label="Add New Supplied File">+</md-button>
 					<md-button ng-class="{ visible: selectedTab==2 }" class="md-fab md-primary md-fab-bottom-right" ng-click="markComponentDialog($event)" aria-label="Add New Mark Component">+</md-button>
 					<md-button ng-class="{ visible: selectedTab==3 }" class="md-fab md-primary md-fab-bottom-right" ng-click="requiredFileDialog($event)" aria-label="Add New Required File">+</md-button>
@@ -24,20 +21,37 @@
 									<label>
 										Assignment Name
 									</label>
-									<input ng-model="assignment.name">
+									<input ng-model="assignment.name" name="name" required>
+									<div ng-messages="newAssignmentForm.name.$error">
+										<div ng-message="required">Assignment name is required.</div>
+									</div>
 								</md-input-container>
 								<div layout-gt-xs="row">
 									<md-datepicker ng-model="assignment.openTime" md-placeholder="Open time"></md-datepicker>
-									<md-datepicker ng-model="assignment.dueTime" md-placeholder="Due time"></md-datepicker>
+									<div layout="column">
+										<md-datepicker ng-model="assignment.dueTime" required md-placeholder="Due time *" name="dueTime" md-min-date="assignment.openTime"></md-datepicker>
+										<style type="text/css">
+											.validation-messages {
+												font-size: 12px;
+												color: #dd2c00;
+												margin: 10px 0 0 25px;
+											}
+										</style>
+										<div class="validation-messages" ng-messages="newAssignmentForm.dueTime.$error">
+											<div ng-message="valid">The entered date is invalid.</div>
+											<div ng-message="required">Due date is required.</div>
+										</div>
+									</div>
+
 								</div>
 								<md-input-container class="md-block">
-									<label>Description (optional)</label>
+									<label>Description</label>
 									<textarea ng-model="assignment.description" md-maxlength="255" rows="5" md-select-on-focus style="height: 147px;"></textarea>
 								</md-input-container>
 								<md-checkbox ng-model="assignment.groupBased" aria-label="Is Group based">Group Based</md-checkbox>
 							</md-content>
 						</md-tab>
-						<md-tab label="Supplied Files">
+						<md-tab label="Supplied Files{{assignment.suppliedFiles.length ? ' (' + assignment.suppliedFiles.length + ')' : ''}}">
 							<md-content class="md-padding">
 								<span layout="row" ng-show="assignment.suppliedFiles.length == 0" layout-align="center center" flex>
 									<span><h2>No supplied files</h2></span>
@@ -53,7 +67,7 @@
 								</md-list>
 							</md-content>
 						</md-tab>
-						<md-tab label="Mark Components">
+						<md-tab label="Mark Components{{assignment.markComponents.length ? ' (' + assignment.markComponents.length + ')' : ''}}">
 							<md-content class="md-padding">
 								<span layout="row" ng-show="assignment.markComponents.length == 0" layout-align="center center" flex>
 									<span><h2>No mark components</h2></span>
@@ -64,12 +78,12 @@
 											<h3>{{ markComponent.name }} ({{ markComponent.maxMark }} marks)</h3>
 											<p>{{ markComponent.description}} </p>
 										</div>
-										<md-icon class="md-secondary" ng-click="removeLine(assignment.markComponent, $index)" aria-label="Remove mark component">remove_circle_outline</md-icon>
+										<md-icon class="md-secondary" ng-click="removeLine(assignment.markComponents, $index)" aria-label="Remove mark component">remove_circle_outline</md-icon>
 									</md-list-item>
 								</md-list>
 							</md-content>
 						</md-tab>
-						<md-tab label="Required Files">
+						<md-tab label="Required Files{{assignment.requiredFiles.length ? ' (' + assignment.requiredFiles.length + ')' : ''}}">
 							<md-content class="md-padding">
 								<span layout="row" ng-show="assignment.requiredFiles.length == 0" layout-align="center center" flex>
 									<span><h2>No required files</h2></span>
@@ -91,6 +105,9 @@
 							</md-content>
 						</md-tab>
 					</md-tabs>
+					<md-button type="submit" class="md-raised md-primary" ng-disabled="!newAssignmentForm.$valid" aria-label="Review new assignment">
+						Review Assignment
+					</md-button>
 				</form>
 			</md-content>
 		</md-card-content>

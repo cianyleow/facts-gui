@@ -6,6 +6,14 @@ define([], function() {
 
 		$scope.reviewing = false;
 
+		$scope.$watch('assignment.openTime', function(newValue, oldValue) {
+			if(oldValue != newValue) {
+				if(newValue > $scope.assignment.dueTime) {
+					$scope.assignment.dueTime = newValue;
+				}
+			}
+		});
+
 		$scope.review = function(assignment) {
 			AssignmentService.putAssignmentForReview(assignment);
 			$state.go('base.app.courseOwner.courses.details.assignments.new.review');
