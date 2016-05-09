@@ -6,15 +6,15 @@
 					<span>Review Assignment<span ng-show="assignment.name"> - {{assignment.name}}</span></span>
 				</h2>
 				<span flex></span>
-				<md-button class="md-raised" aria-label="Review new assignment" ng-click="create(assignment)" ng-disabled="uploading">
+				<md-button class="md-raised" aria-label="Review new assignment" ng-click="create(assignment, $event)" ng-disabled="uploading">
 					Create Assignment
 				</md-button>
 			</div>
 		</md-toolbar>
 		<md-card-content ng-if="_assignment" class="slide">
-			<div class="error" layout="row">
+			<div layout="row">
 				<div class="icon">
-					<md-icon>check_circle</md-icon>
+					<md-icon class="positive">check_circle</md-icon>
 				</div>
 				<div class="message">
 					<span>Assignment created successfully, <countdown-action action-phrase="redirecting" seconds="3" action="action" start="uploaded"></countdown-action></span>
@@ -22,9 +22,9 @@
 			</div>
 		</md-card-content>
 		<md-card-content ng-if="error" class="slide error">
-			<div class="error" layout="row">
+			<div layout="row">
 				<div class="icon">
-					<md-icon>warning</md-icon>
+					<md-icon class="error">warning</md-icon>
 				</div>
 				<div class="message">
 					<span>{{error.message}}</span>
@@ -32,15 +32,6 @@
 			</div>
 		</md-card-content>
 		<md-card-content ng-if="!_assignment">
-			<div class="overlay" ng-if="uploading">
-			</div>
-			<div class="dialog fade" ng-if="uploading">
-				<h3>Uploading Assignment...</h3>
-				<md-progress-linear md-mode="indeterminate"></md-progress-linear>
-				<md-button class="cancel md-raised md-icon-button" ng-click="cancel(canceler)">
-					<md-icon>close</md-icon>
-				</md-button>
-			</div>
 			<div layout="row" layout-xs="column">
 				<div flex-xs flex-gt-xs="70" layout="column">
 					<md-card>

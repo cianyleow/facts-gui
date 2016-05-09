@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'base.services.piechart', 'facts.services.assignment', function($scope, Restangular, $state, $stateParams, $q, FileService, PieChartService, AssignmentService) {
+	return['$scope', 'base.services.dialog', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'base.services.piechart', 'facts.services.assignment', function($scope, DialogService, Restangular, $state, $stateParams, $q, FileService, PieChartService, AssignmentService) {
 		if(!AssignmentService.hasAssignmentForReview()) {
 			$state.go('base.app.courseOwner.courses.details.assignments.new');
 		}
@@ -8,9 +8,13 @@ define([], function() {
 		$scope.markComponentData = PieChartService.getPieChartLines($scope.assignment.markComponents);
 		$scope.markComponentOptions = {thickness: 30};
 		
-		$scope.create = function(assignment) {
+		$scope.create = function(assignment, targetEvent) {
 			$scope.error = undefined;
-			$scope.uploading = true;
+
+			var progress = {
+				determinate: false
+			};
+			DialogService.showProgressDialog('Submission Upload', angular.element(document.body), targetEvent, function() {console.log('Cancelled');}, progress);
 
 			$scope.uploaded = false;
 
@@ -27,12 +31,12 @@ define([], function() {
 			});
 			
 			Restangular.one('courses', $stateParams.courseId).all('assignments').withHttpConfig({timeout: $scope.canceler.promise, transformRequest: angular.identity}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_assignment) {
-				$scope.uploading = false;
+				DialogService.cancelActiveDialog();
 				$scope.uploaded = true;
 				$scope._assignment = _assignment;
 				$scope.canceler.reject();
 			}, function(_error) {
-				$scope.uploading = false;
+				DialogService.cancelActiveDialog();
 				$scope.canceler.reject();
 				$scope.error = {message: errorCodes[_error.status]};
 			});
