@@ -1,0 +1,22 @@
+<md-dialog aria-label="Progress dialog" flex-gt-xs="50" flex-xs ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{title}} - <span ng-if="!progress.determinate">Working...</span><span ng-if="progress.determinate">{{progress.percent}}% Completed</span></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+                <md-icon aria-label="Close">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-progress-linear md-mode="indeterminate" ng-show="!progress.determinate"></md-progress-linear>
+            <md-progress-linear md-mode="determinate" ng-show="progress.determinate" ng-value="progress.percent"></md-progress-linear>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="center center">
+        <md-button class="md-icon-button md-raised" ng-click="cancel()">
+            <md-icon aria-label="Close">close</md-icon>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
