@@ -8,8 +8,28 @@
 			</div>
 		</md-toolbar>
 		<md-card-content>
-			<md-content layout-padding>
-				<form novalidate name="newSubmissionForm" ng-submit="requiredFiles.length === 0 && newSubmissionForm.$valid && submit(submission)">
+			<md-card-content ng-if="_submission" class="slide">
+				<div layout="row">
+					<div class="icon">
+						<md-icon class="positive">check_circle</md-icon>
+					</div>
+					<div class="message">
+						<span>Submission uploaded successfully, redirecting in...3</span>
+					</div>
+				</div>
+			</md-card-content>
+			<md-card-content ng-if="error" class="slide error">
+				<div class="error" layout="row">
+					<div class="icon">
+						<md-icon class="error">warning</md-icon>
+					</div>
+					<div class="message">
+						<span>{{error.message}}</span>
+					</div>
+				</div>
+			</md-card-content>
+			<md-card-content ng-if="!_submission" layout-padding>
+				<form novalidate name="newSubmissionForm" ng-submit="requiredFiles.length === 0 && newSubmissionForm.$valid && submit(submission, $event)">
 					<md-list>
 						<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles" ng-hide="requiredFile.hidden">
 							<div class="md-list-item-text">
