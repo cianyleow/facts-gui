@@ -46,8 +46,7 @@ define([], function() {
 				description: 'Delete assignment'
 			}, {
 				action: function(assignment) {
-					$mdToast.show($mdToast.simple().textContent('Failed to delete assignment "' + assignment.name + '" (ID: ' + assignment.assignmentId + ')').position('top right').theme('error-toast'));
-					//$state.go('base.app.courseOwner.courses.details.assignment.details.edit');
+					$state.go('base.app.courseOwner.courses.details.assignment.details.edit');
 				},
 				icon: 'edit',
 				description: 'Edit Assignment'
