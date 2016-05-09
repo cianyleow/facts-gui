@@ -1,4 +1,4 @@
-define(['./dueDate', './file', './downloadButton', './searchFilter', './autoFocus', './shakeOn'], function(dueDate, file, downloadButton, searchFilter, autoFocus, shakeOn) {
+define(['./dueDate', './file', './downloadButton', './searchFilter', './autoFocus', './shakeOn', './countdownAction'], function(dueDate, file, downloadButton, searchFilter, autoFocus, shakeOn, countdownAction) {
 	'use strict';
 	return {
 		init: function(module) {
@@ -8,6 +8,7 @@ define(['./dueDate', './file', './downloadButton', './searchFilter', './autoFocu
 			module.directive('searchFilter', searchFilter);
 			module.directive('autoFocus', autoFocus);
 			module.directive('shakeOn', shakeOn);
+			module.directive('countdownAction', countdownAction);
 		}
 	};
 });
