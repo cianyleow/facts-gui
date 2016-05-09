@@ -11,6 +11,9 @@ define([], function() {
 		$scope.create = function(assignment) {
 			$scope.error = undefined;
 			$scope.uploading = true;
+
+			$scope.uploaded = false;
+
 			// Create Promise that can be cancelled.
 			$scope.canceler = $q.defer();
 			// Create assignment
@@ -25,6 +28,7 @@ define([], function() {
 			
 			Restangular.one('courses', $stateParams.courseId).all('assignments').withHttpConfig({timeout: $scope.canceler.promise, transformRequest: angular.identity}).customPOST(fd, undefined, undefined, {'Content-Type': undefined}).then(function(_assignment) {
 				$scope.uploading = false;
+				$scope.uploaded = true;
 				$scope._assignment = _assignment;
 				$scope.canceler.reject();
 			}, function(_error) {
@@ -32,6 +36,10 @@ define([], function() {
 				$scope.canceler.reject();
 				$scope.error = {message: errorCodes[_error.status]};
 			});
+		};
+
+		$scope.action = function() {
+			$state.go('base.app.courseOwner.courses.details.assignments.details', {assignmentId: $scope._assignment.assignmentId});
 		};
 
 		var errorCodes = {
