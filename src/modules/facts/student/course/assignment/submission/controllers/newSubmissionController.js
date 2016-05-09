@@ -3,7 +3,9 @@ define([], function() {
 	return['$scope', '$q', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', function($scope, $q, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = assignment.get().$object;
-		
+
+		$scope.uploaded = false;
+
 		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 					
 		$scope.submission = {
@@ -11,11 +13,8 @@ define([], function() {
 			submissionFiles: []
 		};
 
-		$scope.dialog = function(targetEvent) {
-			var progress = {
-				determinate: false
-			};
-			DialogService.showProgressDialog('Submission Upload', angular.element(document.body), targetEvent, function() {console.log('Cancelled');}, progress);
+		$scope.action = function() {
+			$state.go('base.app.courses.details.assignments.details.submissions.details', {submissionId: $scope._submission.submissionId});
 		};
 		
 		$scope.removeSubmissionFile = function(targetEvent, submissionFile, index) {
@@ -73,6 +72,7 @@ define([], function() {
 				$scope._submission = _submission;
 				$scope.canceler.reject();
 				DialogService.cancelActiveDialog();
+				$scope.uploaded = true;
 			}, function(_error) {
 				$scope.canceler.reject();
 				$scope.error = {message: errorCodes[_error.status]};
