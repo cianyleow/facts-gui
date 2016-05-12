@@ -86,12 +86,13 @@
 				<span flex layout="row" layout-align="center center" ng-show="!submissions.length">
 					<span><h3>No submissions!</h3></span>
 				</span>
-				<md-list ng-show="assignments.length">
-					<md-list-item class="md-2-line" ng-repeat="submission in submissions">
+				<md-list ng-show="submissions.length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="submission in submissions" ui-sref="base.app.courses.details.assignments.details.submissions.details({submissionId: submission.submissionId})">
 						<div class="md-list-item-text">
-							<h3>{{submission.title}}</h3>
-							<p>Due: {{submission.description}}</p>
+							<h3>Submission #{{$index + 1}} (ID: {{submission.submissionId}})</h3>
+							<p>Submitted at: {{submission.creationTime | date}}</p>
 						</div>
+						<md-icon ng-class="submissionIcons.{{submission.submissionStatus}}.iconClass" aria-label=submissionIcons.{{submission.submissionStatus}}.description" class="md-secondary">{{submissionIcons[submission.submissionStatus].icon}}</md-icon>
 					</md-list-item>
 				</md-list>
 			</md-content>
