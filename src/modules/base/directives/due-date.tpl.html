@@ -1,1 +1,2 @@
-<span ng-class="{late: late, close: close, early: early}">Due: {{date}} ({{message}})</span>
+<span ng-if="open" ng-class="{close: close, early: early}">Due: {{date}} ({{message}})</span>
+<span ng-if="!open">Assignment closed</span>
