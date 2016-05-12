@@ -79,10 +79,10 @@
 				</span>
 				<md-list ng-show="(allCourses | filter:searchTerm).length">
 					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in allCourses | filter:searchTerm" >
-						<a class="md-list-item-text" href="http://google.com">
+						<div class="md-list-item-text">
 							<h3>{{course.shortName}}: {{course.name}}</h3>
 							<p>{{course.description}}</p>
-						</a>
+						</div>
 						<md-button aria-label="Enroll in course" class="md-secondary" ng-click="enroll(course, $event)" ng-disabled="course.enrolling || course.failed">
 							<span ng-if="!course.enrolling && !course.failed">Enroll</span>
 							<span ng-if="course.failed">
