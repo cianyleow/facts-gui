@@ -1,9 +1,9 @@
-define(['./bytes', './afterToday'], function(bytes, afterToday) {
+define(['./bytes', './afterNow'], function(bytes, afterNow) {
 	'use strict';
 	return {
 		init: function(module) {
 			module.filter('bytes', bytes);
-			module.filter('afterToday', afterToday);
+			module.filter('afterNow', afterNow);
 		}
 	};
 });

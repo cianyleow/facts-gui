@@ -1,6 +1,6 @@
 define([], function () {
     'use strict';
-	function afterTodayFilter() {
+	function afterNowFilter() {
 		return function (items) {
 			var fromDate = new Date();
 			var result = [];
@@ -13,5 +13,5 @@ define([], function () {
 			return result;
 		};
 	}
-	return afterTodayFilter;
+	return afterNowFilter;
 });

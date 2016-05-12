@@ -58,11 +58,11 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!(assignments.length | afterToday)">
+				<span flex layout="row" layout-align="center center" ng-show="!(assignments.length | afterNow)">
 					<span><h3>No assignments!</h3></span>
 				</span>
-				<md-list ng-show="(assignments.length | afterToday)">
-					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments | afterToday" ui-sref="base.app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">
+				<md-list ng-show="(assignments.length | afterNow)">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in assignments | afterNow" ui-sref="base.app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">
 						<div class="md-list-item-text">
 							<h3>{{assignment.name}}</h3>
 							<p><due-date date-string="assignment.dueTime"></due-date></p>
