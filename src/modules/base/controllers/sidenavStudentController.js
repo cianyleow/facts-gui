@@ -9,11 +9,6 @@ define([], function() {
 				title: 'Dashboard'
 			},
 			{
-				link: 'base.app.assignments',
-				icon: 'assignment',
-				title: 'Assignments'
-			},
-			{
 				link: 'base.app.courses',
 				icon: 'account_balance',
 				title: 'Courses'
