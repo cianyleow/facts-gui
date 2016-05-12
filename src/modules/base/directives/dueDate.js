@@ -9,7 +9,7 @@ define([], function() {
 			},
 			controller: ['$scope', '$filter', function($scope, $filter) {
 				var today = Date.now();
-				var due = Date.parse($scope.dateString);
+				var due = new Date($scope.dateString);
 				var diff = due - today;
 				var daysLeft = Math.floor(diff / (3600 * 24 * 1000));
 				if(daysLeft < 0) {
