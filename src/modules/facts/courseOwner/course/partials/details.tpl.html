@@ -69,8 +69,6 @@
 					</md-content>
 				</md-card-content>
 			</md-card>
-		</div>
-		<div flex-sm flex-gt-sm="60">
 			<md-card flex>
 				<md-toolbar>
 					<div class="md-toolbar-tools">
@@ -104,6 +102,46 @@
 					</md-content>
 				</md-card-content>
 			</md-card>
+		</div>
+		<div flex-sm flex-gt-sm="60">
+			<md-card flex>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Announcements</span>
+						</h2>
+						<span flex></span>
+						<md-menu md-position-mode="target-right target">
+							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
+								<md-icon aria-label="More options">more_vert</md-icon>
+							</md-button>
+							<md-menu-content width="4">
+								<md-menu-item>
+									<md-button aria-label="User Details" ng-click="newAnnouncement($event)">
+										<md-icon md-menu-align-target>add_circle_outline</md-icon>
+										New Announcement
+									</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						<span flex layout="row" layout-align="center center" ng-show="!announcements.length">
+							<span><h3>No announcements!</h3></span>
+						</span>
+						<md-list ng-show="announcements.length">
+							<md-list-item class="md-3-line md-long-text" ng-repeat="announcement in announcements">
+								<div class="md-list-item-text">
+									<h3>{{announcement.title}} <span class="md-caption">{{announcement.creationTime | date}}</span></h3>
+									<p>{{announcement.content}}</p>
+								</div>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
 			<md-card flex>
 				<md-toolbar>
 					<div class="md-toolbar-tools">
@@ -134,9 +172,9 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
-					<span><h3>No open assignments!</h3></span>
-				</span>
+						<span flex layout="row" layout-align="center center" ng-show="!assignments.length">
+							<span><h3>No open assignments!</h3></span>
+						</span>
 						<md-list ng-show="assignments.length">
 							<md-list-item class="md-2-line" ng-repeat="assignment in assignments" ui-sref="base.app.courseOwner.courses.details.assignments.details({assignmentId: assignment.assignmentId})">
 								<div class="md-list-item-text">

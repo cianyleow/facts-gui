@@ -1,0 +1,40 @@
+<md-dialog aria-label="New Announcement" flex-gt-xs="50" flex-xs ng-cloak>
+    <form name="newAnnouncementForm" ng-submit="newAnnouncementForm.$valid && check(announcement)">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>New Announcement</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label>Title</label>
+                    <input required name="title" ng-model="announcement.title"/>
+                    <div ng-messages="newAnnouncementForm.title.$error">
+                        <div ng-message="required">Announcement title is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Content</label>
+                    <textarea required name="content" ng-model="announcement.content" md-maxlength="500" rows="5" style="height: 87px;"></textarea>
+                    <div ng-messages="newAnnouncementForm.content.$error">
+                        <div ng-message="required">Announcement content is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-primary md-raised" type="submit" ng-disabled="!newAnnouncementForm.$valid">
+                Add
+            </md-button>
+            <md-button ng-click="cancel()" style="margin-right:20px;">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
