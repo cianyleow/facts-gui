@@ -1,45 +1,72 @@
 <md-content layout="column">
-	<md-card flex>
-		<md-toolbar>
-			<div class="md-toolbar-tools">
-				<h2>
-					<span>{{course.shortName}}: {{course.name}}</span>
-				</h2>
-				<span flex></span>
-				<span ng-if="!enrollment.edit && !enrollment.failed">{{enrollmentLevels[enrollment.enrollmentLevel].value}}</span>
-				<span ng-if="!enrollment.edit && !enrollment.failed">
-					<md-button class="md-icon-button" ng-click="enrollment.edit = true">
-						<md-icon aria-label="Save enrollment">edit</md-icon>
-					</md-button>
-				</span>
-				<md-select aria-label="Enrollment level select" ng-model="enrollment._enrollmentLevel" ng-if="enrollment.edit" md-on-close="saveEnrollment(enrollment)">
-					<md-option ng-value="enrollmentLevel.key" ng-repeat="enrollmentLevel in enrollmentLevels">{{enrollmentLevel.value}}</md-option>
-				</md-select>
-				<span ng-if="enrollment.edit">
-					<md-button class="md-icon-button" ng-click="cancelEnrollmentEdit(enrollment)">
-						<md-icon aria-label="Save enrollment">close</md-icon>
-					</md-button>
-				</span>
-				<span ng-if="enrollment.failed" class="md-caption">
-					Failed to change enrollment level <md-icon aria-label="Enrollment change error">error</md-icon>
-				</span>
+	<div layout="row" layout-xs="column">
+		<div flex-xs flex-gt-xs="50" layout="column">
+			<md-card flex>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>{{course.shortName}}: {{course.name}}</span>
+						</h2>
+						<span flex></span>
+						<span ng-if="!enrollment.edit && !enrollment.failed">{{enrollmentLevels[enrollment.enrollmentLevel].value}}</span>
+							<span ng-if="!enrollment.edit && !enrollment.failed">
+								<md-button class="md-icon-button" ng-click="enrollment.edit = true">
+									<md-icon aria-label="Save enrollment">edit</md-icon>
+								</md-button>
+							</span>
+						<md-select aria-label="Enrollment level select" ng-model="enrollment._enrollmentLevel" ng-if="enrollment.edit" md-on-close="saveEnrollment(enrollment)">
+							<md-option ng-value="enrollmentLevel.key" ng-repeat="enrollmentLevel in enrollmentLevels">{{enrollmentLevel.value}}</md-option>
+						</md-select>
+						<span ng-if="enrollment.edit">
+							<md-button class="md-icon-button" ng-click="cancelEnrollmentEdit(enrollment)">
+								<md-icon aria-label="Save enrollment">close</md-icon>
+							</md-button>
+						</span>
+						<span ng-if="enrollment.failed" class="md-caption">
+							Failed to change enrollment level <md-icon aria-label="Enrollment change error">error</md-icon>
+						</span>
 				</div>
-			</div>
-		</md-toolbar>
-		<md-card-content>
-			<md-content>
-				{{course.description}}
-				<md-list>
-					<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners">
-						<div class="md-list-item-text">
-							<h3>{{courseOwner.title}} {{courseOwner.firstName}} {{courseOwner.lastName}} ({{courseOwner.userName}})</h3>
-							<p>Course Owner</p>
-						</div>
-					</md-list-item>
-				</md-list>
-			</md-content>
-		</md-card-content>
-	</md-card>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						{{course.description}}
+						<md-list>
+							<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners">
+								<div class="md-list-item-text">
+									<h3>{{courseOwner.title}} {{courseOwner.firstName}} {{courseOwner.lastName}} ({{courseOwner.userName}})</h3>
+									<p>Course Owner</p>
+								</div>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
+		</div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+			<md-card>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Announcements</span>
+						</h2>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<span flex layout="row" layout-align="center center" ng-show="!announcements.length">
+						<span><h3>No announcements!</h3></span>
+					</span>
+					<md-list ng-show="announcements.length">
+						<md-list-item class="md-3-line md-long-text" ng-repeat="announcement in announcements">
+							<div class="md-list-item-text">
+								<h3>{{announcement.title}} <span class="md-caption">{{announcement.creationTime | date}}</span></h3>
+								<p>{{announcement.content}}</p>
+							</div>
+						</md-list-item>
+					</md-list>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
 	<md-card flex>
 		<md-toolbar>
 			<div class="md-toolbar-tools">

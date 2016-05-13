@@ -10,6 +10,8 @@ define([], function() {
 		$scope.assignments = course.getList('assignments').$object;
 		$scope.courseOwners = course.getList('courseOwners').$object;
 
+		$scope.announcements = course.getList('announcements').$object;
+
 		$scope.enrollmentLevels = {
 			NO_CREDIT: {
 				value: 'No credit',
