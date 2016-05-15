@@ -58,7 +58,7 @@
 					<md-list ng-show="announcements.length">
 						<md-list-item class="md-3-line md-long-text" ng-repeat="announcement in announcements">
 							<div class="md-list-item-text">
-								<h3>{{announcement.title}} <span class="md-caption">{{announcement.creationTime | date}}</span></h3>
+								<h3>{{announcement.title}} <span class="md-caption">{{announcement.creationTime | relativeTime}}</span></h3>
 								<p>{{announcement.content}}</p>
 							</div>
 						</md-list-item>
