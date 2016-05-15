@@ -22,21 +22,16 @@ define([], function() {
 		};
 
 		$scope.save = function(_course) {
-			if(course.description !== _course.description) {
-				course.description = _course.description;
-				course.put().then(function(_c) {
-					$scope.editCourse = false;
-					$scope._course = undefined;
-					$scope.course = _c;
-				}, function(_error) {
-					$mdToast.show($mdToast.simple().textContent('Failed to update course description.').position('top right'));
-					$scope._course = undefined;
-					$scope.editCourse = false;
-				});
-			} else {
+			course.description = _course.description;
+			course.put().then(function(_c) {
+				$scope.editCourse = false;
+				$scope._course = undefined;
+				$scope.course = _c;
+			}, function(_error) {
+				$mdToast.show($mdToast.simple().textContent('Failed to update course description.').position('top right'));
 				$scope._course = undefined;
 				$scope.editCourse = false;
-			}
+			});
 		};
 
 		$scope.newAnnouncement = function(targetEvent) {
