@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return ['$scope', 'base.services.authentication', '$stateParams', function($scope, AuthenticationService, $stateParams) {
+	return ['$scope', 'base.services.authentication', '$stateParams', '$mdToast', function($scope, AuthenticationService, $stateParams, $mdToast) {
 
 		$scope.user = {};
 
@@ -22,8 +22,11 @@ define([], function() {
 
 		$scope.authenticate = function(user) {
 			AuthenticationService.login(user, $scope.redirect, function(response){
-				console.log('Authentication Error:' + response);
-				$scope.error = true;
+				if(response.status === -1) { // timed out
+					$scope.timeout = true;
+				} else {
+					$scope.error = true;
+				}
 				$scope.attempts++;
 			});
 		};

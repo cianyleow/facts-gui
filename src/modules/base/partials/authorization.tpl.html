@@ -39,10 +39,18 @@
 					<md-button type="submit" ng-disabled="!authorizationForm.$valid" class="md-raised md-primary">Login</md-button>
 					<div layout="row" class="login-error" shake-on="attempts" ng-if="error">
 						<div class="icon">
-							<md-icon class="error">error</md-icon>
+							<md-icon class="error">report</md-icon>
 						</div>
 						<div class="message">
 							Invalid login details.
+						</div>
+					</div>
+					<div layout="row" class="login-error" shake-on="attempts" ng-if="timeout && !error">
+						<div class="icon">
+							<md-icon class="error">signal_wifi_off</md-icon>
+						</div>
+						<div class="message">
+							Login request timed out. Check connection.
 						</div>
 					</div>
 				</div>
