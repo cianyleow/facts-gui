@@ -14,7 +14,7 @@
 							</md-button>
 							<md-menu-content width="4">
 								<md-menu-item>
-									<md-button aria-label="User Details" ui-sref="base.app.courseOwner.courses.details.edit">
+									<md-button aria-label="User Details" ng-click="edit(course)">
 										<md-icon md-menu-align-target>edit</md-icon>
 										Edit Course
 									</md-button>
@@ -25,7 +25,25 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						{{course.description}}
+						<span ng-if="!editCourse">{{course.description}}</span>
+						<form name="editCourseDetailsForm" ng-if="editCourse" class="slide" ng-submit="editCourseDetailsForm.$valid && save(_course)">
+							<md-input-container class="md-block">
+								<label>Description</label>
+								<textarea ng-model="_course.description" md-maxlength="255" rows="5" style="height: 87px;" required name="description"></textarea>
+								<div ng-messages="editCourseDetailsForm.description.$error">
+									<div ng-message="required">Description is required.</div>
+								</div>
+							</md-input-container>
+							<div layout="row" layout-align="center right">
+								<span flex></span>
+								<md-button class="md-icon-button" ng-click="cancelEdit()">
+									<md-icon aria-label="Close edit">close</md-icon>
+								</md-button>
+								<md-button type="submit" class="md-primary md-raised md-icon-button" ng-disabled="editCourseDetailsForm.$pristine">
+									<md-icon>check</md-icon>
+								</md-button>
+							</div>
+						</form>
 						<md-list>
 							<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners">
 								<div class="md-list-item-text">

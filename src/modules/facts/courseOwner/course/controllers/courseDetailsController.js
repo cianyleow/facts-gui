@@ -1,6 +1,8 @@
 define([], function() {
 	'use strict';
 	return['$scope', '$stateParams', 'Restangular', '$mdDialog', 'base.services.dialog', '$mdToast', function($scope, $stateParams, Restangular, $mdDialog, DialogService, $mdToast) {
+		$scope.editCourse = false;
+
 		var course = Restangular.one('courses', $stateParams.courseId);
 		$scope.course = course.get().$object;
 		$scope.assignments = course.getList('assignments').$object;
@@ -8,6 +10,34 @@ define([], function() {
 		$scope.markers = course.getList('markers').$object;
 		$scope.students = course.getList('students').$object;
 		$scope.announcements = course.getList('announcements').$object;
+
+		$scope.edit = function(course) {
+			$scope.editCourse = true;
+			$scope._course = angular.copy(course);
+		};
+
+		$scope.cancelEdit = function() {
+			$scope.editCourse = false;
+			$scope._course = undefined;
+		};
+
+		$scope.save = function(_course) {
+			if(course.description !== _course.description) {
+				course.description = _course.description;
+				course.put().then(function(_c) {
+					$scope.editCourse = false;
+					$scope._course = undefined;
+					$scope.course = _c;
+				}, function(_error) {
+					$mdToast.show($mdToast.simple().textContent('Failed to update course description.').position('top right'));
+					$scope._course = undefined;
+					$scope.editCourse = false;
+				});
+			} else {
+				$scope._course = undefined;
+				$scope.editCourse = false;
+			}
+		};
 
 		$scope.newAnnouncement = function(targetEvent) {
 			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
