@@ -49,7 +49,7 @@ define([], function() {
 					Restangular.one('courses', $stateParams.courseId).all('announcements').post(announcement).then(function(_announcement) {
 						$scope.announcements.push(_announcement);
 					}, function(_error) {
-
+						$mdToast.show($mdToast.simple().textContent('Failed to create announcement.').position('top right'));
 					});
 				});
 		};
