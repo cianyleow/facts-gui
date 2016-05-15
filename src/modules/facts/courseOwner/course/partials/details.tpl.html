@@ -137,6 +137,15 @@
 									<h3>{{announcement.title}} <span class="md-caption">{{announcement.creationTime | date}}</span></h3>
 									<p>{{announcement.content}}</p>
 								</div>
+								<span flex></span>
+								<md-button aria-label="Delete announcement" class="md-secondary" ng-class="{'md-icon-button': !announcement.failed}" ng-click="deleteAnnouncement(announcement, $event)" ng-disabled="announcement.deleting || announcement.failed">
+									<md-icon ng-if="!announcement.deleting && !announcement.failed">delete</md-icon>
+									<span ng-if="announcement.failed">
+										<md-icon aria-label="Error">error</md-icon>
+										Failed
+									</span>
+								</md-button>
+								<md-progress-circular class="md-secondary" md-diameter="24" md-mode="indeterminate" ng-if="announcement.deleting"></md-progress-circular>
 							</md-list-item>
 						</md-list>
 					</md-content>
