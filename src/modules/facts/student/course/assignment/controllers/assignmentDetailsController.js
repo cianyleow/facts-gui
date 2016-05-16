@@ -5,7 +5,7 @@ define([], function() {
 		$scope.assignment = AssignmentService.getAssignment($stateParams.assignmentId);
 		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 		$scope.suppliedFiles = assignment.getList('suppliedFiles').$object;
-		$scope.submissions = assignment.getList('submissions').$object;
+		$scope.submissions = assignment.one('submissions').getList('self').$object;
 
 		$scope.submissionIcons = {
 			'CREDIT': {
