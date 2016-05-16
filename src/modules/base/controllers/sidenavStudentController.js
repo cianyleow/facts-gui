@@ -27,13 +27,7 @@ define([], function() {
 		
 		$scope.currentPeriod = 'Spring 15/16';
 
-		$scope.courses = [];
-		
-		Restangular.one('self').getList('enrollments').then(function(enrollments) {
-			angular.forEach(enrollments, function(enrollment) {
-				$scope.courses.push(enrollment.course);
-			});
-		});
+		$scope.courses = Restangular.one('self').getList('enrollments').$object;
 
 		$scope.baselink = 'base.app.courses.details';
 	}];
