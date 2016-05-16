@@ -12,8 +12,7 @@
 			<md-content layout-padding>
 				<form ng-submit="review(assignment)" name="newAssignmentForm">
 					<md-button ng-class="{ visible: selectedTab==1 }" class="md-fab md-primary md-fab-bottom-right" ng-click="suppliedFileDialog($event)" aria-label="Add New Supplied File">+</md-button>
-					<md-button ng-class="{ visible: selectedTab==2 }" class="md-fab md-primary md-fab-bottom-right" ng-click="markComponentDialog($event)" aria-label="Add New Mark Component">+</md-button>
-					<md-button ng-class="{ visible: selectedTab==3 }" class="md-fab md-primary md-fab-bottom-right" ng-click="requiredFileDialog($event)" aria-label="Add New Required File">+</md-button>
+					<md-button ng-class="{ visible: selectedTab==2 }" class="md-fab md-primary md-fab-bottom-right" ng-click="requiredFileDialog($event)" aria-label="Add New Required File">+</md-button>
 					<md-tabs md-selected="selectedTab" md-dynamic-height md-border-bottom>
 						<md-tab label="Basic Details">
 							<md-content class="md-padding">
@@ -63,22 +62,6 @@
 											<p>{{suppliedFile.file.type}}</p>
 										</div>
 										<md-icon class="md-secondary" ng-click="removeLine(assignment.suppliedFiles, $index)" aria-label="Remove supplied file">remove_circle_outline</md-icon>
-									</md-list-item>
-								</md-list>
-							</md-content>
-						</md-tab>
-						<md-tab label="Mark Components{{assignment.markComponents.length ? ' (' + assignment.markComponents.length + ')' : ''}}">
-							<md-content class="md-padding">
-								<span layout="row" ng-show="assignment.markComponents.length == 0" layout-align="center center" flex>
-									<span><h2>No mark components</h2></span>
-								</span>
-								<md-list>
-									<md-list-item class="md-2-line" ng-repeat="markComponent in assignment.markComponents">
-										<div class="md-list-item-text">
-											<h3>{{ markComponent.name }} ({{ markComponent.maxMark }} marks)</h3>
-											<p>{{ markComponent.description}} </p>
-										</div>
-										<md-icon class="md-secondary" ng-click="removeLine(assignment.markComponents, $index)" aria-label="Remove mark component">remove_circle_outline</md-icon>
 									</md-list-item>
 								</md-list>
 							</md-content>

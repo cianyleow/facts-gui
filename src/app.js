@@ -1,7 +1,7 @@
-define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-title', 'restangular', 'angular-ui-router', 'ng-file-upload', 'angular-material-data-table', 'modules/facts/facts', 'modules/base/base', 'n3-charts-pie-chart', 'd3', 'ng-messages'
+define(['angular', 'angular-material', 'angular-ui-breadcrumbs', 'angular-ui-title', 'restangular', 'angular-ui-router', 'ng-file-upload', 'angular-material-data-table', 'modules/facts/facts', 'modules/base/base', 'ng-messages'
 ], function(angular) {
 	'use strict';
-	var configFn = ['ui.router', 'md.data.table', 'ngFileUpload', 'base', 'facts', 'restangular', 'ngMaterial', 'angularUtils.directives.uiBreadcrumbs', 'ui.router.title', 'n3-pie-chart', 'ngMessages'];
+	var configFn = ['ui.router', 'md.data.table', 'ngFileUpload', 'base', 'facts', 'restangular', 'ngMaterial', 'angularUtils.directives.uiBreadcrumbs', 'ui.router.title', 'ngMessages'];
 	var app = angular.module('app', configFn);
 	
 	app.config(['RestangularProvider', '$locationProvider', '$httpProvider', '$mdThemingProvider',

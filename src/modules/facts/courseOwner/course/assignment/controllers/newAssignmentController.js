@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$mdDialog', '$state', '$stateParams', 'Restangular', 'base.services.piechart', 'base.services.dialog', 'facts.services.assignment', function($scope, $mdDialog, $state, $stateParams, Restangular, PieChartService, DialogService, AssignmentService) {
+	return['$scope', '$mdDialog', '$state', '$stateParams', 'Restangular', 'base.services.dialog', 'facts.services.assignment', function($scope, $mdDialog, $state, $stateParams, Restangular, DialogService, AssignmentService) {
 		$scope.assignment = AssignmentService.getAssignmentForReview();
 		$scope.selectedTab = 0;
 
@@ -40,23 +40,7 @@ define([], function() {
 
 			});
 		};
-		$scope.markComponentDialog = function(targetEvent) {
-			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
-				$scope.markComponent = {};
-				$scope.cancel = function() {
-					$mdDialog.cancel();
-				};
 
-				$scope.check = function(markComponent) {
-					$mdDialog.hide(markComponent);
-				};
-			}], 'src/modules/facts/courseOwner/course/assignment/partials/new.markComponentDialog.tpl.html', angular.element(document.body), targetEvent,
-			function(markComponent) {
-				$scope.assignment.markComponents.push(markComponent);
-			}, function() {
-
-			});
-		};
 		$scope.requiredFileDialog = function(targetEvent) {
 			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
 				$scope.fileName = '';

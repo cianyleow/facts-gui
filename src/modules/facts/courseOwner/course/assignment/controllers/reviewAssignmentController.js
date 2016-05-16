@@ -1,12 +1,10 @@
 define([], function() {
 	'use strict';
-	return['$scope', 'base.services.dialog', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'base.services.piechart', 'facts.services.assignment', function($scope, DialogService, Restangular, $state, $stateParams, $q, FileService, PieChartService, AssignmentService) {
+	return['$scope', 'base.services.dialog', 'Restangular', '$state', '$stateParams', '$q', 'base.services.file', 'facts.services.assignment', function($scope, DialogService, Restangular, $state, $stateParams, $q, FileService, AssignmentService) {
 		if(!AssignmentService.hasAssignmentForReview()) {
 			$state.go('base.app.courseOwner.courses.details.assignments.new');
 		}
 		$scope.assignment = AssignmentService.getAssignmentForReview();
-		$scope.markComponentData = PieChartService.getPieChartLines($scope.assignment.markComponents);
-		$scope.markComponentOptions = {thickness: 30};
 		
 		$scope.create = function(assignment, targetEvent) {
 			$scope.error = undefined;

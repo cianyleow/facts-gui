@@ -80,8 +80,6 @@ module.exports = function (grunt) {
                         'angular-ui-title': 'empty:',
                         'ng-file-upload': 'empty:',
                         'angular-material-data-table': 'empty:',
-                        'n3-charts-pie-chart': 'empty:',
-                        'd3': 'empty:',
                         'ng-messages': 'empty:'
                     }
                 }

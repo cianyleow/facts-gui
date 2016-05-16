@@ -33,7 +33,7 @@
 		</md-card-content>
 		<md-card-content ng-if="!_assignment">
 			<div layout="row" layout-xs="column">
-				<div flex-xs flex-gt-xs="70" layout="column">
+				<div flex-xs flex-gt-xs="50" layout="column">
 					<md-card>
 						<md-toolbar>
 							<div class="md-toolbar-tools">
@@ -61,6 +61,8 @@
 							</md-content>
 						</md-card-content>
 					</md-card>
+				</div>
+				<div flex-xs flex-gt-xs="50" layout="column">
 					<md-card>
 						<md-toolbar>
 							<div class="md-toolbar-tools">
@@ -82,25 +84,6 @@
 										</div>
 									</md-list-item>
 								</md-list>
-							</md-content>
-						</md-card-content>
-					</md-card>
-				</div>
-				<div flex-xs flex-gt-xs="30" layout="column">
-					<md-card>
-						<md-toolbar>
-							<div class="md-toolbar-tools">
-								<h2>
-									<span>Mark Components</span>
-								</h2>
-							</div>
-						</md-toolbar>
-						<md-card-content>
-							<md-content>
-								<span layout="row" ng-show="assignment.markComponents.length == 0" layout-align="center center" flex>
-									<span><h2>No mark components</h2></span>
-								</span>
-								<pie-chart ng-if="markComponentData.length > 0 && markComponentOptions" data="markComponentData" options="markComponentOptions"></pie-chart>
 							</md-content>
 						</md-card-content>
 					</md-card>
