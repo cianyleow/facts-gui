@@ -5,6 +5,14 @@ define([], function() {
 		$scope.assignment = assignment.get().$object;
 		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 		$scope.suppliedFiles = assignment.getList('suppliedFiles').$object;
+
+		$scope.submissions = assignment.getList('submissions').$object;
+
+		$scope.query = {
+			order: 'submitter.username',
+			limit: 30,
+			page: 1
+		};
 		
 		$scope.actions = [
 			{

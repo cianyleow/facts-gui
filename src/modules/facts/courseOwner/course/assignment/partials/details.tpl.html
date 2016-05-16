@@ -1,37 +1,9 @@
 <md-content layout="column">
-	<md-card flex>
-		<md-toolbar>
-			<div class="md-toolbar-tools">
-				<h2>
-					<span>Assignment Workflow</span>
-				</h2>
-				<span flex></span>
-				<md-menu md-position-mode="target-right target">
-					<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
-						<md-icon>more_vert</md-icon>
-					</md-button>
-					<md-menu-content width="4">
-						<md-menu-item ng-repeat="action in actions">
-							<md-button ng-click="action.action(assignment)" aria-label="action.description">
-								<md-icon md-menu-align-target>{{action.icon}}</md-icon>
-								{{action.description}}
-							</md-button>
-						</md-menu-item>
-					</md-menu-content>
-				</md-menu>
-			</div>
-		</md-toolbar>
-		<md-card-content>
-			<md-content>
-				Some tools go here...
-			</md-content>
-		</md-card-content>
-	</md-card>
 	<md-card>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>
-					<span>Assignment Preview</span>
+					<span>Assignment</span>
 				</h2>
 				<span flex></span>
 				<md-menu md-position-mode="target-right target">
@@ -107,6 +79,56 @@
 						</md-card>
 					</div>
 				</div>
+			</md-content>
+		</md-card-content>
+	</md-card>
+	<md-card flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Submissions</span>
+				</h2>
+				<span flex></span>
+				<md-menu md-position-mode="target-right target">
+					<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
+						<md-icon>more_vert</md-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-menu-item ng-repeat="action in actions">
+							<md-button ng-click="action.action(assignment)" aria-label="action.description">
+								<md-icon md-menu-align-target>{{action.icon}}</md-icon>
+								{{action.description}}
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
+			</div>
+		</md-toolbar>
+		<md-card-content>
+			<md-content>
+				<md-table-container>
+					<table md-table>
+						<thead md-head md-order="query.order">
+							<tr md-row>
+								<th md-column md-order-by="submitter.userName"><span>Student Details</span></th>
+								<th md-column md-order-by="version"><span>Version</span></th>
+								<th md-column md-order-by="creationTime"><span>Time</span></th>
+								<th md-column md-order-by="submissionStatus"><span>Status</span></th>
+								<th md-column><span>Submission</span></th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<tr md-row ng-repeat="submission in submissions | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+								<td md-cell>{{submission.submitter.userName}}</td>
+								<td md-cell>{{submission.version}}</td>
+								<td md-cell>{{submission.creationTime | date : 'short'}}</td>
+								<td md-cell>{{submission.submissionStatus}}</td>
+								<td md-cell><a ui-sref="base.app.courseOwner.courses.details.assignments.details({submissionId: submission.submissionId})">View #{{submission.submissionId}} <md-icon>open_in_new</md-icon></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</md-table-container>
+				<md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{submissions.length}}" md-boundary-links="false"></md-table-pagination>
 			</md-content>
 		</md-card-content>
 	</md-card>
