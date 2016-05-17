@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
 	return['$scope', 'Restangular', function($scope, Restangular) {
-		$scope.ownedCourses = Restangular.one('self').getList('courses').$object;
+		$scope.ownedCourses = Restangular.one('self').getList('ownedCourses').$object;
 	}];
 });
