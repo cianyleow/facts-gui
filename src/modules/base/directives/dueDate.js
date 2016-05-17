@@ -5,7 +5,7 @@ define([], function() {
 			restrict: 'E',
 			templateUrl: 'src/modules/base/directives/due-date.tpl.html',
 			scope: {
-				dateString: '=',
+				dateString: '='
 			},
 			controller: ['$scope', '$filter', function($scope, $filter) {
 				var today = Date.now();
@@ -26,7 +26,7 @@ define([], function() {
 						$scope.message = daysLeft + ' days left';
 					}
 				}
-				$scope.date = $filter('date')($scope.dateString, 'hh:mm:ss a dd/MMM/yyyy');
+				$scope.date = $filter('date')($scope.dateString, 'dd/MMM/yyyy HH:mm');
 			}]
 		};
 	}];
