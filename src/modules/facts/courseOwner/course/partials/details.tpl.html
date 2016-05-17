@@ -79,6 +79,9 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
+						<span flex layout="row" layout-align="center center" ng-show="!markers.length">
+							<span><h3>No markers!</h3></span>
+						</span>
 						<md-list>
 							<md-list-item ng-repeat="marker in markers">
 
@@ -111,7 +114,10 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<md-chips ng-model="students" readonly="true">
+						<span flex layout="row" layout-align="center center" ng-show="!enrollments.length">
+							<span><h3>No enrollments!</h3></span>
+						</span>
+						<md-chips ng-model="students" readonly="true" ng-if="enrollments.length">
 							<md-chip-template>
 								<strong>{{$chip.firstName}} {{$chip.lastName}}</strong>
 								<em>({{$chip.userName}})</em>
