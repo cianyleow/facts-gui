@@ -41,6 +41,23 @@ define(['angular', './controllers/controllers', './assignment/assignmentModule']
 						return course.shortName + ': ' + course.name;
 					}]
 				}
+			})
+			.state('base.app.courseOwner.courses.details.enrollments', {
+				url: '/enrollments',
+				data: {
+					displayName: 'Enrollments'
+				},
+				views: {
+					'mainContent@base.app': {
+						templateUrl: 'src/modules/facts/courseOwner/course/partials/enrollments.tpl.html',
+						controller: 'facts.courseOwner.course.controllers.enrollments'
+					}
+				},
+				resolve: {
+					$title: ['course', function(course) {
+						return course.shortName + ' Enrollments';
+					}]
+				}
 			});
 	}]);
 	

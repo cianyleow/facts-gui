@@ -1,0 +1,60 @@
+<md-content layout="column">
+    <md-card>
+        <md-toolbar ng-show="!selected.length">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>Enrollments</span>
+                </h2>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+            <div class="md-toolbar-tools">
+                <span>{{selected.length}} {{selected.length > 1 ? 'students' : 'student'}} selected</span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="deleteEnrollments(selected, $event)">
+                    <md-icon>delete</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="changeEnrollments(selected, $event)">
+                    <md-icon>swap_vert</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <md-content>
+                <md-table-container>
+                    <table md-table md-row-select multiple ng-model="selected">
+                        <thead md-head md-order="query.order" ng-model="selected">
+                        <tr md-row>
+                            <th md-column md-order-by="student.firstName"><span>First Name</span></th>
+                            <th md-column md-order-by="student.lastName"><span>Last Name</span></th>
+                            <th md-column md-order-by="student.userName"><span>User Name</span></th>
+                            <th md-column md-order-by="student.studentId"><span>Student ID</span></th>
+                            <th md-column md-order-by="student.yearOfStudy"><span>Year Of Study</span></th>
+                            <th md-column md-order-by="enrollmentLevel"><span>Enrollment Level</span></th>
+                            <th md-column md-order-by="updateTime"><span>Last Updated</span></th>
+                            <th md-column><span>Unenroll</span></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="enrollment" md-auto-select ng-repeat="enrollment in enrollments | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                            <td md-cell>{{enrollment.student.firstName}}</td>
+                            <td md-cell>{{enrollment.student.lastName}}</td>
+                            <td md-cell>{{enrollment.student.userName}}</td>
+                            <td md-cell>{{enrollment.student.studentId}}</td>
+                            <td md-cell>{{enrollment.student.yearOfStudy}}</td>
+                            <td md-cell>
+                                <md-select aria-label="Enrollment level select" ng-model="enrollment._enrollmentLevel" md-on-close="saveEnrollment(enrollment, $event)" ng-disabled="enrollment.saving || selected.length">
+                                    <md-option ng-value="enrollmentLevel.key" ng-repeat="enrollmentLevel in enrollmentLevels">{{enrollmentLevel.value}}</md-option>
+                                </md-select>
+                            </td>
+                            <td md-cell>{{enrollment.updateTime | date : 'short'}}</td>
+                            <td md-cell><md-button class="md-icon-button" ng-click="deleteEnrollment(enrollment, $event)"><md-icon>delete</md-icon></md-button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{enrollments.length}}" md-boundary-links="false"></md-table-pagination>
+            </md-content>
+        </md-card-content>
+    </md-card>
+</md-content>
