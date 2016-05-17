@@ -7,6 +7,14 @@
 						<h2>
 							<span>{{assignment.name}}</span>
 						</h2>
+						<span flex></span>
+						<md-button class="md-icon-button">
+							<md-icon>access_time</md-icon>
+							<md-tooltip>
+								{{assignment.dueTime | date : 'dd-MMM-yyyy HH:mm'}}
+							</md-tooltip>
+						</md-button>
+						<span hide-sm hide-xs>{{assignment.dueTime | relativeTime}}</span>
 					</div>
 				</md-toolbar>
 				<md-card-content>
