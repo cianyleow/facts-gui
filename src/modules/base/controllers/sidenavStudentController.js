@@ -16,12 +16,14 @@ define([], function() {
 			{
 				link: 'base.app.grades',
 				icon: 'grade',
-				title: 'Grades'
+				title: 'Grades',
+				inProgress: true
 			},
 			{
 				link: 'base.app.messages',
 				icon: 'message',
-				title: 'Messages'
+				title: 'Messages',
+				inProgress: true
 			}
 		];
 		

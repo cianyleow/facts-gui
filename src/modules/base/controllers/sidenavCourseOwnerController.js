@@ -17,7 +17,8 @@ define([], function() {
 			{
 				link: 'base.app.courseOwner.grades',
 				icon: 'grade',
-				title: 'Grades'
+				title: 'Grades',
+				inProgress: true
 			}
 		];
 		
