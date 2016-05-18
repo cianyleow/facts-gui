@@ -114,10 +114,10 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span flex layout="row" layout-align="center center" ng-show="!enrollments.length">
+						<span flex layout="row" layout-align="center center" ng-show="!students.length">
 							<span><h3>No enrollments!</h3></span>
 						</span>
-						<md-chips ng-model="students" readonly="true" ng-if="enrollments.length">
+						<md-chips ng-model="students" readonly="true" ng-if="students.length">
 							<md-chip-template>
 								<strong>{{$chip.firstName}} {{$chip.lastName}}</strong>
 								<em>({{$chip.userName}})</em>
