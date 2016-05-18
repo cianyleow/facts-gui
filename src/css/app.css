@@ -2,6 +2,10 @@ body {
 	background: #ededed;
 }
 
+md-content {
+	background: #FFFFFF !important;
+}
+
 md-list-item.active {
 	background: #bfbfbf !important;
 	color: #FFFFFF;
