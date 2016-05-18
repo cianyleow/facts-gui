@@ -31,6 +31,7 @@ define([], function() {
 				course.failed = false;
 				Restangular.one('courses', course.courseId).all('enrollments').post().then(function(_enrollment) {
 					$scope.allCourses.splice($scope.allCourses.indexOf(course), 1);
+					_enrollment.course = angular.copy(course);
 					$scope.enrollments.push(_enrollment);
 					$mdToast.show($mdToast.simple().textContent('Enrolled in ' + course.shortName + ': ' + course.name).position('top right'));
 				}, function() {
