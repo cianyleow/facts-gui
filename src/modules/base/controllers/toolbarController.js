@@ -7,35 +7,36 @@ define([], function() {
 
 		$scope.actions = [
 			{
+				inProgress: true,
 				icon: 'person',
 				description: 'Change Role',
 				action: function(targetEvent) {
-					$mdDialog.show(
-						{
-							controller: function($scope, $mdDialog) {
-								$scope.roles = userInfo.roles;
-								$scope.currentRole = userInfo.currentRole;
-								$scope.cancel = function() {
-									$mdDialog.cancel();
-								};
-
-								$scope.change = function(newRole) {
-									$mdDialog.hide(newRole);
-								};
-							},
-							templateUrl: 'src/modules/base/partials/role-change.dialog.tpl.html',
-							parent: angular.element(document.body),
-							targetEvent: targetEvent,
-							clickOutsideToClose: true
-						}
-					).then(
-						function(newRole) {
-							console.log(newRole);
-							userInfo.currentRole = newRole;
-						}, function() {
-
-						}
-					);
+					// $mdDialog.show(
+					// 	{
+					// 		controller: function($scope, $mdDialog) {
+					// 			$scope.roles = userInfo.roles;
+					// 			$scope.currentRole = userInfo.currentRole;
+					// 			$scope.cancel = function() {
+					// 				$mdDialog.cancel();
+					// 			};
+                    //
+					// 			$scope.change = function(newRole) {
+					// 				$mdDialog.hide(newRole);
+					// 			};
+					// 		},
+					// 		templateUrl: 'src/modules/base/partials/role-change.dialog.tpl.html',
+					// 		parent: angular.element(document.body),
+					// 		targetEvent: targetEvent,
+					// 		clickOutsideToClose: true
+					// 	}
+					// ).then(
+					// 	function(newRole) {
+					// 		console.log(newRole);
+					// 		userInfo.currentRole = newRole;
+					// 	}, function() {
+                    //
+					// 	}
+					// );
 				}
 			},
 			{

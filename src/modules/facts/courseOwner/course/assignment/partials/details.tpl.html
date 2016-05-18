@@ -103,7 +103,7 @@
 					</md-button>
 					<md-menu-content width="4">
 						<md-menu-item ng-repeat="action in actions">
-							<md-button ng-click="action.action(assignment)" aria-label="action.description">
+							<md-button ng-click="action.action(assignment)" in-progress="true" aria-label="action.description">
 								<md-icon md-menu-align-target>{{action.icon}}</md-icon>
 								{{action.description}}
 							</md-button>
