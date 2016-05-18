@@ -41,7 +41,7 @@ define(['angular', './controllers/controllers'], function(angular, controllers) 
 			.state('base.app.courseOwner.courses.details.assignments.details', {
 				url: '/:assignmentId',
 				data: {
-					displayName: '{{assignment.title}}'
+					displayName: '{{assignment.name}}'
 				},
 				views: {
 					'mainContent@base.app': {
