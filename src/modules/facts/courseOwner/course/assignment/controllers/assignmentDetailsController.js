@@ -14,16 +14,30 @@ define([], function() {
 			page: 1
 		};
 		
-		$scope.actions = [
-			{
-				action: function(assignment) {
-					console.log('Assign markers!' + assignment);
-				},
-				icon: 'link',
-				description: 'Assign Markers'
-				
-			}
-		];
+		$scope.assignMarkers = function(event) {
+			assignment.all('feedback').post().then(function(_feedbacks) {
+				console.log(_feedbacks);
+				var mappedFeedback = [];
+				angular.forEach(_feedbacks, function(_feedback) {
+					mappedFeedback[_feedback.submission.submissionId] = _feedback;
+				});
+				console.log(mappedFeedback);
+				angular.forEach($scope.submissions, function(submission) {
+					submission.feedback = mappedFeedback[submission.submissionId];
+				});
+				$mdToast.show($mdToast.simple().textContent('Successfully assigned markers for assignment.').position('top right'));
+			}, function(error) {
+				$mdDialog.show($mdDialog.alert()
+					.parent(angular.element(document.body))
+					.clickOutsideToClose(true)
+					.title('Marker Assignment Failed')
+					.textContent('Marker assignment failed with error code ' + error.status + ' (' + error.data.message + ').')
+					.ariaLabel('Marker assignment failed.')
+					.ok('Close')
+					.targetEvent(event)
+				);
+			});
+		};
 
 		$scope.previewActions = [
 			{

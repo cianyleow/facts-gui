@@ -102,10 +102,10 @@
 						<md-icon>more_vert</md-icon>
 					</md-button>
 					<md-menu-content width="4">
-						<md-menu-item ng-repeat="action in actions">
-							<md-button ng-click="action.action(assignment)" in-progress="true" aria-label="action.description">
-								<md-icon md-menu-align-target>{{action.icon}}</md-icon>
-								{{action.description}}
+						<md-menu-item>
+							<md-button ng-click="assignMarkers($event)" aria-label="Assign markers">
+								<md-icon md-menu-align-target>link</md-icon>
+								Assign Markers
 							</md-button>
 						</md-menu-item>
 					</md-menu-content>
@@ -121,8 +121,8 @@
 								<th md-column md-order-by="submitter.userName"><span>Student Details</span></th>
 								<th md-column md-order-by="version"><span>Version</span></th>
 								<th md-column md-order-by="creationTime"><span>Time</span></th>
-								<th md-column md-order-by="submissionStatus"><span>Status</span></th>
 								<th md-column><span>Submission</span></th>
+								<th md-column md-order-by="submissionStatus"><span>Status</span></th>
 							</tr>
 						</thead>
 						<tbody md-body>
@@ -130,8 +130,11 @@
 								<td md-cell>{{submission.submitter.userName}}</td>
 								<td md-cell>{{submission.version}}</td>
 								<td md-cell>{{submission.creationTime | date : 'short'}}</td>
-								<td md-cell>{{submission.submissionStatus}}</td>
-								<td md-cell><a ui-sref="base.app.courseOwner.courses.details.assignments.details({submissionId: submission.submissionId})">View #{{submission.submissionId}} <md-icon>open_in_new</md-icon></a></td>
+								<td md-cell><a ui-sref="base.app.courseOwner.courses.details.assignments.details({submissionId: submission.submissionId})" target="_blank">View #{{submission.submissionId}} <md-icon>open_in_new</md-icon></a></td>
+								<td md-cell>
+									<span ng-show="!submission.feedback">{{submission.submissionStatus}}</span>
+									<span ng-show="submission.feedback">Feedback Received</span>
+								</td>
 							</tr>
 						</tbody>
 					</table>
