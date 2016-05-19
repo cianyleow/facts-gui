@@ -120,9 +120,21 @@
 						<md-list ng-show="comments.length">
 							<md-list-item class="md-3-line md-long-text" ng-repeat="comment in comments">
 								<div class="md-list-item-text">
-									<h3>Comment on {{comment.creationTime | date}}</h3>
-									<p>{{comment.comment}}</p>
+									<h3 ng-if="comment.editMode && comment.new">New Comment</h3>
+									<h3 ng-if="comment.editMode && !comment.new">Editing Comment</h3>
+									<h3 ng-if="!comment.editMode">Comment on {{comment.creationTime | date}}</h3>
+									<p><span ng-if="!comment.editMode">{{comment.comment}}</span>
+										<md-input-container class="md-block" ng-if="comment.editMode">
+											<label>Description</label>
+											<textarea ng-model="comment.newComment.comment" required md-maxlength="255" rows="5" style="height: 87px;"></textarea>
+										</md-input-container>
+										<md-checkbox ng-model="comment.newComment.secret" ng-if="comment.editMode">Secret</md-checkbox>
+									</p>
 								</div>
+								<md-icon aria-label="Edit comment" class="md-secondary" ng-if="!comment.editMode" ng-click="editComment(comment)">edit</md-icon>
+								<md-icon aria-label="Delete comment" class="md-secondary" ng-if="!comment.editMode" ng-click="deleteComment(comment, $index)">delete</md-icon>
+								<md-icon aria-label="Save comment" class="md-secondary positive" ng-if="comment.editMode" ng-click="saveComment(comment, $index)">check</md-icon>
+								<md-icon aria-label="Cancel comment" class="md-secondary negative" ng-if="comment.editMode" ng-click="cancelComment(comment)">cancel</md-icon>
 							</md-list-item>
 						</md-list>
 					</md-content>
@@ -134,47 +146,35 @@
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>Marks</span>
+							<span>Mark</span>
 						</h2>
-						<span flex></span>
-						<md-menu md-position-mode="target-right target" ng-show="markActions.length">
-							<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
-								<md-icon>more_vert</md-icon>
-							</md-button>
-							<md-menu-content width="4">
-								<md-menu-item ng-repeat="action in markActions">
-									<md-button ng-click="action.action(assignment)" aria-label="action.description">
-										<md-icon md-menu-align-target>{{action.icon}}</md-icon>
-										{{action.description}}
-									</md-button>
-								</md-menu-item>
-							</md-menu-content>
-						</md-menu>
 					</div>
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span flex layout="row" layout-align="center center" ng-show="!marks.length">
-							<span><h3>No mark components!</h3></span>
-						</span>
-						<div layout="row" ng-show="marks.length">
-							<span flex="50">{{sumMarks}} / {{totalMarks}}</span>
-							<span flex="50">{{grade}}</span>
-						</div>
-						<md-list ng-show="marks.length">
-							<md-list-item class="md-2-line secondary-button-padding" ng-repeat="mark in marks">
-								<div class="md-list-item-text">
-									<h3>{{mark.markComponent.name}} (
-										<span ng-show="mark.editMode"><input type="numeric" ng-model="mark.newMark"/></span>
-										<span ng-show="!mark.editMode">{{mark.mark || "-"}}</span>
-										/ {{mark.markComponent.maxMark}})</h3>
-									<p>{{mark.markComponent.description}}</p>
+						<form name="markForm" ng-submit="markForm.$valid && feedback.mark != mark && saveMark(mark)">
+							<div layout="row" class="mark-slider">
+								<md-slider class="md-primary" flex min="0" max="100" ng-model="mark" aria-label="Mark slider" id="mark-slider"></md-slider>
+								<div flex="15" layout="column" layout-align="center center">
+									<input flex type="number" ng-model="mark" arial-abel="Mark amount" name="mark" min="0" max="100" required aria-controls="mark-slider">
+									<div ng-messages="markForm.mark.$error" class="md-caption error-text">
+										<div ng-message="required">Mark value is required!</div>
+										<div ng-message="min">Mark cannot be below 0%.</div>
+										<div ng-message="max">Mark cannot be above 100%</div>
+									</div>
 								</div>
-								<md-icon class="md-secondary" ng-show="!mark.editMode" ng-click="mark.editMode = true">edit</md-icon>
-								<md-icon class="md-secondary" ng-show="mark.editMode" ng-click="saveMark(mark)">check</md-icon>
-								<md-icon class="md-secondary" ng-show="mark.editMode" ng-click="mark.editMode = false">cancel</md-icon>
-							</md-list-item>
-						</md-list>
+							</div>
+							<div layout="row">
+								<span flex></span>
+								<md-button class="md-icon-button" type="submit" ng-disabled="!markForm.$valid || feedback.mark == mark">
+									<md-icon class="positive">check_circle</md-icon>
+								</md-button>
+								<md-button class="md-icon-button" ng-click="cancelMark()" ng-disabled="feedback.mark == mark">
+									<md-icon class="negative">cancel</md-icon>
+								</md-button>
+
+							</div>
+						</form>
 					</md-content>
 				</md-card-content>
 			</md-card>

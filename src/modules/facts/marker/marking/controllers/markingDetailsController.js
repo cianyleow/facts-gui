@@ -1,8 +1,15 @@
 define([], function() {
 	'use strict';
-	return['Restangular', '$scope', '$stateParams', 'base.services.dialog', function(Restangular, $scope, $stateParams, DialogService) {
+	return['Restangular', '$scope', '$stateParams', 'base.services.dialog', '$mdToast', function(Restangular, $scope, $stateParams, DialogService, $mdToast) {
 		var feedback = Restangular.one('feedback', $stateParams.feedbackId);
-		$scope.feedback = feedback.get().$object;
+		$scope.feedback = feedback.get().then(function(_feedback) {
+			$scope.feedback = _feedback;
+			// Then decorate the mark on that object.
+			feedback.one('mark').get().then(function(_mark) {
+				$scope.feedback.mark = _mark;
+				$scope.mark = _mark;
+			});
+		});
 		feedback.one('submission').get().then(function(_submission) {
 			$scope.submission = _submission;
 			Restangular.one('submissions', _submission.submissionId).getList('submissionFiles').then(function(_files) {
@@ -10,26 +17,67 @@ define([], function() {
 			});
 			Restangular.one('submissions', _submission.submissionId).one('assignment').get().then(function(_assignment) {
 				$scope.assignment = _assignment;
-				Restangular.one('assignments', _assignment.assignmentId).getList('markComponents').then(function(_markComponents) {
-					$scope.marks = [];
-					angular.forEach(_markComponents, function(_markComponent) {
-						$scope.marks.push({markComponent: _markComponent});
-					});
-				});
 				Restangular.one('assignments', _assignment.assignmentId).getList('suppliedFiles').then(function(_suppliedFiles) {
 					$scope.suppliedFiles = _suppliedFiles;
 				});
 			});
 		});
 		$scope.comments = feedback.getList('comments').$object;
-		$scope.marks = feedback.getList('marks').$object;
+
+		$scope.editComment = function(comment) {
+			comment.newComment = angular.copy(comment);
+			comment.editMode = true;
+		};
+
+		$scope.cancelComment = function(comment) {
+			comment.editMode = false;
+			comment.newComment = undefined;
+		};
+
+		$scope.deleteComment = function(comment, idx) {
+			feedback.one('comments', comment.commentId).remove().then(function() {
+				$scope.comments.splice(idx, 1);
+				$mdToast.show($mdToast.simple().textContent('Comment #' + comment.commentId + ' deleted!').position('top right'));
+			}, function() {
+				$mdToast.show($mdToast.simple().textContent('Comment failed to delete!'));
+			});
+		};
+
+		$scope.saveComment = function(comment, idx) {
+			if(comment.new) {
+				feedback.all('comments').post(comment.newComment).then(function(_comment) {
+					$scope.comments[idx] = _comment;
+					$mdToast.show($mdToast.simple().textContent('Comment created!'));
+				});
+			} else {
+				feedback.one('comments', comment.commentId).put(comment.newComment).then(function(_comment) {
+					$scope.comments[idx] = _comment;
+					$mdToast.show($mdToast.simple().textContent('Comment updated!'));
+				});
+			}
+
+		};
+
+		$scope.cancelMark = function() {
+			$scope.mark = $scope.feedback.mark;
+		};
 
 		$scope.saveMark = function(mark) {
-			if(mark.newMark <= mark.markComponent.maxMark) {
-				mark.mark = mark.newMark;
-			}
-			mark.newMark = undefined;
-			mark.editMode = false;
+			var alteredFeedback = angular.copy($scope.feedback);
+			alteredFeedback.mark = mark;
+			feedback.customPUT(alteredFeedback).then(function(_feedback) {
+				$scope.feedback = _feedback;
+				// Then decorate the mark on that object.
+				feedback.one('mark').get().then(function(_mark) {
+					$scope.feedback.mark = _mark;
+					$scope.mark = _mark;
+					$mdToast.show($mdToast.simple().textContent('Mark updated to ' + _mark + '.').position('top right'));
+				}, function() {
+					$mdToast.show($mdToast.simple().textContent('Failed to reload data. Please refresh.').position('top right'));
+				});
+			}, function() {
+				$mdToast.show($mdToast.simple().textContent('Failed to update mark.').position('top right'));
+			});
 		};
 
 		$scope.submissionActions = [
@@ -46,31 +94,17 @@ define([], function() {
 			{
 				description: 'Add Comment',
 				icon: 'add',
-				action: function(targetEvent) {
-					DialogService.showCustomDialog(
-						function($scope, $mdDialog) {
-							$scope.comment = {
-								secret: false
-							};
-
-							$scope.cancel = function() {
-								$mdDialog.cancel();
-							};
-
-							$scope.check = function(comment) {
-								$mdDialog.hide(comment);
-							};
-						}, 'src/modules/facts/marker/marking/partials/new.comment-dialog.tpl.html',
-						angular.element(document.body), targetEvent,
-						function(comment) {
-							feedback.all('comments').post(comment).then(function(_comment) {
-								$scope.comments.push(_comment);
-							}, function(_comment) {
-								console.log('Uhhh, error in send');
-							})
-						}, function() {
-
-						});
+				action: function() {
+					$scope.comments.push({
+						comment: '',
+						secret: false,
+						newComment: {
+							comment: '',
+							secret: false
+						},
+						editMode: true,
+						new: true
+					});
 				}
 			}
 		];

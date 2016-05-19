@@ -119,3 +119,12 @@ md-toolbar.md-table-toolbar.alternate {
 md-toolbar.md-table-toolbar.alternate .md-toolbar-tools {
 	font-size: 16px;
 }
+
+.mark-slider md-slider {
+	margin: 0px 15px 0px 15px;
+}
+
+.mark-slider input[type="number"] {
+	text-align: center;
+	padding-left: 10px;
+}
