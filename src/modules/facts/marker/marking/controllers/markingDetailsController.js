@@ -2,7 +2,7 @@ define([], function() {
 	'use strict';
 	return['Restangular', '$scope', '$stateParams', 'base.services.dialog', '$mdToast', function(Restangular, $scope, $stateParams, DialogService, $mdToast) {
 		var feedback = Restangular.one('feedback', $stateParams.feedbackId);
-		$scope.feedback = feedback.get().then(function(_feedback) {
+		feedback.get().then(function(_feedback) {
 			$scope.feedback = _feedback;
 			// Then decorate the mark on that object.
 			feedback.one('mark').get().then(function(_mark) {

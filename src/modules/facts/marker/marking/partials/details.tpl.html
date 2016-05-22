@@ -8,7 +8,13 @@
 							<span>Feedback Status</span>
 						</h2>
 						<span flex></span>
-						{{submission.creationTime | date}}
+						<md-button class="md-icon-button">
+							<md-icon>access_time</md-icon>
+							<md-tooltip>
+								{{feedback.dueTime | date : 'dd-MMM-yyyy HH:mm'}}
+							</md-tooltip>
+						</md-button>
+						<span hide-sm hide-xs>due {{feedback.dueTime | relativeTime}}</span>
 					</div>
 				</md-toolbar>
 				<md-card-content>
@@ -54,7 +60,13 @@
 					<span>Submission Details</span>
 				</h2>
 				<span flex></span>
-				{{submission.creationTime | date}}
+				<md-button class="md-icon-button">
+					<md-icon>assignment_turned_in</md-icon>
+					<md-tooltip>
+						{{submission.creationTime | date : 'dd-MMM-yyyy HH:mm'}}
+					</md-tooltip>
+				</md-button>
+				<span hide-sm hide-xs>{{submission.creationTime | date : 'dd/MM/yy HH:mm'}}</span>
 				<md-menu md-position-mode="target-right target" ng-show="submissionActions.length">
 					<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 						<md-icon aria-label="More options">more_vert</md-icon>
