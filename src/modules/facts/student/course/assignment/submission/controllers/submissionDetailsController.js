@@ -5,5 +5,15 @@ define([], function() {
 		var submission = Restangular.one('submissions', $stateParams.submissionId);
 		$scope.submission = submission.get().$object;
 		$scope.submissionFiles = submission.getList('submissionFiles').$object;
+		submission.one('feedback').get().then(function(_feedback) {
+			if(_feedback.commentStatus == 'COMMENT_RELEASED') {
+				_feedback.comments = submission.one('feedback', _feedback.feedbackId).getList('comments').$object;
+			}
+
+			if(_feedback.markStatus == 'MARKS_RELEASED') {
+				_feedback.grade = submission.one('feedback', _feedback.feedbackId).one('grade').get().$object;
+			}
+			$scope.feedback = _feedback;
+		});
 	}];
 });

@@ -1,6 +1,6 @@
 <md-content layout="column">
 	<div layout="row" layout-xs="column">
-			<div flex-xs flex-gt-xs="70" layout="column">
+			<div flex-xs flex-gt-xs="50" layout="column">
 				<md-card>
 					<md-toolbar>
 						<div class="md-toolbar-tools">
@@ -28,18 +28,28 @@
 					</md-card-content>
 				</md-card>
 			</div>
-			<div flex-xs flex-gt-xs="30" layout="column">
+			<div flex-xs flex-gt-xs="50" layout="column">
 			<md-card>
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>Status</span>
+							<span>Feedback</span>
 						</h2>
 					</div>
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						{{submission.submissionStatus}}
+						<span layout="row" ng-show="feedback.comments.length == 0" layout-align="center center" flex>
+								<span><h2>No comments</h2></span>
+							</span>
+						<md-list ng-show="feedback.comments.length">
+							<md-list-item class="md-2-line" ng-repeat="comment in feedback.comments">
+								<div class="md-list-item-text">
+									<h3>Comment on {{comment.creationTime | date}}</h3>
+									<p>{{comment.comment}}</p>
+								</div>
+							</md-list-item>
+						</md-list>
 					</md-content>
 				</md-card-content>
 			</md-card>
