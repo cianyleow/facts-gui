@@ -23,7 +23,7 @@
 									</div>
 									<download-button class="md-secondary" file-id="submissionFile.fileId"></download-button>
 								</md-list-item>
-							</md-list>			
+							</md-list>
 						</md-content>
 					</md-card-content>
 				</md-card>
@@ -35,11 +35,13 @@
 						<h2>
 							<span>Feedback</span>
 						</h2>
+						<span flex></span>
+						{{feedback.grade || 'N/A'}}
 					</div>
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span layout="row" ng-show="feedback.comments.length == 0" layout-align="center center" flex>
+						<span layout="row" ng-show="!feedback.comments.length" layout-align="center center" flex>
 								<span><h2>No comments</h2></span>
 							</span>
 						<md-list ng-show="feedback.comments.length">
