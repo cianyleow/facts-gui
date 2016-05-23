@@ -31,7 +31,7 @@
 					<md-content>
 						{{course.description}}
 						<md-list>
-							<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners">
+							<md-list-item class="md-2-line" ng-repeat="courseOwner in courseOwners" ng-href="mailto:{{courseOwner.email}}">
 								<div class="md-list-item-text">
 									<h3>{{courseOwner.title}} {{courseOwner.firstName}} {{courseOwner.lastName}} ({{courseOwner.userName}})</h3>
 									<p>Course Owner</p>
