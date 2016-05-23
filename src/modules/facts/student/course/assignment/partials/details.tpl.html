@@ -20,11 +20,11 @@
 				<md-card-content>
 					<md-content>
 						{{assignment.description}}
-						<span layout="row" ng-show="suppliedFiles.length == 0" layout-align="center center" flex>
+						<span layout="row" ng-show="assignment.suppliedFiles.length == 0" layout-align="center center" flex>
 							<span><h2>No supplied files</h2></span>
 						</span>
 						<md-list>
-							<md-list-item class="md-2-line" ng-repeat="suppliedFile in suppliedFiles">
+							<md-list-item class="md-2-line" ng-repeat="suppliedFile in assignment.suppliedFiles">
 								<div class="md-list-item-text">
 									<h3>{{suppliedFile.name}}.{{suppliedFile.extension}} ({{suppliedFile.size | bytes}})</h3>
 									<p>{{suppliedFile.contentType}}</p>
@@ -47,11 +47,11 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span layout="row" ng-show="requiredFiles.length == 0" layout-align="center center" flex>
+						<span layout="row" ng-show="assignment.requiredFiles.length == 0" layout-align="center center" flex>
 							<span><h2>No required files</h2></span>
 						</span>
 						<md-list>
-							<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles">
+							<md-list-item class="md-2-line" ng-repeat="requiredFile in assignment.requiredFiles">
 								<div class="md-list-item-text">
 									<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
 									<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
@@ -84,7 +84,7 @@
 					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="submission in submissions" ui-sref="base.app.courses.details.assignments.details.submissions.details({submissionId: submission.submissionId})">
 						<div class="md-list-item-text">
 							<h3>Submission #{{$index + 1}} (ID: {{submission.submissionId}})</h3>
-							<p>Submitted at: {{submission.creationTime | date}}</p>
+							<p>Submitted {{submission.creationTime | date : 'dd/MM/yy HH:mm'}}</p>
 						</div>
 						<md-icon ng-class="submissionIcons.{{submission.submissionStatus}}.iconClass" aria-label=submissionIcons.{{submission.submissionStatus}}.description" class="md-secondary">{{submissionIcons[submission.submissionStatus].icon}}</md-icon>
 					</md-list-item>
