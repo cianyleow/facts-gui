@@ -1,14 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', function($scope) {
-		$scope.submissions = [
-			{
-				assignment: {
-					name: 'First assignment'
-				},
-				creationTime: '22-03-2016',
-				submissionStatus: 'ONTIME'
-			}
-		];
+	return['$scope', 'Restangular', function($scope, Restangular) {
+		$scope.feedback = Restangular.one('self').getList('marking').$object;
 	}];
 });

@@ -9,16 +9,16 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!active.length">
+				<span flex layout="row" layout-align="center center" ng-show="!(feedback | filter: {feedbackStatus: 'STARTED'}).length">
 					<span><h3>No active marking!</h3></span>
 				</span>
-				<md-list ng-show="enrolledCourses.length">
-					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="course in enrolledCourses">
+				<md-list ng-show="(feedback | filter: {feedbackStatus: 'STARTED'}).length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="fb in (feedback | filter: {feedbackStatus: 'STARTED'})">
 						<div class="md-list-item-text">
 							<h3>{{course.shortName}}: {{course.name}}</h3>
 							<p>{{course.description}}</p>
 						</div>
-						<md-button class="md-secondary" ui-sref="app.courses.details({courseId: course.courseId})">Continue Marking</md-button>
+						<md-button class="md-secondary" ui-sref="base.app.marker.marking.details({feedbackId: fb.feedbackId})">Continue Marking</md-button>
 					</md-list-item>
 				</md-list>
 			</md-content>
@@ -41,15 +41,17 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!allCourses.length">
+				<span flex layout="row" layout-align="center center" ng-show="!(feedback | filter: {feedbackStatus: 'QUEUED'}).length">
 					<span><h3>No queued submissions!</h3></span>
 				</span>
-				<md-list ng-show="allCourses.length">
-					<div class="md-list-item-text">
-							<h3>{{course.shortName}}: {{course.name}}</h3>
-							<p>{{course.description}}</p>
+				<md-list ng-show="(feedback | filter: {feedbackStatus: 'QUEUED'}).length">
+					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="fb in (feedback | filter: {feedbackStatus: 'QUEUED'})">
+						<div class="md-list-item-text secondary-padding">
+							<h3>Feedback {{fb.feedbackId}}</h3>
+							<p>Due {{fb.dueTime | relativeTime}}</p>
 						</div>
-						<md-button class="md-secondary" ui-sref="app.courses.details({courseId: course.courseId})">Start Marking</md-button>
+						<md-button class="md-secondary" ui-sref="base.app.marker.marking.details({feedbackId: fb.feedbackId})">Start Marking</md-button>
+					</md-list-item>
 				</md-list>
 			</md-content>
 		</md-card-content>
