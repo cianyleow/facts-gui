@@ -29,18 +29,18 @@
 				<md-toolbar>
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>Assignment Details: {{assignment.name}}</span>
+							<span>Assignment Details: {{feedback.assignment.name}}</span>
 						</h2>
 					</div>
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
 						{{assignment.description}}
-						<span layout="row" ng-show="suppliedFiles.length == 0" layout-align="center center" flex>
+						<span layout="row" ng-show="feedback.assignment.suppliedFiles.length == 0" layout-align="center center" flex>
 							<span><h2>No supplied files</h2></span>
 						</span>
 						<md-list>
-							<md-list-item class="md-2-line" ng-repeat="suppliedFile in suppliedFiles">
+							<md-list-item class="md-2-line" ng-repeat="suppliedFile in feedback.assignment.suppliedFiles">
 								<div class="md-list-item-text">
 									<h3>{{suppliedFile.name}}.{{suppliedFile.extension}} ({{suppliedFile.size | bytes}})</h3>
 									<p>{{suppliedFile.contentType}}</p>
@@ -63,10 +63,10 @@
 				<md-button class="md-icon-button">
 					<md-icon>assignment_turned_in</md-icon>
 					<md-tooltip>
-						{{submission.creationTime | date : 'dd-MMM-yyyy HH:mm'}}
+						{{feedback.submission.creationTime | date : 'dd-MMM-yyyy HH:mm'}}
 					</md-tooltip>
 				</md-button>
-				<span hide-sm hide-xs>{{submission.creationTime | date : 'dd/MM/yy HH:mm'}}</span>
+				<span hide-sm hide-xs>{{feedback.submission.creationTime | date : 'dd/MM/yy HH:mm'}}</span>
 				<md-menu md-position-mode="target-right target" ng-show="submissionActions.length">
 					<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 						<md-icon aria-label="More options">more_vert</md-icon>
@@ -84,17 +84,17 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-				<p>{{submission.comment}}</p>
-				<span layout="row" ng-show="submissionFiles.length == 0" layout-align="center center" flex>
+				<p>{{feedback.submission.comment}}</p>
+				<span layout="row" ng-show="feedback.submission.submittedFiles.length == 0" layout-align="center center" flex>
 					<span><h2>No submission files</h2></span>
 				</span>
 				<md-list>
-					<md-list-item class="md-2-line" ng-repeat="submissionFile in submissionFiles">
+					<md-list-item class="md-2-line" ng-repeat="submittedFile in feedback.submission.submittedFiles">
 						<div class="md-list-item-text">
-							<h3>{{submissionFile.name}}.{{submissionFile.extension}} ({{submissionFile.size | bytes}})</h3>
-							<p>Hash: {{submissionFile.hash}}</p>
+							<h3>{{submittedFile.name}}.{{submittedFile.extension}} ({{submittedFile.size | bytes}})</h3>
+							<p>Hash: {{submittedFile.hash}}</p>
 						</div>
-						<download-button file-id="submissionFile.fileId"></download-button>
+						<download-button file-id="submittedFile.fileId"></download-button>
 					</md-list-item>
 				</md-list>	
 			</md-content>
@@ -126,11 +126,11 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span flex layout="row" layout-align="center center" ng-show="!comments.length">
+						<span flex layout="row" layout-align="center center" ng-show="!feedback.comments.length">
 							<span><h3>No comments!</h3></span>
 						</span>
-						<md-list ng-show="comments.length">
-							<md-list-item class="md-3-line md-long-text" ng-repeat="comment in comments">
+						<md-list ng-show="feedback.comments.length">
+							<md-list-item class="md-3-line md-long-text" ng-repeat="comment in feedback.comments">
 								<div class="md-list-item-text">
 									<h3 ng-if="comment.editMode && comment.new">New Comment</h3>
 									<h3 ng-if="comment.editMode && !comment.new">Editing Comment</h3>
@@ -184,7 +184,6 @@
 								<md-button class="md-icon-button" ng-click="cancelMark()" ng-disabled="feedback.mark == mark">
 									<md-icon class="negative">cancel</md-icon>
 								</md-button>
-
 							</div>
 						</form>
 					</md-content>
