@@ -5,7 +5,6 @@ define([], function() {
 		feedback.get().then(function(_feedback) {
 			$scope.feedback = _feedback;
 			$scope.mark = _feedback.mark;
-			$scope.feedback.assignment = Restangular.one('assignments', _feedback.submission.assignment.assignmentId).get().$object;
 		});
 
 		// var feedback = Restangular.one('feedback', $stateParams.feedbackId);
@@ -41,6 +40,57 @@ define([], function() {
 			comment.newComment = undefined;
 		};
 
+		$scope.changeMarkReleased = function(_feedback) {
+			$scope.markReleasedRequest = true;
+			var alteredFeedback = {
+				markReleased: _feedback.markReleased
+			};
+			feedback.customPUT(alteredFeedback).then(function(_feedback) {
+				$scope.feedback.markReleased = _feedback.markReleased;
+				$mdToast.show($mdToast.simple().textContent(_feedback.markReleased ? 'Mark released.' : 'Mark hidden.').position('top right'));
+			}, function() {
+				$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
+				feedback.markReleased = !feedback.markReleased;
+			}).finally(function() {
+				$scope.markReleasedRequest = false;
+			});
+		};
+
+		$scope.changeCommentReleased = function(_feedback) {
+			$scope.commentReleasedRequest = true;
+			var alteredFeedback = {
+				commentReleased: _feedback.commentReleased
+			};
+			feedback.customPUT(alteredFeedback).then(function(_feedback) {
+				$scope.feedback.commentReleased = _feedback.commentReleased;
+				$mdToast.show($mdToast.simple().textContent(_feedback.commentReleased ? 'Comment released.' : 'Comment hidden.').position('top right'));
+			}, function() {
+				$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
+				feedback.commentReleased = !feedback.commentReleased;
+			}).finally(function() {
+				$scope.commentReleasedRequest = false;
+			});
+		};
+
+		$scope.changeFeedbackStatus = function(_feedback, oldFeedbackStatus) {
+			if(_feedback.feedbackStatus != oldFeedbackStatus) {
+				$scope.feedbackStatusRequest = true;
+				var alteredFeedback = {
+					feedbackStatus: _feedback.feedbackStatus
+				};
+				feedback.customPUT(alteredFeedback).then(function(_feedback) {
+					$scope.feedback.feedbackStatus = _feedback.feedbackStatus;
+					$mdToast.show($mdToast.simple().textContent('Feedback status change from ' + oldFeedbackStatus + ' to ' + _feedback.feedbackStatus + '.').position('top right'));
+				}, function() {
+					$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
+					_feedback.feedbackStatus = oldFeedbackStatus;
+				}).finally(function() {
+					$scope.feedbackStatusRequest = false;
+					$scope.oldFeedbackStatus = undefined;
+				})
+			}
+		};
+
 		$scope.deleteComment = function(comment, idx) {
 			Restangular.one('comments', comment.commentId).remove().then(function() {
 				$scope.feedback.comments.splice(idx, 1);
@@ -57,7 +107,7 @@ define([], function() {
 					$mdToast.show($mdToast.simple().textContent('Comment created!'));
 				});
 			} else {
-				feedback.one('comments', comment.commentId).put(comment.newComment).then(function(_comment) {
+				feedback.one('comments', comment.commentId).customPUT(comment.newComment).then(function(_comment) {
 					$scope.feedback.comments[idx] = _comment;
 					$mdToast.show($mdToast.simple().textContent('Comment updated!'));
 				});
@@ -74,7 +124,7 @@ define([], function() {
 				mark: mark
 			};
 			feedback.customPUT(alteredFeedback).then(function(_feedback) {
-				$scope.feedback = _feedback;
+				$scope.feedback.mark = _feedback.mark;
 				$scope.mark = _feedback.mark;
 					$mdToast.show($mdToast.simple().textContent('Mark updated to ' + _feedback.mark + '.').position('top right'));
 			}, function() {
