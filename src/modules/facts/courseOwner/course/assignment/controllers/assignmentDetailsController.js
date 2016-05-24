@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$stateParams', 'Restangular', 'base.services.piechart', '$mdDialog', '$mdToast', '$state', function($scope, $stateParams, Restangular, PieChartService, $mdDialog, $mdToast, $state) {
+	return['$scope', '$stateParams', 'Restangular', '$mdDialog', '$mdToast', '$state', function($scope, $stateParams, Restangular, $mdDialog, $mdToast, $state) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId).one('admin');
 		$scope.assignment = assignment.get().$object;
 
