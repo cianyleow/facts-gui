@@ -5,8 +5,6 @@ define([], function() {
 		$scope.assignment = assignment.get().$object;
 
 		$scope.uploaded = false;
-
-		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
 					
 		$scope.submission = {
 			comment: '',

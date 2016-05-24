@@ -29,16 +29,16 @@
 				</div>
 			</md-card-content>
 			<md-card-content ng-if="!_submission" layout-padding>
-				<form novalidate name="newSubmissionForm" ng-submit="requiredFiles.length === 0 && newSubmissionForm.$valid && submit(submission, $event)">
+				<form novalidate name="newSubmissionForm" ng-submit="assignment.requiredFiles.length === 0 && newSubmissionForm.$valid && submit(submission, $event)">
 					<md-list>
-						<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles" ng-hide="requiredFile.hidden">
+						<md-list-item class="md-2-line" ng-repeat="requiredFile in assignment.requiredFiles" ng-hide="requiredFile.hidden">
 							<div class="md-list-item-text">
 								<h3>Required: {{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}] {{requiredFile.file.name}}</h3>
 								<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
 							</div>
 							<md-icon class="md-secondary" aria-label="Upload required file" ng-click="addSubmissionFile($event, requiredFile, $index)">file_upload</md-icon>
 						</md-list-item>
-						<span layout="row" ng-show="requiredFiles.length > 0 && submission.submissionFiles.length === 0" layout-align="center center" flex>
+						<span layout="row" ng-show="assignment.requiredFiles.length > 0 && submission.submissionFiles.length === 0" layout-align="center center" flex>
 							<span><h2>No submission files</h2></span>
 						</span>
 						<md-list-item class="md-2-line" ng-repeat="submissionFile in submission.submissionFiles" ng-model="submissionFile" ng-click="removeSubmissionFile($event, submissionFile, $index)">
@@ -57,7 +57,7 @@
 						</div>
 					</md-input-container>
 					<div layout="row">
-						<md-button class="md-raised md-primary" ng-disabled="requiredFiles.length !== 0 || !newSubmissionForm.$valid" type="submit">Submit</md-button>
+						<md-button class="md-raised md-primary" ng-disabled="assignment.requiredFiles.length !== 0 || !newSubmissionForm.$valid" type="submit">Submit</md-button>
 					</div>
 				</form>
 			</md-content>
