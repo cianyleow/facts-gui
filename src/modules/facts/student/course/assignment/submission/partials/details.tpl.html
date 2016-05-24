@@ -12,11 +12,11 @@
 					<md-card-content>
 						<md-content layout-padding>
 							<p>{{submission.comment}}</p>
-							<span layout="row" ng-show="submissionFiles.length == 0" layout-align="center center" flex>
+							<span layout="row" ng-show="submission.submittedFiles.length == 0" layout-align="center center" flex>
 								<span><h2>No submission files</h2></span>
 							</span>
 							<md-list>
-								<md-list-item class="md-2-line" ng-repeat="submissionFile in submissionFiles">
+								<md-list-item class="md-2-line" ng-repeat="submissionFile in submission.submittedFiles">
 									<div class="md-list-item-text">
 										<h3>{{submissionFile.name}}.{{submissionFile.extension}} ({{submissionFile.size | bytes}})</h3>
 										<p>Hash: {{submissionFile.hash}}</p>
@@ -41,11 +41,11 @@
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span layout="row" ng-show="!feedback.comments.length" layout-align="center center" flex>
+						<span layout="row" ng-show="!submission.feedback.publicComments.length" layout-align="center center" flex>
 								<span><h2>No comments</h2></span>
 							</span>
 						<md-list ng-show="feedback.comments.length">
-							<md-list-item class="md-2-line" ng-repeat="comment in feedback.comments">
+							<md-list-item class="md-2-line" ng-repeat="comment in submission.feedback.publicComments">
 								<div class="md-list-item-text">
 									<h3>Comment on {{comment.creationTime | date}}</h3>
 									<p>{{comment.comment}}</p>
