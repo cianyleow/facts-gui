@@ -1,12 +1,8 @@
 define([], function() {
 	'use strict';
 	return['$scope', '$stateParams', 'Restangular', 'base.services.piechart', '$mdDialog', '$mdToast', '$state', function($scope, $stateParams, Restangular, PieChartService, $mdDialog, $mdToast, $state) {
-		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
+		var assignment = Restangular.one('assignments', $stateParams.assignmentId).one('admin');
 		$scope.assignment = assignment.get().$object;
-		$scope.requiredFiles = assignment.getList('requiredFiles').$object;
-		$scope.suppliedFiles = assignment.getList('suppliedFiles').$object;
-
-		$scope.submissions = assignment.getList('submissions').$object;
 
 		$scope.query = {
 			order: 'submitter.username',

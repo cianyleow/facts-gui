@@ -126,7 +126,7 @@
 							</tr>
 						</thead>
 						<tbody md-body>
-							<tr md-row ng-repeat="submission in submissions | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+							<tr md-row ng-repeat="submission in assignment.submissions | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
 								<td md-cell>{{submission.submitter.userName}}</td>
 								<td md-cell>{{submission.version}}</td>
 								<td md-cell>{{submission.creationTime | date : 'short'}}</td>
@@ -139,7 +139,7 @@
 						</tbody>
 					</table>
 				</md-table-container>
-				<md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{submissions.length}}" md-boundary-links="false"></md-table-pagination>
+				<md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{assignment.submissions.length}}" md-boundary-links="false"></md-table-pagination>
 			</md-content>
 		</md-card-content>
 	</md-card>
