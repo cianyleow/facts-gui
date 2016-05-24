@@ -5,8 +5,6 @@ define([], function() {
 
 		var course = Restangular.one('courses', $stateParams.courseId).one('admin');
 		$scope.course = course.get().$object;
-		$scope.markers = course.getList('markers').$object;
-		$scope.students = course.getList('students').$object;
 
 		$scope.edit = function(course) {
 			$scope.editCourse = true;
