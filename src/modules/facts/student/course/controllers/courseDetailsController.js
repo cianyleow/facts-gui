@@ -7,10 +7,6 @@ define([], function() {
 			$scope.enrollment = _enrollment;
 			$scope.enrollment._enrollmentLevel = _enrollment.enrollmentLevel;
 		});
-		$scope.assignments = course.getList('assignments').$object;
-		$scope.courseOwners = course.getList('courseOwners').$object;
-
-		$scope.announcements = course.getList('announcements').$object;
 
 		$scope.enrollmentLevels = {
 			NO_CREDIT: {
@@ -38,8 +34,8 @@ define([], function() {
 				return;
 			}
 			var confirm = $mdDialog.confirm()
-				.title('Change enrollment level for ' + enrollment.course.shortName)
-				.textContent('Change your enrollment level in ' + enrollment.course.shortName + ': ' + enrollment.course.name + ' from ' + $scope.enrollmentLevels[enrollment.enrollmentLevel].value + ' to ' + $scope.enrollmentLevels[enrollment._enrollmentLevel].value + '?')
+				.title('Change enrollment level for ' + $scope.course.shortName)
+				.textContent('Change your enrollment level in ' + $scope.course.shortName + ': ' + $scope.course.name + ' from ' + $scope.enrollmentLevels[enrollment.enrollmentLevel].value + ' to ' + $scope.enrollmentLevels[enrollment._enrollmentLevel].value + '?')
 				.ariaLabel('Change enrollment')
 				.targetEvent(targetEvent)
 				.ok('Change')
