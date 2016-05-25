@@ -2,11 +2,23 @@
 	<div layout="row" layout-xs="column">
 			<div flex-xs flex-gt-xs="50" layout="column">
 				<md-card>
-					<md-toolbar>
+					<md-toolbar ng-class="{'md-accent': !submission.credit && submission.submissionStatus != 'LATE', 'md-warn': submission.submissionStatus == 'LATE'}">
 						<div class="md-toolbar-tools">
 							<h2>
 								<span>{{assignment.name}} (v.{{submission.version}})</span>
 							</h2>
+							<span flex></span>
+							<md-button class="md-icon-button">
+								<md-icon ng-if="submission.submissionStatus != 'LATE' && submission.credit">assignment_turned_in</md-icon>
+								<md-icon ng-if="submission.submissionStatus != 'LATE' && !submission.credit">access_time</md-icon>
+								<md-icon ng-if="submission.submissionStatus == 'LATE'">assignment_late</md-icon>
+								<md-tooltip>
+									{{submission.creationTime | date : 'dd-MMM-yyyy HH:mm'}}
+								</md-tooltip>
+							</md-button>
+							<span hide-sm hide-xs ng-if="submission.submissionStatus != 'LATE' && submission.credit">{{submission.creationTime | date : 'dd/MM/yy HH:mm'}}</span>
+							<span hide-sm hide-xs ng-if="submission.submissionStatus != 'LATE' && !submission.credit">Not for Credit</span>
+							<span hide-sm hide-xs ng-if="submission.submissionStatus == 'LATE'">Late Submission</span>
 						</div>
 					</md-toolbar>
 					<md-card-content>
@@ -40,9 +52,12 @@
 							<md-tooltip>Mark not released</md-tooltip>
 							<md-icon>block</md-icon>
 						</md-button>
-						<span hide-sm ng-if="!submission.feedback.markReleased">Not Released</span>
-						<md-icon ng-if="submission.feedback.markReleased">grade</md-icon>
-						<span ng-if="submission.feedback.markReleased">{{submission.feedback.grade || 'N/A'}}</span>
+						<md-icon ng-if="!submission.credit">block</md-icon>
+						<span ng-if="submission.credit">
+							<span hide-sm ng-if="!submission.feedback.markReleased">Not Released</span>
+							<md-icon ng-if="submission.feedback.markReleased">grade</md-icon>
+							<span ng-if="submission.feedback.markReleased">{{submission.feedback.grade || 'N/A'}}</span>
+						</span>
 					</div>
 				</md-toolbar>
 				<md-card-content>
