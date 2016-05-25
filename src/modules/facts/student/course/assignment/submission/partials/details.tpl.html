@@ -5,7 +5,7 @@
 					<md-toolbar>
 						<div class="md-toolbar-tools">
 							<h2>
-								<span>{{assignment.name}}: Submission #{{submission.version}}</span>
+								<span>{{assignment.name}} (v.{{submission.version}})</span>
 							</h2>
 						</div>
 					</md-toolbar>
@@ -36,15 +36,24 @@
 							<span>Feedback</span>
 						</h2>
 						<span flex></span>
-						{{feedback.grade || 'N/A'}}
+						<md-button hide-gt-sm class="md-icon-button">
+							<md-tooltip>Mark not released</md-tooltip>
+							<md-icon>block</md-icon>
+						</md-button>
+						<span hide-sm ng-if="!submission.feedback.markReleased">Not Released</span>
+						<md-icon ng-if="submission.feedback.markReleased">grade</md-icon>
+						<span ng-if="submission.feedback.markReleased">{{submission.feedback.grade || 'N/A'}}</span>
 					</div>
 				</md-toolbar>
 				<md-card-content>
 					<md-content>
-						<span layout="row" ng-show="!submission.feedback.publicComments.length" layout-align="center center" flex>
+						<span layout="row" ng-if="!submission.feedback.commentReleased" layout-align="center center" flex>
+								<span><h2>Comments not released</h2></span>
+						</span>
+						<span layout="row" ng-if="submission.feedback.commentReleased" ng-show="!submission.feedback.publicComments.length" layout-align="center center" flex>
 								<span><h2>No comments</h2></span>
-							</span>
-						<md-list ng-show="feedback.comments.length">
+						</span>
+						<md-list ng-if="submission.feedback.commentReleased" ng-show="feedback.comments.length">
 							<md-list-item class="md-2-line" ng-repeat="comment in submission.feedback.publicComments">
 								<div class="md-list-item-text">
 									<h3>Comment on {{comment.creationTime | date}}</h3>
