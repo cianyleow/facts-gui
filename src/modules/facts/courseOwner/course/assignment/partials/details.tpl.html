@@ -44,11 +44,11 @@
 							<md-card-content>
 								<md-content>
 									{{assignment.description}}
-									<span layout="row" ng-show="suppliedFiles.length == 0" layout-align="center center" flex>
+									<span layout="row" ng-show="assignment.suppliedFiles.length == 0" layout-align="center center" flex>
 										<span><h2>No supplied files</h2></span>
 									</span>
 									<md-list>
-										<md-list-item class="md-2-line" ng-repeat="suppliedFile in suppliedFiles">
+										<md-list-item class="md-2-line" ng-repeat="suppliedFile in assignment.suppliedFiles">
 											<div class="md-list-item-text">
 												<h3>{{suppliedFile.name}}.{{suppliedFile.extension}} ({{suppliedFile.size | bytes}})</h3>
 												<p>{{suppliedFile.contentType}}</p>
@@ -71,11 +71,11 @@
 							</md-toolbar>
 							<md-card-content>
 								<md-content>
-									<span layout="row" ng-show="requiredFiles.length == 0" layout-align="center center" flex>
+									<span layout="row" ng-show="assignment.requiredFiles.length == 0" layout-align="center center" flex>
 										<span><h2>No required files</h2></span>
 									</span>
 									<md-list>
-										<md-list-item class="md-2-line" ng-repeat="requiredFile in requiredFiles">
+										<md-list-item class="md-2-line" ng-repeat="requiredFile in assignment.requiredFiles">
 											<div class="md-list-item-text">
 												<h3>{{requiredFile.fileName}}[.{{requiredFile.allowedExtension}}]</h3>
 												<p>Max File Size: {{requiredFile.maxFileSize | bytes}}</p>
@@ -121,25 +121,24 @@
 								<th md-column md-order-by="submitter.userName"><span>Student Details</span></th>
 								<th md-column md-order-by="version"><span>Version</span></th>
 								<th md-column md-order-by="creationTime"><span>Time</span></th>
-								<th md-column><span>Submission</span></th>
 								<th md-column md-order-by="submissionStatus"><span>Status</span></th>
+								<th md-column><span>Feedback</span></th>
+								<th md-column><span>Submission</span></th>
 							</tr>
 						</thead>
 						<tbody md-body>
-							<tr md-row ng-repeat="submission in assignment.submissions | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-								<td md-cell>{{submission.submitter.userName}}</td>
+							<tr md-row ng-repeat="submission in submissions | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+								<td md-cell>{{submission.submitter.firstName || submission.submitter.userName}} {{submission.submitter.lastName}} ({{submission.submitter.studentId || 'No enrollment'}})</span></td>
 								<td md-cell>{{submission.version}}</td>
 								<td md-cell>{{submission.creationTime | date : 'short'}}</td>
+								<td md-cell>{{submission.submissionStatus}}</td>
+								<td md-cell>{{submission.feedback ? 'Feedback Received' : 'No feedback yet'}}</td>
 								<td md-cell><a ui-sref="base.app.courseOwner.courses.details.assignments.details({submissionId: submission.submissionId})" target="_blank">View #{{submission.submissionId}} <md-icon>open_in_new</md-icon></a></td>
-								<td md-cell>
-									<span ng-show="!submission.feedback">{{submission.submissionStatus}}</span>
-									<span ng-show="submission.feedback">Feedback Received</span>
-								</td>
 							</tr>
 						</tbody>
 					</table>
 				</md-table-container>
-				<md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{assignment.submissions.length}}" md-boundary-links="false"></md-table-pagination>
+				<md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{submissions.length}}" md-boundary-links="false"></md-table-pagination>
 			</md-content>
 		</md-card-content>
 	</md-card>

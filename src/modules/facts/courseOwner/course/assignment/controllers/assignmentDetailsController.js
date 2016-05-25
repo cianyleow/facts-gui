@@ -1,8 +1,9 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$stateParams', 'Restangular', '$mdDialog', '$mdToast', '$state', function($scope, $stateParams, Restangular, $mdDialog, $mdToast, $state) {
-		var assignment = Restangular.one('assignments', $stateParams.assignmentId).one('admin');
+	return['$scope', '$stateParams', 'Restangular', '$mdDialog', '$mdToast', '$state', 'facts.services.course', function($scope, $stateParams, Restangular, $mdDialog, $mdToast, $state, CourseService) {
+		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = assignment.get().$object;
+		$scope.submissions = assignment.getList('submissions').$object;
 
 		$scope.query = {
 			order: 'submitter.username',
@@ -17,7 +18,6 @@ define([], function() {
 				angular.forEach(_feedbacks, function(_feedback) {
 					mappedFeedback[_feedback.submission.submissionId] = _feedback;
 				});
-				console.log(mappedFeedback);
 				angular.forEach($scope.submissions, function(submission) {
 					submission.feedback = mappedFeedback[submission.submissionId];
 				});
@@ -37,20 +37,20 @@ define([], function() {
 
 		$scope.previewActions = [
 			{
-				action: function(assignment, event) {
+				action: function(_assignment, event) {
 					var confirm = $mdDialog.confirm()
 						.title('Delete Assignment')
-						.textContent('Are you sure you want to delete assignment "' + assignment.name + '" (ID: ' + assignment.assignmentId + ')?')
+						.textContent('Are you sure you want to delete assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')?')
 						.ariaLabel('Delete assignment')
 						.targetEvent(event)
 						.ok('Delete')
 						.cancel('Cancel');
 					$mdDialog.show(confirm).then(function() {
-						Restangular.one('assignments', assignment.assignmentId).remove().then(function() {
+						assignment.remove().then(function() {
 							$state.go('base.app.courseOwner.courses.details');
-							$mdToast.show($mdToast.simple().textContent('Successfully deleted assignment "' + assignment.name + '" (ID: ' + assignment.assignmentId + ')').position('top right').theme('success-toast'));
+							$mdToast.show($mdToast.simple().textContent('Successfully deleted assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')').position('top right').theme('success-toast'));
 						}, function() {
-							$mdToast.show($mdToast.simple().textContent('Failed to delete assignment "' + assignment.name + '" (ID: ' + assignment.assignmentId + ')').position('top right').theme('error-toast'));
+							$mdToast.show($mdToast.simple().textContent('Failed to delete assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')').position('top right').theme('error-toast'));
 						});
 					});
 
