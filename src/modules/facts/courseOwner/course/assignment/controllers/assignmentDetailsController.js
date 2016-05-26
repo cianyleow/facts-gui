@@ -12,15 +12,8 @@ define([], function() {
 		};
 		
 		$scope.assignMarkers = function(event) {
-			assignment.all('feedback').post().then(function(_feedbacks) {
-				console.log(_feedbacks);
-				var mappedFeedback = [];
-				angular.forEach(_feedbacks, function(_feedback) {
-					mappedFeedback[_feedback.submission.submissionId] = _feedback;
-				});
-				angular.forEach($scope.submissions, function(submission) {
-					submission.feedback = mappedFeedback[submission.submissionId];
-				});
+			assignment.all('feedback').post().then(function(_submissions) {
+				$scope.submissions = _submissions;
 				$mdToast.show($mdToast.simple().textContent('Successfully assigned markers for assignment.').position('top right'));
 			}, function(error) {
 				$mdDialog.show($mdDialog.alert()
