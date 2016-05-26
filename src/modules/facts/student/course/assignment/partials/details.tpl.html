@@ -86,7 +86,8 @@
 							<h3>Submission #{{$index + 1}} (ID: {{submission.submissionId}})</h3>
 							<p>Submitted {{submission.creationTime | date : 'dd/MM/yy HH:mm'}}</p>
 						</div>
-						<md-icon ng-class="submissionIcons.{{submission.submissionStatus}}.iconClass" aria-label=submissionIcons.{{submission.submissionStatus}}.description" class="md-secondary">{{submissionIcons[submission.submissionStatus].icon}}</md-icon>
+						<md-icon ng-if="submission.submissionStatus == 'LATE'" class="negative" aria-label="Late submission" class="md-secondary">assignment_late</md-icon>
+						<md-icon ng-if="submission.credit" class="positive" aria-label="Credit submission" class="md-secondary">assignment_turned_in</md-icon>
 					</md-list-item>
 				</md-list>
 			</md-content>

@@ -4,18 +4,5 @@ define([], function() {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = AssignmentService.getAssignment($stateParams.assignmentId);
 		$scope.submissions = assignment.one('submissions').getList('self').$object;
-
-		$scope.submissionIcons = {
-			'CREDIT': {
-				iconClass: 'positive',
-				icon: 'assignment_turned_in',
-				description: 'This assignment is on time!'
-			},
-			'LATE': {
-				iconClass: 'negative',
-				icon: 'assignment_late',
-				description: 'This assignment is late.'
-			}
-		};
 	}];
 });
