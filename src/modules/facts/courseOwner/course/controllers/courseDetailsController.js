@@ -50,24 +50,15 @@ define([], function() {
 		};
 
 		$scope.deleteAnnouncement = function(announcement, event) {
-			var confirm = $mdDialog.confirm()
-				.title('Delete "' + announcement.title + '" announcement?')
-				.textContent('Are you sure you want to delete the announcement "' + announcement.title + ' (ID: ' + announcement.announcementId + ')?')
-				.ariaLabel('Delete announcement')
-				.targetEvent(event)
-				.ok('Delete')
-				.cancel('Cancel');
-			$mdDialog.show(confirm).then(function() {
-				announcement.deleting = true;
-				announcement.failed = false;
-				Restangular.one('announcements', announcement.announcementId).remove().then(function() {
-					$scope.course.announcements.splice($scope.course.announcements.indexOf(announcement), 1);
-					$mdToast.show($mdToast.simple().textContent('Deleted "' + announcement.title + '" announcement.').position('top right'));
-				}, function() {
-					announcement.deleting = false;
-					announcement.failed = true;
-					$mdToast.show($mdToast.simple().textContent('Failed to delete "' + announcement.title + '" announcement.').position('top right'));
-				});
+			announcement.deleting = true;
+			announcement.failed = false;
+			Restangular.one('announcements', announcement.announcementId).remove().then(function() {
+				$scope.course.announcements.splice($scope.course.announcements.indexOf(announcement), 1);
+				$mdToast.show($mdToast.simple().textContent('Deleted "' + announcement.title + '" announcement.').position('top right'));
+			}, function() {
+				announcement.deleting = false;
+				announcement.failed = true;
+				$mdToast.show($mdToast.simple().textContent('Failed to delete "' + announcement.title + '" announcement.').position('top right'));
 			});
 		}
 	}];

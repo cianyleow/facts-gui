@@ -162,7 +162,7 @@
 									<p>{{announcement.content}}</p>
 								</div>
 								<span flex></span>
-								<md-button aria-label="Delete announcement" class="md-secondary" ng-class="{'md-icon-button': !announcement.failed}" ng-click="deleteAnnouncement(announcement, $event)" ng-disabled="announcement.deleting || announcement.failed">
+								<md-button confirm-action confirm-title="Delete Announcement" confirm-content="Are you sure you want to delete this announcement?" confirm="Delete" aria-label="Delete announcement" class="md-secondary" ng-class="{'md-icon-button': !announcement.failed}" ng-click="deleteAnnouncement(announcement, $event)" ng-disabled="announcement.deleting || announcement.failed">
 									<md-icon ng-if="!announcement.deleting && !announcement.failed">delete</md-icon>
 									<span ng-if="announcement.failed">
 										<md-icon aria-label="Error">error</md-icon>
