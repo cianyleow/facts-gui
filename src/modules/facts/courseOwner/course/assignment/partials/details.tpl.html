@@ -11,10 +11,14 @@
 						<md-icon>more_vert</md-icon>
 					</md-button>
 					<md-menu-content width="4">
-						<md-menu-item ng-repeat="action in previewActions">
-							<md-button ng-click="action.action(assignment, $event)" aria-label="action.description">
-								<md-icon md-menu-align-target>{{action.icon}}</md-icon>
-								{{action.description}}
+						<md-menu-item>
+							<md-button ng-click="delete(assignment)" confirm-action confirm-title="Delete Assignment" confirm-content="Are you sure want to delete the assignment '{{assignment.name}}' (ID: {{assignment.assignmentId}})?" confirm="Delete">
+								<md-icon aria-label="Delete Assignment" md-menu-align-target>delete</md-icon>Delete Assignment
+							</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button ui-sref="base.app.courseOwner.courses.details.assignment.details.edit">
+								<md-icon aria-label="Edit Assignment" md-menu-align-target>edit</md-icon>Edit Assignment
 							</md-button>
 						</md-menu-item>
 					</md-menu-content>

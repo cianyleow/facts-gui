@@ -28,35 +28,13 @@ define([], function() {
 			});
 		};
 
-		$scope.previewActions = [
-			{
-				action: function(_assignment, event) {
-					var confirm = $mdDialog.confirm()
-						.title('Delete Assignment')
-						.textContent('Are you sure you want to delete assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')?')
-						.ariaLabel('Delete assignment')
-						.targetEvent(event)
-						.ok('Delete')
-						.cancel('Cancel');
-					$mdDialog.show(confirm).then(function() {
-						assignment.remove().then(function() {
-							$state.go('base.app.courseOwner.courses.details');
-							$mdToast.show($mdToast.simple().textContent('Successfully deleted assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')').position('top right').theme('success-toast'));
-						}, function() {
-							$mdToast.show($mdToast.simple().textContent('Failed to delete assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')').position('top right').theme('error-toast'));
-						});
-					});
-
-				},
-				icon: 'delete',
-				description: 'Delete assignment'
-			}, {
-				action: function(assignment) {
-					$state.go('base.app.courseOwner.courses.details.assignment.details.edit');
-				},
-				icon: 'edit',
-				description: 'Edit Assignment'
-			}
-		];
+		$scope.delete = function(_assignment) {
+			assignment.remove().then(function() {
+				$state.go('base.app.courseOwner.courses.details');
+				$mdToast.show($mdToast.simple().textContent('Successfully deleted assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')').position('top right').theme('success-toast'));
+			}, function() {
+				$mdToast.show($mdToast.simple().textContent('Failed to delete assignment "' + _assignment.name + '" (ID: ' + _assignment.assignmentId + ')').position('top right').theme('error-toast'));
+			});
+		};
 	}];
 });
