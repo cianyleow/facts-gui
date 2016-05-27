@@ -36,8 +36,12 @@ define([], function() {
 		};
 
 		$scope.cancelComment = function(comment) {
-			comment.editMode = false;
-			comment.newComment = undefined;
+			if(comment.new) {
+				$scope.feedback.comments.splice($scope.feedback.comments.indexOf(comment), 1);
+			} else {
+				comment.editMode = false;
+				comment.newComment = undefined;
+			}
 		};
 
 		$scope.changeMarkReleased = function(_feedback) {
