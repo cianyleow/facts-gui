@@ -91,7 +91,7 @@
 					</md-tooltip>
 				</md-button>
 				<span hide-sm hide-xs>{{feedback.submission.creationTime | date : 'dd/MM/yy HH:mm'}}</span>
-				<md-menu md-position-mode="target-right target" ng-show="submissionActions.length">
+				<md-menu md-offset="-200 8" ng-show="submissionActions.length">
 					<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 						<md-icon aria-label="More options">more_vert</md-icon>
 					</md-button>
@@ -133,7 +133,7 @@
 							<span>Comments</span>
 						</h2>
 						<span flex></span>
-						<md-menu md-position-mode="target-right target" ng-show="commentActions.length">
+						<md-menu md-offset="-200 8" ng-show="commentActions.length">
 							<md-button class="md-icon-button" aria-label="Edit" ng-click="$mdOpenMenu($event)">
 								<md-icon>more_vert</md-icon>
 							</md-button>

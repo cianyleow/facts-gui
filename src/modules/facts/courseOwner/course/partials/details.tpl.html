@@ -8,7 +8,7 @@
 							<span>{{course.shortName}}: {{course.name}}</span>
 						</h2>
 						<span flex></span>
-						<md-menu md-position-mode="target-right target">
+						<md-menu md-offset="-200 8">
 							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 								<md-icon aria-label="More options">more_vert</md-icon>
 							</md-button>
@@ -39,7 +39,7 @@
 								<md-button class="md-icon-button" ng-click="cancelEdit()">
 									<md-icon aria-label="Close edit">close</md-icon>
 								</md-button>
-								<md-button type="submit" class="md-primary md-raised md-icon-button" ng-disabled="editCourseDetailsForm.$pristine">
+								<md-button type="submit" class="md-primary md-raised md-icon-button" confirm-action confirm-title="Edit Course" confirm-content="Are you sure you want to save the edit of this course"ng-disabled="editCourseDetailsForm.$pristine">
 									<md-icon>check</md-icon>
 								</md-button>
 							</div>
@@ -62,7 +62,7 @@
 							<span>Markers</span>
 						</h2>
 						<span flex></span>
-						<md-menu md-position-mode="target-right target">
+						<md-menu mmd-offset="-200 8">
 							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 								<md-icon aria-label="More options">more_vert</md-icon>
 							</md-button>
@@ -97,7 +97,7 @@
 							<span>Enrollments</span>
 						</h2>
 						<span flex></span>
-						<md-menu md-position-mode="target-right target">
+						<md-menu md-offset="-200 8">
 							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 								<md-icon aria-label="More options">more_vert</md-icon>
 							</md-button>
@@ -135,7 +135,7 @@
 							<span>Announcements</span>
 						</h2>
 						<span flex></span>
-						<md-menu md-position-mode="target-right target">
+						<md-menu md-offset="-200 8">
 							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 								<md-icon aria-label="More options">more_vert</md-icon>
 							</md-button>
@@ -162,7 +162,7 @@
 									<p>{{announcement.content}}</p>
 								</div>
 								<span flex></span>
-								<md-button confirm-action confirm-title="Delete Announcement" confirm-content="Are you sure you want to delete this announcement?" confirm="Delete" aria-label="Delete announcement" class="md-secondary" ng-class="{'md-icon-button': !announcement.failed}" ng-click="deleteAnnouncement(announcement, $event)" ng-disabled="announcement.deleting || announcement.failed">
+								<md-button aria-label="Delete announcement" class="md-secondary" ng-class="{'md-icon-button': !announcement.failed}" ng-click="deleteAnnouncement(announcement, $event)" ng-disabled="announcement.deleting || announcement.failed">
 									<md-icon ng-if="!announcement.deleting && !announcement.failed">delete</md-icon>
 									<span ng-if="announcement.failed">
 										<md-icon aria-label="Error">error</md-icon>
@@ -182,7 +182,7 @@
 							<span>Assignments</span>
 						</h2>
 						<span flex></span>
-						<md-menu md-position-mode="target-right target">
+						<md-menu md-offset="-200 8">
 							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 								<md-icon aria-label="More options">more_vert</md-icon>
 							</md-button>
