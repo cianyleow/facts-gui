@@ -7,6 +7,16 @@
 			{{ $title }}
 		</h3>
 		<span flex></span>
+		<md-button class="md-icon-button">
+			<md-icon ng-if="!notifications.length">notifications_none</md-icon>
+			<md-tooltip md-direction="bottom">
+				No notifications
+			</md-tooltip>
+		</md-button>
+		<md-button class="md-icon-button" ng-if="notifications.length">
+			<md-icon>notifications</md-icon>
+			<div class="notification-badge">{{notifications.length}}</div>
+		</md-button>
 		<md-menu md-position-mode="target-right target">
 			<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 				<md-icon aria-label="More options">more_vert</md-icon>

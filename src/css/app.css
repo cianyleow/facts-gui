@@ -128,3 +128,18 @@ md-toolbar.md-table-toolbar.alternate .md-toolbar-tools {
 	text-align: center;
 	padding-left: 10px;
 }
+
+div.notification-badge {
+	display: block;
+	font-weight: 500;
+	color: #FFFFFF;
+	background: #B71C1C;
+	z-index: 100;
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	line-height: 18px;
+}

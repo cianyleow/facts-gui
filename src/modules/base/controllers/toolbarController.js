@@ -1,9 +1,11 @@
 define([], function() {
 	'use strict';
-	return ['$scope', '$state', 'base.services.authentication', '$log', '$mdSidenav', 'base.services.token', '$mdDialog', function($scope, $state, AuthenticationService, $log, $mdSidenav, TokenService, $mdDialog) {
+	return ['$scope', '$state', 'base.services.authentication', '$log', '$mdSidenav', 'base.services.token', '$mdDialog', 'Restangular', function($scope, $state, AuthenticationService, $log, $mdSidenav, TokenService, $mdDialog, Restangular) {
 		var userInfo = TokenService.userInfo();
 
 		$scope.userDetails = userInfo.userDetails.firstName + ' ' + userInfo.userDetails.lastName + ' (' + userInfo.userDetails.userName + ')';
+
+		$scope.notifications = Restangular.one('self').getList('notifications').$object;
 
 		$scope.actions = [
 			{
