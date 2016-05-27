@@ -46,31 +46,51 @@ define([], function() {
 
 		$scope.changeMarkReleased = function(_feedback) {
 			$scope.markReleasedRequest = true;
-			var alteredFeedback = {
-				markReleased: _feedback.markReleased
-			};
-			feedback.customPUT(alteredFeedback).then(function(_feedback) {
-				$scope.feedback.markReleased = _feedback.markReleased;
-				$mdToast.show($mdToast.simple().textContent(_feedback.markReleased ? 'Mark released.' : 'Mark hidden.').position('top right'));
+			$mdDialog.show($mdDialog.confirm()
+				.title((_feedback.markReleased ? 'Release' : 'Hide') + ' Marks')
+				.textContent('Are you sure you want to ' + (_feedback.markReleased ? 'release' : 'hide') + ' the marks?')
+				.ariaLabel((_feedback.markReleased ? 'Release' : 'Hide') + ' Marks')
+				.ok(_feedback.markReleased ? 'Release' : 'Hide')
+				.cancel('Cancel')
+			).then(function() {
+				var alteredFeedback = {
+					markReleased: _feedback.markReleased
+				};
+				feedback.customPUT(alteredFeedback).then(function (_feedback) {
+					$scope.feedback.markReleased = _feedback.markReleased;
+					$mdToast.show($mdToast.simple().textContent(_feedback.markReleased ? 'Mark released.' : 'Mark hidden.').position('top right'));
+				}, function () {
+					$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
+					_feedback.markReleased = !_feedback.markReleased;
+				});
 			}, function() {
-				$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
-				feedback.markReleased = !feedback.markReleased;
+				_feedback.markReleased = !_feedback.markReleased;
 			}).finally(function() {
 				$scope.markReleasedRequest = false;
 			});
 		};
 
 		$scope.changeCommentReleased = function(_feedback) {
-			$scope.commentReleasedRequest = true;
-			var alteredFeedback = {
-				commentReleased: _feedback.commentReleased
-			};
-			feedback.customPUT(alteredFeedback).then(function(_feedback) {
-				$scope.feedback.commentReleased = _feedback.commentReleased;
-				$mdToast.show($mdToast.simple().textContent(_feedback.commentReleased ? 'Comment released.' : 'Comment hidden.').position('top right'));
+			$scope.commentReleased = true;
+			$mdDialog.show($mdDialog.confirm()
+				.title((_feedback.commentReleased ? 'Release' : 'Hide') + ' Comments')
+				.textContent('Are you sure you want to ' + (_feedback.markReleased ? 'release' : 'hide') + ' the comments?')
+				.ariaLabel((_feedback.commentReleased ? 'Release' : 'Hide') + ' Comments')
+				.ok(_feedback.commentReleased ? 'Release' : 'Hide')
+				.cancel('Cancel')
+			).then(function() {
+				var alteredFeedback = {
+					commentReleased: _feedback.commentReleased
+				};
+				feedback.customPUT(alteredFeedback).then(function (_feedback) {
+					$scope.feedback.commentReleased = _feedback.commentReleased;
+					$mdToast.show($mdToast.simple().textContent(_feedback.commentReleased ? 'Comment released.' : 'Comment hidden.').position('top right'));
+				}, function () {
+					$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
+					_feedback.commentReleased = !_feedback.commentReleased;
+				});
 			}, function() {
-				$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
-				feedback.commentReleased = !feedback.commentReleased;
+				_feedback.commentReleased = !_feedback.commentReleased;
 			}).finally(function() {
 				$scope.commentReleasedRequest = false;
 			});
@@ -79,14 +99,24 @@ define([], function() {
 		$scope.changeFeedbackStatus = function(_feedback, oldFeedbackStatus) {
 			if(_feedback.feedbackStatus != oldFeedbackStatus) {
 				$scope.feedbackStatusRequest = true;
-				var alteredFeedback = {
-					feedbackStatus: _feedback.feedbackStatus
-				};
-				feedback.customPUT(alteredFeedback).then(function(_feedback) {
-					$scope.feedback.feedbackStatus = _feedback.feedbackStatus;
-					$mdToast.show($mdToast.simple().textContent('Feedback status change from ' + oldFeedbackStatus + ' to ' + _feedback.feedbackStatus + '.').position('top right'));
+				$mdDialog.show($mdDialog.confirm()
+					.title('Change Feedback Status')
+					.textContent('Are you sure you want to change the feedback status from ' + oldFeedbackStatus + ' to ' + _feedback.feedbackStatus + '?')
+					.ariaLabel('Change feedback status')
+					.ok('Change')
+					.cancel('Cancel')
+				).then(function() {
+					var alteredFeedback = {
+						feedbackStatus: _feedback.feedbackStatus
+					};
+					feedback.customPUT(alteredFeedback).then(function (_feedback) {
+						$scope.feedback.feedbackStatus = _feedback.feedbackStatus;
+						$mdToast.show($mdToast.simple().textContent('Feedback status change from ' + oldFeedbackStatus + ' to ' + _feedback.feedbackStatus + '.').position('top right'));
+					}, function () {
+						$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
+						_feedback.feedbackStatus = oldFeedbackStatus;
+					});
 				}, function() {
-					$mdToast.show($mdToast.simple().textContent('Failed to update comment released.').position('top right'));
 					_feedback.feedbackStatus = oldFeedbackStatus;
 				}).finally(function() {
 					$scope.feedbackStatusRequest = false;
@@ -160,6 +190,8 @@ define([], function() {
 				}, function () {
 					$mdToast.show($mdToast.simple().textContent('Failed to update mark.').position('top right'));
 				});
+			}, function() {
+				$scope.mark = $scope.feedback.mark;
 			});
 		};
 
