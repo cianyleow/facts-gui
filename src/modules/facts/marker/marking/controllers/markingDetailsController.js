@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['Restangular', '$scope', '$stateParams', 'base.services.dialog', '$mdToast', function(Restangular, $scope, $stateParams, DialogService, $mdToast) {
+	return['Restangular', '$scope', '$stateParams', '$mdDialog', '$mdToast', function(Restangular, $scope, $stateParams, $mdDialog, $mdToast) {
 		var feedback = Restangular.one('feedback', $stateParams.feedbackId);
 		feedback.get().then(function(_feedback) {
 			$scope.feedback = _feedback;
@@ -96,27 +96,46 @@ define([], function() {
 		};
 
 		$scope.deleteComment = function(comment, idx) {
-			Restangular.one('comments', comment.commentId).remove().then(function() {
-				$scope.feedback.comments.splice(idx, 1);
-				$mdToast.show($mdToast.simple().textContent('Comment #' + comment.commentId + ' deleted!').position('top right'));
-			}, function() {
-				$mdToast.show($mdToast.simple().textContent('Comment failed to delete!'));
+			$mdDialog.show($mdDialog.confirm()
+				.title('Delete Comment')
+				.textContent('Are you sure you want to delete this comment?')
+				.ariaLabel('Delete comment')
+				.ok('Delete')
+				.cancel('Cancel')
+			).then(function() {
+				Restangular.one('comments', comment.commentId).remove().then(function() {
+					$scope.feedback.comments.splice(idx, 1);
+					$mdToast.show($mdToast.simple().textContent('Comment #' + comment.commentId + ' deleted!').position('top right'));
+				}, function() {
+					$mdToast.show($mdToast.simple().textContent('Failed to delete comment.'));
+				});
 			});
 		};
 
 		$scope.saveComment = function(comment, idx) {
-			if(comment.new) {
-				feedback.all('comments').post(comment.newComment).then(function(_comment) {
-					$scope.feedback.comments[idx] = _comment;
-					$mdToast.show($mdToast.simple().textContent('Comment created!'));
-				});
-			} else {
-				feedback.one('comments', comment.commentId).customPUT(comment.newComment).then(function(_comment) {
-					$scope.feedback.comments[idx] = _comment;
-					$mdToast.show($mdToast.simple().textContent('Comment updated!'));
-				});
-			}
-
+			$mdDialog.show($mdDialog.confirm()
+				.title((comment.new ? 'Save New' : 'Update') + ' Comment')
+				.textContent('Are you sure you want to ' + (comment.new ? 'save' : 'update') + ' this comment?')
+				.ariaLabel((comment.new ? 'Save' : 'Update') + ' comment')
+				.ok(comment.new ? 'Save' : 'Update')
+				.cancel('Cancel')
+			).then(function() {
+				if (comment.new) {
+					feedback.all('comments').post(comment.newComment).then(function (_comment) {
+						$scope.feedback.comments[idx] = _comment;
+						$mdToast.show($mdToast.simple().textContent('Comment created!'));
+					}, function() {
+						$mdToast.show($mdToast.simple().textContent('Failed to create mark.').position('top right'));
+					});
+				} else {
+					Restangular.one('comments', comment.commentId).customPUT(comment.newComment).then(function (_comment) {
+						$scope.feedback.comments[idx] = _comment;
+						$mdToast.show($mdToast.simple().textContent('Comment updated!'));
+					}, function() {
+						$mdToast.show($mdToast.simple().textContent('Failed to update mark.').position('top right'));
+					});
+				}
+			});
 		};
 
 		$scope.cancelMark = function() {
@@ -124,15 +143,23 @@ define([], function() {
 		};
 
 		$scope.saveMark = function(mark) {
-			var alteredFeedback = {
-				mark: mark
-			};
-			feedback.customPUT(alteredFeedback).then(function(_feedback) {
-				$scope.feedback.mark = _feedback.mark;
-				$scope.mark = _feedback.mark;
+			$mdDialog.show($mdDialog.confirm()
+				.title('Update Mark')
+				.textContent('Are you sure you want to update this mark to ' + mark + '?')
+				.ariaLabel('Update Mark')
+				.ok('Update')
+				.cancel('Cancel')
+			).then(function() {
+				var alteredFeedback = {
+					mark: mark
+				};
+				feedback.customPUT(alteredFeedback).then(function (_feedback) {
+					$scope.feedback.mark = _feedback.mark;
+					$scope.mark = _feedback.mark;
 					$mdToast.show($mdToast.simple().textContent('Mark updated to ' + _feedback.mark + '.').position('top right'));
-			}, function() {
-				$mdToast.show($mdToast.simple().textContent('Failed to update mark.').position('top right'));
+				}, function () {
+					$mdToast.show($mdToast.simple().textContent('Failed to update mark.').position('top right'));
+				});
 			});
 		};
 
