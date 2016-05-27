@@ -11,7 +11,7 @@
             <div class="md-toolbar-tools">
                 <span>{{selected.length}} {{selected.length > 1 ? 'students' : 'student'}} selected</span>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="deleteEnrollments(selected, $event)">
+                <md-button class="md-icon-button" ng-click="deleteEnrollments(selected)" confirm-action confirm-title="Bulk Unenroll Students" confirm-content="Are you sure you want to unenroll {{selected.length}} {{selected.length == 1 ? 'student' : 'students'}}?" confirm="Unenroll">
                     <md-icon>delete</md-icon>
                 </md-button>
                 <md-button class="md-icon-button" ng-click="changeEnrollments(selected, $event)">
@@ -48,7 +48,7 @@
                                 </md-select>
                             </td>
                             <td md-cell>{{enrollment.updateTime | date : 'short'}}</td>
-                            <td md-cell><md-button class="md-icon-button" ng-click="deleteEnrollment(enrollment, $event)"><md-icon>delete</md-icon></md-button></td>
+                            <td md-cell><md-button class="md-icon-button" confirm-action confirm-title="Unenroll Student" confirm-content="Are you sure you want to unenroll '{{enrollment.student.firstName}} {{enrollment.student.lastName}} ({{enrollment.student.studentId}})' from this course?" confirm="Unenroll" ng-click="deleteEnrollment(enrollment)"><md-icon>delete</md-icon></md-button></td>
                         </tr>
                         </tbody>
                     </table>

@@ -34,30 +34,21 @@ define([], function() {
 			});
 		});
 
-		$scope.deleteEnrollments = function(selected, targetEvent) {
-			var confirm = $mdDialog.confirm()
-				.title('Unenroll ' + selected.length + ' Students')
-				.textContent('Are you sure you want to unenroll ' + selected.length + ' students?')
-				.ariaLabel('Bulk unenroll')
-				.targetEvent(targetEvent)
-				.ok('Unenroll All')
-				.cancel('Cancel');
-			$mdDialog.show(confirm).then(function() {
-				var failed = 0;
-				angular.forEach(selected, function(enrollment) {
-					Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
-						$scope.enrollments.splice($scope.enrollments.indexOf(enrollment), 1);
-					}, function() {
-						failed++;
-					});
+		$scope.deleteEnrollments = function(selected) {
+			var failed = 0;
+			angular.forEach(selected, function(enrollment) {
+				Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
+					$scope.enrollments.splice($scope.enrollments.indexOf(enrollment), 1);
+				}, function() {
+					failed++;
 				});
-				if(failed.length) {
-					$mdToast.show($mdToast.simple().textContent('Failed to unenroll ' + failed + ' out of ' + selected.length + ' students.').position('top right'));
-				} else {
-					$mdToast.show($mdToast.simple().textContent('Successfully unenrolled all ' + selected.length + ' students.').position('top right'));
-				}
-				$scope.selected = [];
 			});
+			if(failed.length) {
+				$mdToast.show($mdToast.simple().textContent('Failed to unenroll ' + failed + ' out of ' + selected.length + ' students.').position('top right'));
+			} else {
+				$mdToast.show($mdToast.simple().textContent('Successfully unenrolled all ' + selected.length + ' students.').position('top right'));
+			}
+			$scope.selected = [];
 		};
 
 		$scope.changeEnrollments = function(selected, targetEvent) {
@@ -136,24 +127,15 @@ define([], function() {
 			});
 		};
 
-		$scope.deleteEnrollment = function(enrollment, event) {
+		$scope.deleteEnrollment = function(enrollment) {
 			event.stopPropagation();
-			var confirm = $mdDialog.confirm()
-				.title('Unenroll ' + enrollment.student.firstName + ' ' + enrollment.student.lastName)
-				.textContent('Are you sure you want to unenroll ' + enrollment.student.firstName + ' ' + enrollment.student.lastName + '?')
-				.ariaLabel('Unenroll from course')
-				.targetEvent(event)
-				.ok('Unenroll')
-				.cancel('Cancel');
-			$mdDialog.show(confirm).then(function() {
-				Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
-					$scope.enrollments.splice($scope.enrollments.indexOf(enrollment), 1);
-					$mdToast.show($mdToast.simple().textContent('Unenrolled ' + enrollment.student.firstName + ' ' + enrollment.student.lastName).position('top right'));
-				}, function() {
-					enrollment.unenrolling = false;
-					enrollment.failed = true;
-					$mdToast.show($mdToast.simple().textContent('Failed to unenroll ' + enrollment.student.firstName + ' ' + enrollment.student.lastName).position('top right'));
-				});
+			Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
+				$scope.enrollments.splice($scope.enrollments.indexOf(enrollment), 1);
+				$mdToast.show($mdToast.simple().textContent('Unenrolled ' + enrollment.student.firstName + ' ' + enrollment.student.lastName).position('top right'));
+			}, function() {
+				enrollment.unenrolling = false;
+				enrollment.failed = true;
+				$mdToast.show($mdToast.simple().textContent('Failed to unenroll ' + enrollment.student.firstName + ' ' + enrollment.student.lastName).position('top right'));
 			});
 		};
 	}];
