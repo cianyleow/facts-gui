@@ -1,7 +1,6 @@
 define([], function() {
 	'use strict';
 	return ['$scope', 'Restangular', function($scope, Restangular) {
-		$scope.menuSource = 'src/modules/base/partials/menu/courseOwner.tpl.html';
 		
 		$scope.menu = [
 			{
