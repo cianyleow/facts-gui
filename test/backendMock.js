@@ -59,6 +59,10 @@ define(['fixtures'], function(fixtures) {
             .respond(function(method, url, data) {
                return [200, data];
             });
+        $httpBackend.when('POST', /^api\/courses\/[\d]+\/announcements$/)
+            .respond(function(method, url, data) {
+                return [201, data];
+            });
 
         // ENROLLMENTS
         mockPut('api/enrollments');

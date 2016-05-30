@@ -17,6 +17,7 @@ define([], function() {
 		};
 
 		$scope.save = function(_course) {
+			var originalDescription = course.description;
 			course.description = _course.description;
 			course.put().then(function(_c) {
 				$scope.editCourse = false;
@@ -24,6 +25,7 @@ define([], function() {
 				$scope.course = _c;
 			}, function() {
 				$mdToast.show($mdToast.simple().textContent('Failed to update course description.').position('top right'));
+				course.description = originalDescription;
 				$scope._course = undefined;
 				$scope.editCourse = false;
 			});

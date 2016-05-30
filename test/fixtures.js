@@ -9,8 +9,7 @@ define([], function() {
                     {
                         "announcementId": 1,
                         "title": "Title",
-                        "content": "Content",
-                        "secret": false
+                        "content": "Content"
                     }
                 ],
                 "assignments": [
