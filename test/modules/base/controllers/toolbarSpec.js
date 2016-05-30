@@ -9,7 +9,7 @@ define(['baseTestSetup'], function(baseTestSetup) {
             AuthenticationService = $injector.get('base.services.authentication');
             TokenService = $injector.get('base.services.token');
             state = $injector.get('$state');
-            spyOn(AuthenticationService, 'logout').andCallFake();
+            spyOn(AuthenticationService, 'logout').andCallFake(function() {});
             spyOn(TokenService, 'userInfo').andCallFake(function() {
                 return {
                     userDetails: {
@@ -19,7 +19,7 @@ define(['baseTestSetup'], function(baseTestSetup) {
                     }
                 };
             });
-            spyOn(state, 'go').andCallFake();
+            spyOn(state, 'go').andCallFake(function() {});
             ToolbarController = $controller('base.controllers.toolbar', {
                 $scope: scope,
                 $state: state
@@ -38,10 +38,11 @@ define(['baseTestSetup'], function(baseTestSetup) {
             expect(scope.notifications).toBeDefined();
         }));
 
-        it('Calling logout action should go to authentication service', function() {
+        it('Calling logout action should go to authentication service', inject(function($httpBackend) {
+            $httpBackend.flush();
             scope.logout();
             expect(AuthenticationService.logout).toHaveBeenCalled();
             expect(state.go).toHaveBeenCalled();
-        });
+        }));
     });
 });
