@@ -18,6 +18,13 @@ define(['fixtures'], function(fixtures) {
             });
         }
 
+        function mockPut(url) {
+            var pattern = new RegExp('^' + url + '/\\d+$');
+            $httpBackend.whenPUT(pattern).respond(function(method, url, data) {
+                return [200, data];
+            });
+        }
+
         // Actual mocking here
         // LOGIN
         $httpBackend.when('POST', /^api\/login/)
@@ -43,6 +50,13 @@ define(['fixtures'], function(fixtures) {
             .respond(function(method, url, data) {
                 return [201, data];
             });
+        $httpBackend.when('GET', /^api\/courses\/[\d]+\/enrollments$/)
+            .respond(fixtures['api/enrollments']);
+
+        // ENROLLMENTS
+        mockPut('api/enrollments');
+        $httpBackend.whenDELETE(/^api\/enrollments\/[\d]+/)
+            .respond(200);
 
         // FEEDBACK
         $httpBackend.when('GET', /^api\/feedback\/[\d]+$/)

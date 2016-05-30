@@ -145,6 +145,33 @@ define([], function() {
             {
                 "submissionId": 1
             }
+        ],
+        "api/enrollments": [
+            {
+                enrollmentId: 1,
+                enrollmentLevel: 'SUBMISSION_CREDIT',
+                student: {
+                    firstName: 'First',
+                    lastName: 'Last'
+                }
+            },
+            {
+                enrollmentId: 2,
+                enrollmentLevel: 'SUBMISSION_CREDIT',
+                student: {
+                    firstName: 'First',
+                    lastName: 'Last'
+                }
+            },
+            {
+                enrollmentId: 3,
+                enrollmentLevel: 'SUBMISSION_CREDIT',
+                student: {
+                    firstName: 'First',
+                    lastName: 'Last'
+                }
+            }
         ]
+
     };
 });
