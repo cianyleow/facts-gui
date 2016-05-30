@@ -26,6 +26,9 @@ define(['fixtures'], function(fixtures) {
             });
 
         // COURSES
+        mockRoot('api/courses');
+        $httpBackend.when('GET', /^api\/courses\/[\d]+$/)
+            .respond(fixtures['api/courses'][0]);
         $httpBackend.when('POST', /^api\/courses\/[\d]+\/assignments$/)
             .respond(function(method, url, data) {
                 return [201, data];
