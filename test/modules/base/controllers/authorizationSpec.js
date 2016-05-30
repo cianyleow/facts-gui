@@ -7,7 +7,7 @@ define(['baseTestSetup'], function(baseTestSetup) {
         beforeEach(inject(function($rootScope, $controller, $injector) {
             scope = $rootScope.$new();
             AuthenticationService = $injector.get('base.services.authentication');
-            AuthorizationController = $controller('base.controllers.authorization-controller', {
+            AuthorizationController = $controller('base.controllers.authorization', {
                 $scope: scope
             });
         }));

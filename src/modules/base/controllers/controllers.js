@@ -10,8 +10,8 @@ define(['modules/base/controllers/sidenavStudentController',
 			module.controller('base.controllers.sidenav.student.controller', SidenavStudentController);
 			module.controller('base.controllers.sidenav.marker.controller', SidenavMarkerController);
 			module.controller('base.controllers.sidenav.courseOwner.controller', SidenavCourseOwnerController);
-			module.controller('base.controllers.toolbar-controller', ToolbarController);
-			module.controller('base.controllers.authorization-controller', AuthorizationController);
+			module.controller('base.controllers.toolbar', ToolbarController);
+			module.controller('base.controllers.authorization', AuthorizationController);
 		}
 	};
 });

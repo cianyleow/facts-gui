@@ -32,7 +32,7 @@ define(['angular',
 					'logout': false
 				},
 				templateUrl: 'src/modules/base/partials/authorization.tpl.html',
-				controller: 'base.controllers.authorization-controller'
+				controller: 'base.controllers.authorization'
 			})
 			.state('base', {
 				abstract: true,
@@ -50,7 +50,7 @@ define(['angular',
 					},
 					toolbar: {
 						templateUrl: 'src/modules/base/partials/toolbar.tpl.html',
-						controller: 'base.controllers.toolbar-controller'
+						controller: 'base.controllers.toolbar'
 					}
 				},
 				resolve: {
