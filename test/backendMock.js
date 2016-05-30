@@ -25,6 +25,14 @@ define(['fixtures'], function(fixtures) {
                 return [201, data, {'X-AUTH-TOKEN': 'asdf'}];
             });
 
+        // SELF
+        $httpBackend.when('GET', /^api\/self\/ownedCourses/)
+            .respond(fixtures['api/courses']);
+        $httpBackend.when('GET', /^api\/self\/markedCourses/)
+            .respond(fixtures['api/courses']);
+        $httpBackend.when('GET', /^api\/self\/enrolledCourses/)
+            .respond(fixtures['api/courses']);
+
         // COURSES
         mockRoot('api/courses');
         $httpBackend.when('GET', /^api\/courses\/[\d]+$/)
