@@ -6,51 +6,41 @@ define([], function() {
 		$scope.userDetails = userInfo.userDetails.firstName + ' ' + userInfo.userDetails.lastName + ' (' + userInfo.userDetails.userName + ')';
 
 		$scope.notifications = Restangular.one('self').getList('notifications').$object;
-
-		$scope.actions = [
-			{
-				inProgress: true,
-				icon: 'person',
-				description: 'Change Role',
-				action: function(targetEvent) {
-					// $mdDialog.show(
-					// 	{
-					// 		controller: function($scope, $mdDialog) {
-					// 			$scope.roles = userInfo.roles;
-					// 			$scope.currentRole = userInfo.currentRole;
-					// 			$scope.cancel = function() {
-					// 				$mdDialog.cancel();
-					// 			};
-                    //
-					// 			$scope.change = function(newRole) {
-					// 				$mdDialog.hide(newRole);
-					// 			};
-					// 		},
-					// 		templateUrl: 'src/modules/base/partials/role-change.dialog.tpl.html',
-					// 		parent: angular.element(document.body),
-					// 		targetEvent: targetEvent,
-					// 		clickOutsideToClose: true
-					// 	}
-					// ).then(
-					// 	function(newRole) {
-					// 		console.log(newRole);
-					// 		userInfo.currentRole = newRole;
-					// 	}, function() {
-                    //
-					// 	}
-					// );
-				}
-			},
-			{
-				icon: 'power_settings_new',
-				description: 'Logout',
-				action: function() {
-					$log.info('Logging out user');
-					AuthenticationService.logout();
-					$state.go('authorize', {logout: true});
-				}
-			}
-		];
+		
+		$scope.logout = function() {
+			$log.info('Logging out user');
+			AuthenticationService.logout();
+			$state.go('authorize', {logout: true});
+		};
+		
+		$scope.changeRoleDialog = function(targetEvent) {
+			// $mdDialog.show(
+			// 	{
+			// 		controller: function($scope, $mdDialog) {
+			// 			$scope.roles = userInfo.roles;
+			// 			$scope.currentRole = userInfo.currentRole;
+			// 			$scope.cancel = function() {
+			// 				$mdDialog.cancel();
+			// 			};
+			//
+			// 			$scope.change = function(newRole) {
+			// 				$mdDialog.hide(newRole);
+			// 			};
+			// 		},
+			// 		templateUrl: 'src/modules/base/partials/role-change.dialog.tpl.html',
+			// 		parent: angular.element(document.body),
+			// 		targetEvent: targetEvent,
+			// 		clickOutsideToClose: true
+			// 	}
+			// ).then(
+			// 	function(newRole) {
+			// 		console.log(newRole);
+			// 		userInfo.currentRole = newRole;
+			// 	}, function() {
+			//
+			// 	}
+			// );
+		};
 
 		$scope.toggleSidenav = function(menuId) {
 			$mdSidenav(menuId).toggle();

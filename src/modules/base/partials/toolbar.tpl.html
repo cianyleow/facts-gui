@@ -49,10 +49,16 @@
 						{{userDetails}}
 					</md-button>
 				</md-menu-item>
-				<md-menu-item ng-repeat="action in actions">
-					<md-button ng-click="action.action($event)" in-progress="action.inProgress" aria-label="action.description">
-						<md-icon md-menu-align-target>{{action.icon}}</md-icon>
-						{{action.description}}
+				<md-menu-item>
+					<md-button aria-label="Change Role" ng-click="changeRoleDialog($event)" in-progress="true" >
+						<md-icon md-menu-align-target>person</md-icon>
+						Change Role
+					</md-button>
+				</md-menu-item>
+				<md-menu-item>
+					<md-button ng-click="logout()" aria-label="Logout">
+						<md-icon md-menu-align-target>power_settings_new</md-icon>
+						Logout
 					</md-button>
 				</md-menu-item>
 			</md-menu-content>
