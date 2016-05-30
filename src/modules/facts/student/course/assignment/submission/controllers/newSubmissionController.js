@@ -1,8 +1,7 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$q', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', function($scope, $q, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular) {
-		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
-		$scope.assignment = assignment.get().$object;
+	return['$scope', '$q', '$mdDialog', '$state', '$stateParams', 'base.services.dialog', 'base.services.file', 'Restangular', 'facts.services.assignment', function($scope, $q, $mdDialog, $state, $stateParams, DialogService, FileService, Restangular, AssignmentService) {
+		$scope.assignment = AssignmentService.getAssignment($stateParams.assignmentId);
 
 		$scope.uploaded = false;
 					
@@ -26,7 +25,7 @@ define([], function() {
 			.then(function() {
 				$scope.submission.submissionFiles.splice(index, 1);
 				submissionFile.file = undefined;
-				$scope.requiredFiles.push(submissionFile);
+				$scope.assignment.requiredFiles.push(submissionFile);
 			});
 		};
 		
@@ -42,7 +41,7 @@ define([], function() {
 				};
 			}, 'src/modules/facts/student/course/assignment/submission/partials/new.submissionFileDialog.tpl.html', angular.element(document.body), targetEvent,
 			function(file) {
-				$scope.requiredFiles.splice(index, 1);
+				$scope.assignment.requiredFiles.splice(index, 1);
 				requiredFile.file = file;
 				$scope.submission.submissionFiles.push(requiredFile);
 			}, function() {
