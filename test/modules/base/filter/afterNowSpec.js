@@ -11,16 +11,16 @@ define(['baseTestSetup'],
             }));
 
             it('Undefined list returns empty list', function() {
-                var items = undefined;
+                var items;
                 expect(afterNowFilter(items)).toEqual([]);
             });
 
-            it('Empty input list returns empty list', function($httpBackend) {
+            it('Empty input list returns empty list', function() {
                 var items = [];
                 expect(afterNowFilter(items)).toEqual([]);
             });
 
-            it('List returns elements only after the current time', inject(function($httpBackend) {
+            it('List returns elements only after the current time', function() {
                 var now = new Date();
                 var hour = 3600 * 1000;
                 var items = [
@@ -34,7 +34,7 @@ define(['baseTestSetup'],
                     }
                 ];
                 expect(afterNowFilter(items)).toEqual([items[1]]);
-            }));
+            });
         });
     }
 );
