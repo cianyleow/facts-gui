@@ -78,6 +78,8 @@ define(['fixtures'], function(fixtures) {
             .respond(fixtures['api/feedback'][0]);
 
         // SUBMISSIONS
+        $httpBackend.when('GET', /^api\/submissions\/[\d]+$/)
+            .respond(fixtures['api/submissions'][0]);
         $httpBackend.when('GET', /^api\/submissions\/[\d]+\/submissionFiles/)
             .respond(fixtures['api/files']);
 
