@@ -6,6 +6,8 @@ define([], function() {
 
 		$scope.error = false;
 
+		$scope.timeout = false;
+
 		$scope.attempts = 0;
 
 		$scope.states = [
