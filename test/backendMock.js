@@ -63,6 +63,8 @@ define(['fixtures'], function(fixtures) {
             .respond(function(method, url, data) {
                 return [201, data];
             });
+        $httpBackend.when('GET', /^api\/courses\/[\d]+\/enrollment$/)
+            .respond(fixtures['api/enrollments'][0]);
 
         // ENROLLMENTS
         mockPut('api/enrollments');
