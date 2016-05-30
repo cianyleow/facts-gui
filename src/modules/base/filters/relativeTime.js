@@ -3,6 +3,11 @@ define([], function() {
 
 	var relativeTimeFilter = ['$filter', function($filter) {
 		return function (date) {
+			var test;
+			var isInt = isNaN(date) ? !1 : (test = parseFloat(date), (0 | test) === test);
+			if(date === undefined || !(date instanceof Date || isInt)) {
+				return '';
+			}
 			var targetDate = new Date(date);
 			var currentDate = new Date();
 			var timeDiff = currentDate - date;
