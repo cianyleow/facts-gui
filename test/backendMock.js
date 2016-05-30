@@ -41,6 +41,8 @@ define(['fixtures'], function(fixtures) {
             .respond(fixtures['api/courses']);
         $httpBackend.when('GET', /^api\/self\/notifications/)
             .respond(fixtures['api/notifications']);
+        $httpBackend.when('GET', /^api\/self\/enrollments/)
+            .respond(fixtures['api/enrollments']);
 
         // COURSES
         mockRoot('api/courses');
