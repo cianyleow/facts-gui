@@ -12,16 +12,14 @@ define(['baseTestSetup'], function(baseTestSetup) {
             });
         }));
 
-        it('Should load an assignment, required files, supplied files and mark components', inject(function($httpBackend) {
+        it('Should load a fully decorated assignment and a list of submission separately.', inject(function($httpBackend) {
             $httpBackend.expectGET(/^api\/assignments\/1/);
-            $httpBackend.expectGET(/^api\/assignments\/1\/requiredFiles/);
-            $httpBackend.expectGET(/^api\/assignments\/1\/markComponents/);
-            // $httpBackend.expectGET('api/assignments/1/suppliedFiles');
+            $httpBackend.expectGET(/^api\/assignments\/1\/submissions/);
             $httpBackend.flush();
             expect(scope.assignment).toBeDefined();
-            expect(scope.suppliedFiles).toBeDefined();
-            expect(scope.markComponents).toBeDefined();
-            expect(scope.requiredFiles).toBeDefined();
+            expect(scope.assignment.suppliedFiles).toBeDefined();
+            expect(scope.assignment.requiredFiles).toBeDefined();
+            expect(scope.submissions).toBeDefined();
         }));
     });
 });

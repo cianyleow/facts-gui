@@ -19,11 +19,6 @@ define(['baseTestSetup', 'fixtures'], function(baseTestSetup, fixtures) {
             });
         }));
 
-        it('Should open new dialog for new mark component', function() {
-            scope.markComponentDialog();
-            expect(DialogService.showCustomDialog).toHaveBeenCalled();
-        });
-
         it('Should open new dialog for new supplied file', function() {
             scope.suppliedFileDialog();
             expect(DialogService.showCustomDialog).toHaveBeenCalled();

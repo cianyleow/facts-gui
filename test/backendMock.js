@@ -34,12 +34,6 @@ define(['fixtures'], function(fixtures) {
         // FEEDBACK
         $httpBackend.when('GET', /^api\/feedback\/[\d]+$/)
             .respond(fixtures['api/feedback'][0]);
-        $httpBackend.when('GET', /^api\/feedback\/[\d]+\/submission+$/)
-            .respond(fixtures['api/submissions'][0]);
-        $httpBackend.when('GET', /^api\/feedback\/[\d]+\/marks+$/)
-            .respond(fixtures['api/marks']);
-        $httpBackend.when('GET', /^api\/feedback\/[\d]+\/comments+$/)
-            .respond(fixtures['api/comments']);
 
         // SUBMISSIONS
         $httpBackend.when('GET', /^api\/submissions\/[\d]+\/submissionFiles/)
@@ -51,12 +45,8 @@ define(['fixtures'], function(fixtures) {
         mockPatch('api/assignments');
         $httpBackend.when('GET', /^api\/assignments\/[\d]+$/)
             .respond(fixtures['api/assignments'][0]);
-        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/requiredFiles$/)
-            .respond(fixtures['api/requiredFiles']);
-        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/markComponents$/)
-            .respond(fixtures['api/markComponents']);
-        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/suppliedFiles$/)
-            .respond(fixtures['api/files']);
+        $httpBackend.when('GET', /^api\/assignments\/[\d]+\/submissions+$/).
+            respond(fixtures['api/submissions']);
 
         // Files
         $httpBackend.when('GET', /^api\/files\/[\d]+\/link$/)

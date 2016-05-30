@@ -59,7 +59,6 @@ define(['baseTestSetup', 'fixtures'], function(baseTestSetup, fixtures) {
                 expect(assignment.openTime).toBeUndefined();
                 expect(assignment.requiredFiles).toEqual([]);
                 expect(assignment.suppliedFiles).toEqual([]);
-                expect(assignment.markComponents).toEqual([]);
             });
 
             it('Has assignment returns false for initialization state', function() {
