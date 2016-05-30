@@ -44,6 +44,7 @@ define(['fixtures'], function(fixtures) {
 
         // COURSES
         mockRoot('api/courses');
+        mockPut('api/courses');
         $httpBackend.when('GET', /^api\/courses\/[\d]+$/)
             .respond(fixtures['api/courses'][0]);
         $httpBackend.when('POST', /^api\/courses\/[\d]+\/assignments$/)
@@ -52,6 +53,12 @@ define(['fixtures'], function(fixtures) {
             });
         $httpBackend.when('GET', /^api\/courses\/[\d]+\/enrollments$/)
             .respond(fixtures['api/enrollments']);
+        $httpBackend.when('GET', /^api\/courses\/[\d]+\/admin$/)
+            .respond(fixtures['api/courses'][0]);
+        $httpBackend.when('PUT', /^api\/courses\/[\d]+\/admin$/)
+            .respond(function(method, url, data) {
+               return [200, data];
+            });
 
         // ENROLLMENTS
         mockPut('api/enrollments');

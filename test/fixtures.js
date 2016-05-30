@@ -5,6 +5,14 @@ define([], function() {
         "api/courses": [
             {
                 "courseId": 1,
+                "announcements": [
+                    {
+                        "announcementId": 1,
+                        "title": "Title",
+                        "content": "Content",
+                        "secret": false
+                    }
+                ],
                 "assignments": [
                     {
                         "assignmentId":9,
