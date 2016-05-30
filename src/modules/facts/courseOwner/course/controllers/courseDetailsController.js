@@ -22,7 +22,7 @@ define([], function() {
 				$scope.editCourse = false;
 				$scope._course = undefined;
 				$scope.course = _c;
-			}, function(_error) {
+			}, function() {
 				$mdToast.show($mdToast.simple().textContent('Failed to update course description.').position('top right'));
 				$scope._course = undefined;
 				$scope.editCourse = false;
@@ -43,13 +43,13 @@ define([], function() {
 				function(announcement) {
 					Restangular.one('courses', $stateParams.courseId).all('announcements').post(announcement).then(function(_announcement) {
 						$scope.course.announcements.push(_announcement);
-					}, function(_error) {
+					}, function() {
 						$mdToast.show($mdToast.simple().textContent('Failed to create announcement.').position('top right'));
 					});
 				});
 		};
 
-		$scope.deleteAnnouncement = function(announcement, event) {
+		$scope.deleteAnnouncement = function(announcement) {
 			announcement.deleting = true;
 			announcement.failed = false;
 			Restangular.one('announcements', announcement.announcementId).remove().then(function() {
@@ -60,6 +60,6 @@ define([], function() {
 				announcement.failed = true;
 				$mdToast.show($mdToast.simple().textContent('Failed to delete "' + announcement.title + '" announcement.').position('top right'));
 			});
-		}
+		};
 	}];
 });

@@ -7,29 +7,6 @@ define([], function() {
 			$scope.mark = _feedback.mark;
 		});
 
-		// var feedback = Restangular.one('feedback', $stateParams.feedbackId);
-		// feedback.get().then(function(_feedback) {
-		// 	$scope.feedback = _feedback;
-		// 	// Then decorate the mark on that object.
-		// 	feedback.one('mark').get().then(function(_mark) {
-		// 		$scope.feedback.mark = _mark;
-		// 		$scope.mark = _mark;
-		// 	});
-		// });
-		// feedback.one('submission').get().then(function(_submission) {
-		// 	$scope.submission = _submission;
-		// 	Restangular.one('submissions', _submission.submissionId).getList('submissionFiles').then(function(_files) {
-		// 		$scope.submissionFiles = _files;
-		// 	});
-		// 	Restangular.one('submissions', _submission.submissionId).one('assignment').get().then(function(_assignment) {
-		// 		$scope.assignment = _assignment;
-		// 		Restangular.one('assignments', _assignment.assignmentId).getList('suppliedFiles').then(function(_suppliedFiles) {
-		// 			$scope.suppliedFiles = _suppliedFiles;
-		// 		});
-		// 	});
-		// });
-		// $scope.comments = feedback.getList('comments').$object;
-
 		$scope.editComment = function(comment) {
 			comment.newComment = angular.copy(comment);
 			comment.editMode = true;
@@ -121,7 +98,7 @@ define([], function() {
 				}).finally(function() {
 					$scope.feedbackStatusRequest = false;
 					$scope.oldFeedbackStatus = undefined;
-				})
+				});
 			}
 		};
 

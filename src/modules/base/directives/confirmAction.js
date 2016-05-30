@@ -9,7 +9,7 @@ define([], function() {
                 element.prop('ng-click', null).off('click');
 
                 element.bind('click', function(e) {
-                   e.stopImmediatePropagation();
+                    e.stopImmediatePropagation();
 
                     console.log('Clicked');
 

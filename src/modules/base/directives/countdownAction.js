@@ -17,7 +17,9 @@ define([], function() {
                 };
                 $scope.$watch('start', function(newValue) {
                     if(newValue) {
-                        $interval($scope.decrement, 1000, $scope.seconds).then(function() {$scope.action()});
+                        $interval($scope.decrement, 1000, $scope.seconds).then(function() {
+                            $scope.action();
+                        });
                     }
                 });
             }]

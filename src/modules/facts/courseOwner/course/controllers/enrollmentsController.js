@@ -53,51 +53,51 @@ define([], function() {
 
 		$scope.changeEnrollments = function(selected, targetEvent) {
 			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
-				$scope._enrollmentLevel;
-			$scope.enrollmentLevels = {
-				NO_CREDIT: {
-					value: 'No credit',
-					key: 'NO_CREDIT'
-				},
-				SUBMISSION_CREDIT: {
-					value: 'Submission Credit',
-					key: 'SUBMISSION_CREDIT'
-				},
-				EXAM_CREDIT: {
-					value: 'Exam Credit',
-					key: 'EXAM_CREDIT'
-				}
-			};
-
-			$scope.cancel = function() {
-				$mdDialog.cancel();
-			};
-
-			$scope.check = function(enrollmentLevel) {
-				$mdDialog.hide(enrollmentLevel);
-			};
-		}], 'src/modules/facts/courseOwner/course/partials/bulk.change.enrollment.dialog.tpl.html', angular.element(document.body), targetEvent,
-			function(enrollmentLevel) {
-				var failed = 0;
-				var alteredEnrollment = {
-					enrollmentLevel: enrollmentLevel
+				$scope.enrollmentLevels = {
+					NO_CREDIT: {
+						value: 'No credit',
+						key: 'NO_CREDIT'
+					},
+					SUBMISSION_CREDIT: {
+						value: 'Submission Credit',
+						key: 'SUBMISSION_CREDIT'
+					},
+					EXAM_CREDIT: {
+						value: 'Exam Credit',
+						key: 'EXAM_CREDIT'
+					}
 				};
-				angular.forEach(selected, function(enrollment) {
-					Restangular.one('enrollments', enrollment.enrollmentId).customPUT(alteredEnrollment).then(function(_enrollment) {
-						enrollment.enrollmentLevel = _enrollment.enrollmentLevel;
-						enrollment._enrollmentLevel = _enrollment.enrollmentLevel;
-						enrollment.updateTime = _enrollment.updateTime;
-					}, function() {
-						failed++;
+
+				$scope.cancel = function() {
+					$mdDialog.cancel();
+				};
+
+				$scope.check = function(enrollmentLevel) {
+					$mdDialog.hide(enrollmentLevel);
+				};
+			}], 'src/modules/facts/courseOwner/course/partials/bulk.change.enrollment.dialog.tpl.html', angular.element(document.body), targetEvent,
+				function(enrollmentLevel) {
+					var failed = 0;
+					var alteredEnrollment = {
+						enrollmentLevel: enrollmentLevel
+					};
+					angular.forEach(selected, function(enrollment) {
+						Restangular.one('enrollments', enrollment.enrollmentId).customPUT(alteredEnrollment).then(function(_enrollment) {
+							enrollment.enrollmentLevel = _enrollment.enrollmentLevel;
+							enrollment._enrollmentLevel = _enrollment.enrollmentLevel;
+							enrollment.updateTime = _enrollment.updateTime;
+						}, function() {
+							failed++;
+						});
 					});
-				});
-				if(failed.length) {
-					$mdToast.show($mdToast.simple().textContent('Failed to change enrollments for ' + failed + ' out of ' + selected.length + ' students.').position('top right'));
-				} else {
-					$mdToast.show($mdToast.simple().textContent('Successfully changed enrollments for all ' + selected.length + ' students.').position('top right'));
+					if(failed.length) {
+						$mdToast.show($mdToast.simple().textContent('Failed to change enrollments for ' + failed + ' out of ' + selected.length + ' students.').position('top right'));
+					} else {
+						$mdToast.show($mdToast.simple().textContent('Successfully changed enrollments for all ' + selected.length + ' students.').position('top right'));
+					}
+					$scope.selected = [];
 				}
-				$scope.selected = [];
-			});
+			);
 		};
 
 		$scope.saveEnrollment = function(enrollment, targetEvent) {
@@ -128,7 +128,6 @@ define([], function() {
 		};
 
 		$scope.deleteEnrollment = function(enrollment) {
-			event.stopPropagation();
 			Restangular.one('enrollments', enrollment.enrollmentId).remove().then(function() {
 				$scope.enrollments.splice($scope.enrollments.indexOf(enrollment), 1);
 				$mdToast.show($mdToast.simple().textContent('Unenrolled ' + enrollment.student.firstName + ' ' + enrollment.student.lastName).position('top right'));

@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return ['$scope', 'base.services.authentication', '$stateParams', '$mdToast', function($scope, AuthenticationService, $stateParams, $mdToast) {
+	return ['$scope', 'base.services.authentication', '$stateParams', function($scope, AuthenticationService, $stateParams) {
 
 		$scope.user = {};
 
@@ -11,12 +11,12 @@ define([], function() {
 		$scope.states = [
 			{
 				enabled: $stateParams.redirect,
-				icon: "link",
-				message: "Redirecting to " + $stateParams.redirect + " after login."
+				icon: 'link',
+				message: 'Redirecting to ' + $stateParams.redirect + ' after login.'
 			}, {
 				enabled: $stateParams.logout,
-				icon: "power_settings_new",
-				message: "Logged out successfully."
+				icon: 'power_settings_new',
+				message: 'Logged out successfully.'
 			}
 		];
 

@@ -7,7 +7,7 @@ define([], function() {
                 shakeOn: '='
             },
             link: function(scope, element) {
-                scope.$watch('shakeOn', function(autoFocus) {
+                scope.$watch('shakeOn', function() {
                     $animate.addClass(element, 'shake').then(function() {
                         element.removeClass('shake');
                     });

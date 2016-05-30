@@ -1,6 +1,6 @@
 define([], function() {
 	'use strict';
-	return['$scope', '$stateParams', 'Restangular', '$mdDialog', '$mdToast', '$state', 'facts.services.course', function($scope, $stateParams, Restangular, $mdDialog, $mdToast, $state, CourseService) {
+	return['$scope', '$stateParams', 'Restangular', '$mdDialog', '$mdToast', '$state', function($scope, $stateParams, Restangular, $mdDialog, $mdToast, $state) {
 		var assignment = Restangular.one('assignments', $stateParams.assignmentId);
 		$scope.assignment = assignment.get().$object;
 		$scope.submissions = assignment.getList('submissions').$object;
