@@ -13,10 +13,31 @@
 				No notifications
 			</md-tooltip>
 		</md-button>
-		<md-button class="md-icon-button" ng-if="notifications.length">
-			<md-icon>notifications</md-icon>
-			<div class="notification-badge">{{notifications.length}}</div>
-		</md-button>
+		<md-menu md-offset="-330 8" ng-if="notifications.length">
+			<md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+				<md-icon>notifications</md-icon>
+				<div class="notification-badge">{{notifications.length}}</div>
+			</md-button>
+			<md-menu-content width="6">
+				<!--<md-grid-list md-cols="2" md-row-height="4:1">
+					<md-grid-tile>
+						<md-button>Clear list</md-button>
+					</md-grid-tile>
+					<md-grid-tile>
+						<md-button>Filter list</md-button>
+					</md-grid-tile>
+				</md-grid-list>-->
+				<md-list-item class="md-2-line" ng-repeat="notification in notifications" href="{{notification.link}}">
+					<div class="md-list-item-text">
+						<h3>{{notification.title}}</h3>
+						<p>{{notification.creationTime | relativeTime}}</p>
+					</div>
+					<md-icon class="md-secondary" ng-if="!notification.seen">info</md-icon>
+					<md-icon class="md-secondary" ng-if="notification.seen">info_outline</md-icon>
+				</md-list-item>
+			</md-menu-content>
+		</md-menu>
+
 		<md-menu md-position-mode="target-right target">
 			<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
 				<md-icon aria-label="More options">more_vert</md-icon>
