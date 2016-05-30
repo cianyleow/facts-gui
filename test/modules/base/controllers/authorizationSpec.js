@@ -12,23 +12,23 @@ define(['baseTestSetup'], function(baseTestSetup) {
             });
         }));
 
-        it('Should define a user, error, attempts and states.', inject(function($httpBackend) {
+        it('Should define a user, error, attempts and states.', function() {
             expect(scope.user).toBeDefined();
             expect(scope.timeout).toEqual(false);
             expect(scope.error).toEqual(false);
             expect(scope.attempts).toEqual(0);
             expect(scope.states).toBeDefined();
-        }));
+        });
 
         it('Authentication request should use AuthenticationService', function() {
-            spyOn(AuthenticationService, 'login').andCallFake(function() {})
+            spyOn(AuthenticationService, 'login').andCallFake(function() {});
             var user = {};
             scope.authenticate(user);
             expect(AuthenticationService.login).toHaveBeenCalled();
         });
 
         it('Failed authentication should invoke only error mode and increase attempts', function() {
-            spyOn(AuthenticationService, 'login').andCallFake(function(user, redirect, callback) { callback({ status: 404})});
+            spyOn(AuthenticationService, 'login').andCallFake(function(user, redirect, callback) { callback({ status: 404});});
             var user = {};
             scope.authenticate(user);
             scope.$digest();
@@ -38,7 +38,7 @@ define(['baseTestSetup'], function(baseTestSetup) {
         });
 
         it('Timed out authentication should invoke only timeout mode and increase attempts', function() {
-            spyOn(AuthenticationService, 'login').andCallFake(function(user, redirect, callback) { callback({ status: -1})});
+            spyOn(AuthenticationService, 'login').andCallFake(function(user, redirect, callback) { callback({ status: -1});});
             var user = {};
             scope.authenticate(user);
             scope.$digest();

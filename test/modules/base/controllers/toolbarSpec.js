@@ -41,7 +41,7 @@ define(['baseTestSetup'], function(baseTestSetup) {
         it('Calling logout action should go to authentication service', function() {
             scope.logout();
             expect(AuthenticationService.logout).toHaveBeenCalled();
-            expect($state.go).toHaveBeenCalled();
+            expect(state.go).toHaveBeenCalled();
         });
     });
 });
