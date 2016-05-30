@@ -62,5 +62,15 @@ define(['baseTestSetup', 'fixtures'], function(baseTestSetup, fixtures) {
             scope.removeLine(array, 100);
             expect(array).toBe(array);
         });
+
+        it('Watched assignment openTime should change dueTime to itself if greater than current dueTime', function() {
+            var now = new Date().getTime();
+            var ahead = now + 3600 * 1000; // Add one day
+            scope.assignment.dueTime = now;
+            scope.$digest();
+            scope.assignment.openTime = ahead;
+            scope.$digest();
+            expect(scope.assignment.dueTime).toEqual(ahead);
+        });
     });
 });
