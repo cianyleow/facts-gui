@@ -7,30 +7,29 @@
 			{{ $title }}
 		</h3>
 		<span flex></span>
-		<md-button class="md-icon-button">
-			<md-icon ng-if="!notifications.length">notifications_none</md-icon>
-			<md-tooltip md-direction="bottom">
-				No notifications
-			</md-tooltip>
-		</md-button>
-		<md-menu md-offset="-330 8" ng-if="notifications.length">
+		<md-menu md-offset="-330 8">
 			<md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
-				<md-icon>notifications</md-icon>
-				<div class="notification-badge">{{notifications.length}}</div>
+				<md-icon ng-if="!notifications.length">notifications_off</md-icon>
+				<md-icon ng-if="(notifications | filter: {seen: false}).length">notifications</md-icon>
+				<md-icon ng-if="!(notifications | filter: {seen: false}).length">notifications_none</md-icon>
+				<div class="notification-badge" ng-if="(notifications | filter: {seen: false}).length">{{(notifications | filter: {seen: false}).length}}</div>
 			</md-button>
 			<md-menu-content width="6">
-				<!--<md-grid-list md-cols="2" md-row-height="4:1">
-					<md-grid-tile>
-						<md-button>Clear list</md-button>
+				<md-grid-list md-cols="3" md-row-height="4:1">
+					<md-grid-tile md-colspan="2" ng-if="notifications.length">
+						<h4>{{notifications.length}} Notification{{notifications.length == 1 ? '' : 's'}}</h4>
 					</md-grid-tile>
-					<md-grid-tile>
-						<md-button>Filter list</md-button>
+					<md-grid-tile ng-if="notifications.length">
+						<md-button ng-click="clearNotifications()">Clear list</md-button>
 					</md-grid-tile>
-				</md-grid-list>-->
-				<md-list-item class="md-2-line" ng-repeat="notification in notifications" href="{{notification.link}}">
+					<md-grid-tile md-colspan="3" ng-if="!notifications.length">
+						<h2>No notifications</h2>
+					</md-grid-tile>
+				</md-grid-list>
+				<md-list-item class="md-2-line" ng-repeat="notification in notifications" ng-click="viewNotification(notification)">
 					<div class="md-list-item-text">
-						<h3>{{notification.title}}</h3>
-						<p>{{notification.creationTime | relativeTime}}</p>
+						<h3 ng-class="{'strong': !notification.seen}">{{notification.title}} <span class="md-caption">{{notification.creationTime | relativeTime}}</span></h3>
+						<p>{{notification.content | limitTo: 50}}{{notification.content.length > 50 ? '...' : ''}}</p>
 					</div>
 					<md-icon class="md-secondary" ng-if="!notification.seen">info</md-icon>
 					<md-icon class="md-secondary" ng-if="notification.seen">info_outline</md-icon>

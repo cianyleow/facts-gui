@@ -143,3 +143,7 @@ div.notification-badge {
 	border-radius: 50%;
 	line-height: 18px;
 }
+
+h3.strong {
+	font-weight: 800 !important;
+}
