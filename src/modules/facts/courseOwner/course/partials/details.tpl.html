@@ -68,7 +68,7 @@
 							</md-button>
 							<md-menu-content width="4">
 								<md-menu-item>
-									<md-button aria-label="User Details" in-progress="true" ui-sref="base.app.courseOwner.courses.details.markers">
+									<md-button aria-label="User Details" ng-click="openAddMarkerDialog($event)">
 										<md-icon md-menu-align-target>add_circle_outline</md-icon>
 										Add Marker
 									</md-button>
@@ -83,8 +83,11 @@
 							<span><h3>No markers!</h3></span>
 						</span>
 						<md-list>
-							<md-list-item ng-repeat="marker in course.markers">
-
+							<md-list-item class="md-2-line" ng-repeat="marker in course.markers" href="mailto:{{marker.email}}">
+								<div class="md-list-item-text">
+									<h3>{{marker.title}} {{marker.firstName}} {{marker.lastName}} ({{marker.userName}})</h3>
+									<p>Marker</p>
+								</div>
 							</md-list-item>
 						</md-list>
 					</md-content>

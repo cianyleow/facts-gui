@@ -31,6 +31,48 @@ define([], function() {
 			});
 		};
 
+		$scope.openAddMarkerDialog = function(targetEvent) {
+			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
+					$scope.newMarkers = [];
+
+					$scope.allMarkers = [];
+					course.one('markers').getList('available').then(function(_markers) {
+						angular.forEach(_markers, function(_marker) {
+							_marker.lowerName = (_marker.firstName + ' ' + _marker.lastName).toLowerCase();
+							_marker.userName = _marker.userName.toLowerCase();
+							$scope.allMarkers.push(_marker);
+						});
+					});
+
+					$scope.querySearch = function(query) {
+						var results = query ? $scope.allMarkers.filter(createFilterFor(query)) : [];
+						return results;
+					};
+
+					function createFilterFor(query) {
+						var lowercaseQuery = angular.lowercase(query);
+						return function filterFn(marker) {
+							return (marker.lowerName.indexOf(lowercaseQuery) === 0) || (marker.userName.indexOf(lowercaseQuery) === 0);
+						}
+					}
+
+					$scope.cancel = function() {
+						$mdDialog.cancel();
+					};
+
+					$scope.check = function(newMarkers) {
+						$mdDialog.hide(newMarkers);
+					};
+				}], 'src/modules/facts/courseOwner/course/partials/add.markerDialog.tpl.html', angular.element(document.body), targetEvent,
+				function(newMarkers) {
+					angular.forEach(newMarkers, function(marker) {
+						course.all('markers').post(marker).then(function(_marker) {
+							$scope.course.markers.push(_marker);
+						});
+					})
+				});
+		};
+
 		$scope.newAnnouncement = function(targetEvent) {
 			DialogService.showCustomDialog(['$scope', '$mdDialog', function($scope, $mdDialog) {
 					$scope.announcement = {};
