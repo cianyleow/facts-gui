@@ -42,10 +42,11 @@
 			</div>
 			<div flex-xs flex-gt-xs="50" layout="column">
 			<md-card>
-				<md-toolbar>
+				<md-toolbar ng-class="{'md-accent': submission.feedback.markReleased}">
 					<div class="md-toolbar-tools">
 						<h2>
 							<span>Feedback</span>
+							<span ng-if="submission.feedback.markReleased"> | Mark Released</span>
 						</h2>
 						<span flex></span>
 						<md-button hide-gt-sm class="md-icon-button">
@@ -65,13 +66,13 @@
 						<span layout="row" ng-if="!submission.feedback.commentReleased" layout-align="center center" flex>
 								<span><h2>Comments not released</h2></span>
 						</span>
-						<span layout="row" ng-if="submission.feedback.commentReleased" ng-show="!submission.feedback.publicComments.length" layout-align="center center" flex>
+						<span layout="row" ng-if="submission.feedback.commentReleased" ng-show="!submission.feedback.comments.length" layout-align="center center" flex>
 								<span><h2>No comments</h2></span>
 						</span>
-						<md-list ng-if="submission.feedback.commentReleased" ng-show="feedback.comments.length">
-							<md-list-item class="md-2-line" ng-repeat="comment in submission.feedback.publicComments">
+						<md-list ng-if="submission.feedback.commentReleased" ng-show="submission.feedback.comments.length">
+							<md-list-item class="md-2-line" ng-repeat="comment in submission.feedback.comments">
 								<div class="md-list-item-text">
-									<h3>Comment on {{comment.creationTime | date}}</h3>
+									<h3>Comment on {{comment.creationTime | date : 'short'}}</h3>
 									<p>{{comment.comment}}</p>
 								</div>
 							</md-list-item>
