@@ -136,7 +136,7 @@
 								<td md-cell>{{submission.version}}</td>
 								<td md-cell>{{submission.creationTime | date : 'short'}}</td>
 								<td md-cell>{{submission.submissionStatus}}</td>
-								<td md-cell>{{submission.feedback ? 'Feedback Received' : 'No feedback yet'}}</td>
+								<td md-cell>{{submission.feedback.feedbackStatus}}</td>
 								<td md-cell><a ui-sref="base.app.courseOwner.courses.details.assignments.details({submissionId: submission.submissionId})" target="_blank">View #{{submission.submissionId}} <md-icon>open_in_new</md-icon></a></td>
 							</tr>
 						</tbody>
