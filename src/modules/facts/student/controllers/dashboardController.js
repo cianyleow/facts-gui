@@ -9,14 +9,6 @@ define([], function() {
 			}
 		};
 
-		$scope.viewNotification = function(notification) {
-			Restangular.one('self').one('notifications', notification.notificationId).put().then(function(_notification) {
-				$scope.notifications[$scope.notifications.indexOf(notification)] = _notification;
-				notification = _notification;
-			});
-			$location.path(notification.link); //  Redirect regardless of outcome.
-		};
-
 		$scope.markAllRead = function() {
 			angular.forEach($scope.notifications, function(notification) {
 				Restangular.one('self').one('notifications', notification.notificationId).put().then(function(_notification) {

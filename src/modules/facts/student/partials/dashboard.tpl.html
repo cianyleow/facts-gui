@@ -49,7 +49,7 @@
 					<span><h3>No notifications!</h3></span>
 				</span>
 				<md-list ng-show="notifications.length">
-					<md-list-item class="md-2-line" ng-repeat="notification in notifications" ng-click="viewNotification(notification)">
+					<md-list-item class="md-2-line" ng-repeat="notification in notifications" href="{{notification.link}}">
 						<div class="md-list-item-text">
 							<h3 ng-class="{'strong': !notification.seen}">{{notification.title}} <span class="md-caption">{{notification.creationTime | relativeTime}}</span></h3>
 							<p>{{notification.content | limitTo: 50}}{{notification.content.length > 50 ? '...' : ''}}</p>
