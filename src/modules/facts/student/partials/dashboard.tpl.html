@@ -31,7 +31,7 @@
 							</md-button>
 						</md-menu-item>
 						<md-menu-item>
-							<md-button aria-label="User Details" ng-click="filtering = !filtering">
+							<md-button aria-label="User Details" ng-click="toggleFiltering()">
 								<md-icon md-menu-align-target>filter_list</md-icon>
 								Toggle Filter
 							</md-button>
@@ -41,8 +41,11 @@
 			</div>
 		</md-toolbar>
 		<md-card-content>
+			<md-content ng-show="filtering" class="slide">
+				<md-checkbox flex>Announcements</md-checkbox><md-checkbox flex>Assignments</md-checkbox><md-checkbox flex>Other</md-checkbox>
+			</md-content>
 			<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!notifications.length">
+				<span flex layout="row" layout-align="center center" ng-if="!notifications.length">
 					<span><h3>No notifications!</h3></span>
 				</span>
 				<md-list ng-show="notifications.length">

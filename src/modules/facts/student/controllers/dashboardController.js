@@ -3,6 +3,12 @@ define([], function() {
 	return ['$scope', 'Restangular', function($scope, Restangular) {
 		$scope.notifications = Restangular.one('self').getList('notifications').$object;
 
+		$scope.toggleFiltering = function() {
+			if($scope.notifications.length != 0) {
+				$scope.filtering = !$scope.filtering;
+			}
+		};
+
 		$scope.viewNotification = function(notification) {
 			Restangular.one('self').one('notifications', notification.notificationId).put().then(function(_notification) {
 				$scope.notifications[$scope.notifications.indexOf(notification)] = _notification;
