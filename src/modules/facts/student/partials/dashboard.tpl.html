@@ -5,60 +5,96 @@
 			<p>Please use the navigation bar to access pages.</p>
 		</md-card-content>
 	</md-card>
-	<md-card>
-		<md-toolbar>
-			<div class="md-toolbar-tools">
-				<md-icon>notifications</md-icon>
-				<h2>
-					Notifications<span ng-if="notifications.length">({{notifications.length}})</span>
-				</h2>
-				<span flex></span>
-				<md-menu mmd-offset="-200 8">
-					<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
-						<md-icon aria-label="More options">more_vert</md-icon>
-					</md-button>
-					<md-menu-content width="4">
-						<md-menu-item>
-							<md-button aria-label="User Details" ng-click="clearNotifications()">
-								<md-icon md-menu-align-target>block</md-icon>
-								Clear Notifications
+	<div layout="row" layout-sm="column">
+		<div flex-sm flex-gt-sm="50">
+			<md-card>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<md-icon>notifications</md-icon>
+						<h2>
+							Notifications<span ng-if="notifications.length">({{notifications.length}})</span>
+						</h2>
+						<span flex></span>
+						<md-menu mmd-offset="-200 8">
+							<md-button class="md-icon-button" aria-label="More options" ng-click="$mdOpenMenu($event)">
+								<md-icon aria-label="More options">more_vert</md-icon>
 							</md-button>
-						</md-menu-item>
-						<md-menu-item>
-							<md-button aria-label="User Details" ng-click="markAllRead()">
-								<md-icon md-menu-align-target>notifications_none</md-icon>
-								Mark All Read
-							</md-button>
-						</md-menu-item>
-						<md-menu-item>
-							<md-button aria-label="User Details" ng-click="toggleFiltering()">
-								<md-icon md-menu-align-target>filter_list</md-icon>
-								Toggle Filter
-							</md-button>
-						</md-menu-item>
-					</md-menu-content>
-				</md-menu>
+							<md-menu-content width="4">
+								<md-menu-item>
+									<md-button aria-label="User Details" ng-click="clearNotifications()">
+										<md-icon md-menu-align-target>block</md-icon>
+										Clear Notifications
+									</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button aria-label="User Details" ng-click="markAllRead()">
+										<md-icon md-menu-align-target>notifications_none</md-icon>
+										Mark All Read
+									</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button aria-label="User Details" ng-click="toggleFiltering()">
+										<md-icon md-menu-align-target>filter_list</md-icon>
+										Toggle Filter
+									</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content ng-show="filtering" class="slide">
+						<md-checkbox flex>Announcements</md-checkbox><md-checkbox flex>Assignments</md-checkbox><md-checkbox flex>Other</md-checkbox>
+					</md-content>
+					<md-content>
+						<span flex layout="row" layout-align="center center" ng-if="!notifications.length">
+							<span><h3>No notifications!</h3></span>
+						</span>
+						<md-list ng-show="notifications.length">
+							<md-list-item class="md-2-line" ng-repeat="notification in notifications" href="{{notification.link}}">
+								<div class="md-list-item-text">
+									<h3 ng-class="{'strong': !notification.seen}">{{notification.title}} <span class="md-caption">{{notification.creationTime | relativeTime}}</span></h3>
+									<p>{{notification.content | limitTo: 50}}{{notification.content.length > 50 ? '...' : ''}}</p>
+								</div>
+								<md-icon class="md-secondary" ng-if="!notification.seen">info</md-icon>
+								<md-icon class="md-secondary" ng-if="notification.seen">info_outline</md-icon>
+							</md-list-item>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
 			</div>
-		</md-toolbar>
-		<md-card-content>
-			<md-content ng-show="filtering" class="slide">
-				<md-checkbox flex>Announcements</md-checkbox><md-checkbox flex>Assignments</md-checkbox><md-checkbox flex>Other</md-checkbox>
-			</md-content>
-			<md-content>
-				<span flex layout="row" layout-align="center center" ng-if="!notifications.length">
-					<span><h3>No notifications!</h3></span>
-				</span>
-				<md-list ng-show="notifications.length">
-					<md-list-item class="md-2-line" ng-repeat="notification in notifications" href="{{notification.link}}">
-						<div class="md-list-item-text">
-							<h3 ng-class="{'strong': !notification.seen}">{{notification.title}} <span class="md-caption">{{notification.creationTime | relativeTime}}</span></h3>
-							<p>{{notification.content | limitTo: 50}}{{notification.content.length > 50 ? '...' : ''}}</p>
-						</div>
-						<md-icon class="md-secondary" ng-if="!notification.seen">info</md-icon>
-						<md-icon class="md-secondary" ng-if="notification.seen">info_outline</md-icon>
-					</md-list-item>
-				</md-list>
-			</md-content>
-		</md-card-content>
-	</md-card>
+		</div>
+	<div layout="row" layout-sm="column">
+		<div flex-sm flex-gt-sm="50">
+			<md-card>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<md-icon>announcement</md-icon>
+						<h2>
+							Announcements
+						</h2>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<md-content>
+						<span flex layout="row" layout-align="center center" ng-if="!notifications.length">
+							<span><h3>No courses!</h3></span>
+						</span>
+						<md-list ng-show="announcementCourses.length">
+							<div ng-repeat="announcementCourse in announcementCourses">
+								<md-subheader class="md-no-sticky">{{announcementCourse.name}}</md-subheader>
+								<md-list-item class="md-3-line md-long-text" ng-repeat="announcement in announcementCourse.announcements" ui-sref="base.app.student.course.details({courseId: announcementCourse.courseId})">
+									<div class="md-list-item-text">
+										<h3>{{announcement.title}} <span class="md-caption">{{announcement.creationTime | relativeTime}}</span></h3>
+										<p>{{announcement.content}}</p>
+									</div>
+								</md-list-item>
+							</div>
+						</md-list>
+					</md-content>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
 </md-content>
