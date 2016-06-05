@@ -74,7 +74,7 @@
 					<span>Active Assignments</span>
 				</h2>
 				<span flex></span>
-				{{course.assignments.length}} total
+				<span ng-if="course.assignments.length"{{course.assignments.length}} total</div>
 				<md-button class="md-icon-button" aria-label="View All" ui-sref="base.app.courses.details.assignments">
 					<md-tooltip>
 						View all assignments
@@ -85,10 +85,10 @@
 		</md-toolbar>
 		<md-card-content>
 			<md-content>
-				<span flex layout="row" layout-align="center center" ng-show="!(course.assignments.length | afterNow).length">
+				<span flex layout="row" layout-align="center center" ng-show="!(course.assignments | afterNow).length">
 					<span><h3>No assignments!</h3></span>
 				</span>
-				<md-list ng-show="(course.assignments.length | afterNow).length">
+				<md-list ng-show="(course.assignments | afterNow).length">
 					<md-list-item class="md-2-line secondary-button-padding" ng-repeat="assignment in course.assignments | afterNow" ui-sref="base.app.courses.details.assignments.details({assignmentId: assignment.assignmentId})">
 						<div class="md-list-item-text">
 							<h3>{{assignment.name}}</h3>
