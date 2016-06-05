@@ -6,7 +6,7 @@ define([], function() {
 		$scope.announcementCourses = [];
 		Restangular.one('self').getList('enrolledCourses').then(function(enrolledCourses) {
 			angular.forEach(enrolledCourses, function(enrolledCourse) {
-				Restangular.one('courses', enrolledCourse.courseId).then(function(course) {
+				Restangular.one('courses', enrolledCourse.courseId).get().then(function(course) {
 					$scope.announcementCourses.push(course);
 				});
 			});
