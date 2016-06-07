@@ -34,7 +34,7 @@ Additionally, this guide must be used in conjunction with the FACTS guide, and i
 3. Clone the latest FACTS GUI repository and build it locally with NPM commands.
   1. `git clone https://github.com/cianyleow/facts-gui`
   2. `cd facts-gui`
-  3. `npm install -g grunt bower`
+  3. `sudo npm install -g grunt bower`
   4. `npm install`
   5. `grunt dist`
 
