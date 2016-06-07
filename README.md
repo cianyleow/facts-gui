@@ -39,4 +39,4 @@ Additionally, this guide must be used in conjunction with the FACTS guide, and i
   5. `grunt dist`
 
 4. Moved the distribution files to a production available location
-  1. `cp -r dist /usr/share/nginx/html/facts`
+  1. `sudo cp -r dist /usr/share/nginx/html/facts`
